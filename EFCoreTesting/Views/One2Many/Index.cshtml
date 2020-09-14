@@ -1,0 +1,60 @@
+﻿@model User
+
+@if (Model == null)
+{
+<form asp-action="AddOrUpdateOneToMany" asp-controller="One2Many" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Address.Id" />
+
+    <div class="form-group">
+        <label asp-for="FirstName" class="form-control"></label>
+        <input class="form-control" type="text" asp-for="FirstName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="form-control"></label>
+        <input type="text" asp-for="LastName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Age" class="form-control"></label>
+        <input type="number" asp-for="Age" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Country" class="form-control"></label>
+        <input type="text" asp-for="Address.Country" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.City" class="form-control"></label>
+        <input type="text" asp-for="Address.City" />
+    </div>
+    <button type="submit" value="отправить">Добавить</button>
+</form>
+}
+else
+{
+<form asp-action="AddOrUpdateOneToMany" asp-controller="One2Many" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Address.Id" />
+
+    <div class="form-group">
+        <label asp-for="FirstName" class="form-control"></label>
+        <input class="form-control" type="text" asp-for="FirstName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="form-control"></label>
+        <input type="text" asp-for="LastName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Age" class="form-control"></label>
+        <input type="number" asp-for="Age" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.Country" class="form-control"></label>
+        <input type="text" asp-for="Address.Country" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Address.City" class="form-control"></label>
+        <input type="text" asp-for="Address.City" />
+    </div>
+    <button type="submit" value="отправить">Обновить</button>
+</form>
+}
