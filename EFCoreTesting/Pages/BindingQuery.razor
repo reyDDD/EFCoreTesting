@@ -1,12 +1,35 @@
-﻿@page "/marchrut/{name}"
+﻿@*@page "/marchrut/{name}"*@
 @page "/marchrut"
-<h3>BindingQuery</h3>
+@*@page "/marchrut/{id:int}"*@
+@*@page "/marchrut/{id2:double}"*@
+@*@page "/marchrut/{id3:bool}"*@
+@*@page "/marchrut/{id4:decimal}"*@
+@page "/marchrut/{id5:datetime}"
 
+<h3>BindingQuery</h3>
+<ul>
+    <li>string - @Name</li>
+    <li>int - @Id</li>
+    <li>double - @Id2</li>
+    <li>bool - @Id3</li>
+    <li>decimal - @Id4</li>
+    <li>datetime - @Id5</li>
+</ul>
 <p>Свойству присвоено значение из маршрута - @Name (если параметр задан, иначе присвоено значение по умолчанию - "master"</p>
 @code {
 
     [Parameter]
     public string Name { get; set; }
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public double Id2 { get; set; }
+    [Parameter]
+    public bool Id3 { get; set; }
+    [Parameter]
+    public decimal Id4 { get; set; }
+    [Parameter]
+    public DateTime Id5 { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
