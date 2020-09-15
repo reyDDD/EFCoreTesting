@@ -2,19 +2,46 @@
 @using EFCoreTesting.Models
 <h3>User Info</h3>
 
-<EditForm Model="@user" OnValidSubmit="SaveUser">
-    <InputText @bind-Value="user.FirstName" />
-    <InputText @bind-Value="user.LastName" />
-    <InputNumber @bind-Value="user.Age" />
+<EditForm Model="userec" OnValidSubmit="SaveUser">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="userec.FirstName" />
+    <InputText @bind-Value="userec.LastName" />
+    <InputNumber @bind-Value="userec.Age" />
+    <InputDate @bind-Value="userec.BirthDay" />
+    <InputCheckbox @bind-Value="userec.IsMale" />
     <button type="submit">Добавить пользователя в базу</button>
 </EditForm>
 
+<h2>Список пользователей в базе</h2>
+<ul>
+    @foreach (var item in users)
+    {
+    <li>@item.FirstName @item.LastName is @item.Age , your birthday @item.BirthDay and it is male - @item.IsMale</li>
+    }
+</ul>
+
+
+
 @code {
 
-    private User user = new User() { FirstName = "Ivan", LastName = "Petrov", Age = 23};
+    public User userec = new User() { FirstName = "Ivan", LastName = "Petrov", Age = 23, BirthDay = new DateTime(year: 2010, month: 12, day: 16), IsMale = true};
 
-    private void SaveUser()
+    public IEnumerable<User> users { get; set; }  = new List<User>();
+
+    [Inject]
+    public WorkOne2Many workOne2Many { get; set; }
+
+    public void SaveUser()
     {
-
+        workOne2Many.AddOrUpdate(userec);
+        users = workOne2Many.ListUser();
     }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        users = workOne2Many.ListUser();
+    }
+
 }

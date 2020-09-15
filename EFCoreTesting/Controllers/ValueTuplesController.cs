@@ -12,9 +12,9 @@ namespace EFCoreTesting.Controllers
         {
             (int, string) tyr = (id, name);
 
-             (int, string) Test ((int Age, string Name) tt)
+            (int, string) Test((int, string Name) korteg)
             {
-                return (tt.Age + 5, tt.Name + " add");
+                return (korteg.Item1 + 5, korteg.Name + " add");
             }
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreTesting.Services
 {
@@ -21,7 +21,7 @@ namespace EFCoreTesting.Services
 
             if (user.Id == 0)
             {
-                if (user.Address.City == null && user.Address.Country == null && user.Address.Id == 0)
+                if (user.Address?.City == null && user.Address?.Country == null && user.Address?.Id == 0)
                 {
                     user.Address = null;
                 }
@@ -49,6 +49,19 @@ namespace EFCoreTesting.Services
             }
             context.SaveChanges();
 
+        }
+
+        public IEnumerable<User> ListUser()
+        {
+            try
+            {
+                var res = context.Users.Include(a => a.Address).ToList();
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return new List<User> { new User { FirstName = "Masha" } };
+            }  
         }
     }
 }
