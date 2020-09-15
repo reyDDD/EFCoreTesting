@@ -32,6 +32,9 @@ namespace EFCoreTesting
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
+
+            services.AddScoped<InjectService>();
+            services.AddScoped<InjectService2>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

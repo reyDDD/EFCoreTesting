@@ -1,0 +1,45 @@
+﻿@page "/depend"
+@inject InjectService Inj
+@*@inherits EFCoreTesting.Services.ComponentBase*@ 
+<h3>Внедрение зависимостей</h3>
+
+<h2>первая зависимость</h2>
+<ul>
+    @* инжектить напрямую не нужно, экземпляр класса уже создан*@
+    @foreach (var friend in Inj.ReturnListFriends())
+    {
+        <li>@friend</li>
+    }
+</ul>
+
+
+<h2>вторая зависимость</h2>
+<ul>
+    @foreach (var friend in List2.ReturnListFriends())
+    {
+        <li>@friend</li>
+    }
+</ul>
+<h2>третья зависимость</h2>
+@*<ul>
+    @foreach (var friend in List3.ReturnListFriends())
+    {
+        <li>@friend</li>
+    }
+</ul>*@
+<p>в тетьей зависимости я еще параметр сгенерировал - но не могу полчить доступ ни к методу, ни к свойству. И проект не коомпилируется - какая-то ошибка</p>
+
+<button @onclick="Popolni">Клик ми</button>
+
+@code {
+
+
+    [Inject]
+    public InjectService2 List2 { get; set; }
+
+
+    private void Popolni()
+    {
+        Inj.AddFriends("Bubon", "Muflon");
+    }
+}
