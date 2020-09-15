@@ -1,0 +1,15 @@
+﻿@page "/marchrut/{name}"
+@page "/marchrut"
+<h3>BindingQuery</h3>
+
+<p>Свойству присвоено значение из маршрута - @Name (если параметр задан, иначе присвоено значение по умолчанию - "master"</p>
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Name = Name ?? "master";
+    }
+}
