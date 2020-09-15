@@ -29,6 +29,9 @@ namespace EFCoreTesting
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped<WorkOne2Many>();
             services.AddMvc();
+            //services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddServerSideBlazor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,8 +48,10 @@ namespace EFCoreTesting
            
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("defoult", "{controller=One2Many}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=One2Many}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
+                //endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
         }
     }
