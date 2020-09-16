@@ -35,6 +35,7 @@ namespace EFCoreTesting
 
             services.AddScoped<InjectService>();
             services.AddScoped<InjectService2>();
+            services.AddScoped<InjectServices>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

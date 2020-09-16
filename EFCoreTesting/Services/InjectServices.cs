@@ -7,7 +7,11 @@ namespace EFCoreTesting.Services
 {
     public class InjectServices
     {
-        private List<string> List { get; set; } = new List<string> { "первый", "второй", "третий" };
+        private List<string> List { get; set; } 
+        public InjectServices()
+        {
+            List = new List<string> { "первый", "второй", "третий" };
+        }
         public IEnumerable<string> ReturnListFriends()
         {
             return List;

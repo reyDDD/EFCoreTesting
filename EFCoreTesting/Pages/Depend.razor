@@ -1,6 +1,7 @@
 ﻿@page "/depend"
 @inject InjectService Inj
-@*@inherits EFCoreTesting.Services.ComponentBase*@ 
+@*@inject ComponentBasese basas*@
+@inherits ComponentBasese
 <h3>Внедрение зависимостей</h3>
 
 <h2>первая зависимость</h2>
@@ -21,13 +22,13 @@
     }
 </ul>
 <h2>третья зависимость</h2>
-@*<ul>
+<ul>
     @foreach (var friend in List3.ReturnListFriends())
     {
-        <li>@friend</li>
+        <li>@friend </li>
     }
-</ul>*@
-<p>в тетьей зависимости я еще параметр сгенерировал - но не могу полчить доступ ни к методу, ни к свойству. И проект не коомпилируется - какая-то ошибка</p>
+</ul>
+<p>@CountName - всего в списке столько элементов</p>
 
 <button @onclick="Popolni">Клик ми</button>
 

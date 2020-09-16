@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Services
 {
-    public class ComponentBase : IComponent
+    public class ComponentBasese : ComponentBase
     {
         [Parameter]
         public int CountName { get; set; } 
@@ -19,15 +19,11 @@ namespace EFCoreTesting.Services
             return CountName;
         }
 
-        public void Attach(RenderHandle renderHandle)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SetParametersAsync(ParameterView parameters)
+        protected override void OnParametersSet()
         {
             CountName = List3.ReturnListFriends().Count();
-            return Task.CompletedTask;
         }
+ 
+
     }
 }
