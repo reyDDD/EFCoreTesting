@@ -56,7 +56,8 @@ namespace EFCoreTesting
                 endpoints.MapDefaultControllerRoute();
                 //endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapFallbackToController("Blazor", "Home");
+               // endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
