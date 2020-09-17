@@ -1,0 +1,17 @@
+﻿@page "/clicat"
+
+<h3>EventParent</h3>
+
+<EventChild Clickat="Show" />
+
+<p>измененное значение как обработчик клика на кнопку в дочернем компонете присвоило значение: @MyProperty</p>
+@code {
+
+    public int MyProperty { get; set; }
+
+    public void Show()
+    {
+        MyProperty = 55;
+
+    }
+}

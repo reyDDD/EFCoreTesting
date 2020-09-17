@@ -1,0 +1,8 @@
+﻿<h3>EventChild</h3>
+
+<button @onclick="Clickat">Кликай тут</button>
+@code {
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> Clickat { get; set; }
+}
