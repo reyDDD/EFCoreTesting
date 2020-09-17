@@ -1,0 +1,23 @@
+﻿<h3>ChildContents</h3>
+
+<div>это текст внутри дочернего компонента
+    
+    <div>тут отображается кусок кода из родительского компонента: 
+    
+    @ChildContent
+    
+    </div>
+    
+    </div>
+@code {
+
+    [Parameter]
+    public string Country { get; set; }
+
+    [Parameter]
+    public string City { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
