@@ -24,8 +24,21 @@ namespace EFCoreTesting.Services
                 if (user.Address?.City == null && user.Address?.Country == null && user.Address?.Id == 0)
                 {
                     user.Address = null;
+                    context.Users.Add(user);
                 }
-                context.Users.Add(user);
+                else if ((user.Address?.City != null || user.Address?.Country != null) && user.Address?.Id == 0)
+                {
+                    addressOrigin = context.Addresses.Where(x => x.Country == user.Address.Country && x.City == user.Address.City).FirstOrDefault();
+                    if (addressOrigin != null)
+                    {
+                        user.Address = addressOrigin;
+                    }
+              
+                    
+                    context.Users.Add(user);
+                }
+                 
+
             }
             else if (user.Id != 0)
             {
@@ -63,5 +76,23 @@ namespace EFCoreTesting.Services
                 return new List<User> { new User { FirstName = "Masha" } };
             }  
         }
+
+        public IEnumerable<Address> GetListAdresses()
+        {
+            return context.Addresses.Include(u => u.Users).ToList();
+        }
+
+
+        //фильтрую данные в связанной таблице (загружаю не все, а согластно критериев, Фримен, стр 339
+        public IEnumerable<Address> GetListAdressesWithFilter()
+        {
+            IEnumerable<Address> listAddreses = context.Addresses.ToList();
+            foreach (var addres in listAddreses)
+            {
+                context.Entry(addres).Collection(u => u.Users).Query().Where(x => x.FirstName != "Masha").Load();
+            }
+            return listAddreses;   
+        }
+
     }
 }

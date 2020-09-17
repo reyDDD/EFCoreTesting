@@ -3,11 +3,16 @@
 <h3>RefParent</h3>
 
 <RefChild @ref="dochka" />
- 
+
 
 <p>результат после клика: @MyProperty</p>
-<button @onclick="OnSomething">click me for set</button>
-<button @onclick="() => Origin = MyProperty">click me for show</button>
+ 
+    <button @onclick="OnSomething">click me for set</button>
+ 
+    <div>
+        <button @onclick="() => Origin = dochka.Work2()" @onclick:stopPropagation="false">click me for show</button>
+    </div>
+ 
 <p>@Origin</p>
 @code {
 

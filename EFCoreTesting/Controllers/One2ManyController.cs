@@ -29,8 +29,18 @@ namespace EFCoreTesting.Controllers
         }
 
 
+       
+        public IActionResult GetListAdresses()
+        {
+            var res = workOne2Many.GetListAdresses();
+            return View("ListAddresses", res);
+        }
 
-   
+        public IActionResult GetListAdressesWithFilter()
+        {
+            var res = workOne2Many.GetListAdressesWithFilter();
+            return View("ListAddresses", res);
+        }
 
 
     }
