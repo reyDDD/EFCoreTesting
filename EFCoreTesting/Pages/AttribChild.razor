@@ -1,0 +1,12 @@
+﻿<h3>AttribChild</h3>
+
+<p>одиночный атрибут: @Onther</p>
+<div @attributes="Collection">диву присвоид массив значение в  формате ключ=значение. Просмотри код</div>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Collection { get; set; } = new Dictionary<string, object>();
+
+    [Parameter]
+    public int Onther { get; set; }
+}

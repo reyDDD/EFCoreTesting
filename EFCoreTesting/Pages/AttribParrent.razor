@@ -1,0 +1,17 @@
+﻿@page "/parrrent"
+<h3>AttribParrent</h3>
+
+<AttribChild @attributes="CollAttr" Onther="MyProperty" />
+
+
+@code {
+
+    private Dictionary<string, object> CollAttr { get; set; } = new Dictionary<string, object>
+    {
+        {"one", 12 },
+        {"two", 312 },
+        {"three", 342 }
+    };
+
+    public int MyProperty { get; set; } = 6;
+}

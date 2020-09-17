@@ -6,10 +6,18 @@
 
 <div>Это текст в основном компоненте</div>
 
-<ChildContents Country="Гондурас" City="задница мира">
+<ChildContents Country="Гондурас" City="задница мира" OnclickDelegate="Pusk">
     <div>Это текст в основном компоненте внутри блока ChildContents, который в параметры дочернего отправляет два значение - страну и город</div>
 
 </ChildContents>
+
+<p>текст после клика на кнонккку равен: @MyProperty </p>
+
 @code {
 
+    public int MyProperty { get; set; }
+    public void Pusk()
+    {
+        MyProperty = 5;
+    }
 }
