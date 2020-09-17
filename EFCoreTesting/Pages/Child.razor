@@ -1,0 +1,10 @@
+﻿@page "/home/blazor"
+
+<h3>Child</h3>
+
+<p>а это содержимое, которое в дочерний компонент передается из родительского: @ChildContent</p>
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
