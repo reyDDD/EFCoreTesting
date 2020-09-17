@@ -1,0 +1,38 @@
+﻿@page "/refpparent"
+
+<h3>RefParent</h3>
+
+<RefChild @ref="dochka" />
+ 
+
+<p>результат после клика: @MyProperty</p>
+<button @onclick="OnSomething">click me for set</button>
+<button @onclick="() => Origin = MyProperty">click me for show</button>
+<p>@Origin</p>
+@code {
+
+    public int Origin { get; set; }
+
+    public int MyProperty { get; set; }
+
+    private RefChild dochka;
+
+    private void OnSomething()
+    {
+        MyProperty = dochka.Work2();
+    }
+
+    //вылетает ошибка, потому что ссылка на компонент станновится доступна только после отрисовки страницы
+    //protected override void OnParametersSet()
+    //{
+    //    MyProperty = dochka.MyProperty;
+    //}
+
+
+    //а так работает - данные присваиваются свойству
+    protected override void OnAfterRender(bool firstRender)
+    {
+        firstRender = true;
+        MyProperty = dochka.MyProperty;
+    }
+}
