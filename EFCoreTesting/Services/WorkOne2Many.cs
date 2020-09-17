@@ -94,5 +94,12 @@ namespace EFCoreTesting.Services
             return listAddreses;   
         }
 
+        public IEnumerable<User> GetListWithError()
+        {
+            IQueryable<User> res = context.Users;
+            res = res.Include(u=>u.Address);
+
+            return res;
+        }
     }
 }

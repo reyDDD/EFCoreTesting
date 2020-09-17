@@ -1,0 +1,8 @@
+﻿@model IEnumerable<User>
+
+
+@foreach (User user in Model)
+{
+ <div>---- @user.FirstName</div>
+     @await Html.PartialAsync("PartialAddress", user.Address)
+}

@@ -42,6 +42,11 @@ namespace EFCoreTesting.Controllers
             return View("ListAddresses", res);
         }
 
+        public IActionResult PartialError()
+        {
+            var res = workOne2Many.GetListWithError();
+            return View("ListUser", res);
+        }
 
     }
 }

@@ -1,0 +1,9 @@
+﻿@model Address
+
+@if (Model?.Users != null)
+{
+    @foreach (User user in Model?.Users)
+    {
+        <div>@user.FirstName</div>
+    }
+}
