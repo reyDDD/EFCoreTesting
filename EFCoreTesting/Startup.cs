@@ -36,6 +36,7 @@ namespace EFCoreTesting
             services.AddScoped<InjectService>();
             services.AddScoped<InjectService2>();
             services.AddScoped<InjectServices>();
+            services.AddScoped<One2Many>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,8 +56,8 @@ namespace EFCoreTesting
                 endpoints.MapControllerRoute("default", "{controller=One2Many}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 //endpoints.MapRazorPages();
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToController("Blazor", "Home");
+                //endpoints.MapBlazorHub();
+               // endpoints.MapFallbackToController("Blazor", "Home");
                // endpoints.MapFallbackToPage("/_Host");
             });
         }

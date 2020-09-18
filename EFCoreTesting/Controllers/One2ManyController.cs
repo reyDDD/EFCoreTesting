@@ -11,11 +11,13 @@ namespace EFCoreTesting.Controllers
     public class One2ManyController : Controller
     {
         private WorkOne2Many workOne2Many;
+
         public One2ManyController(WorkOne2Many workOne2Many)
         {
             this.workOne2Many = workOne2Many;
         }
 
+ 
         public IActionResult Index()
         {
             return View();

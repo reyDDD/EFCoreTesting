@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Address>
+@{
+    int count = 0;
+    int countAddress = 0;
+}
+<form asp-action="UpdateUsers" asp-controller="OneMany" method="post">
+
+
+    @foreach (Address address in Model)
+    {
+        <div class="row">
+            <input class="col" type="hidden" name="[@countAddress].Id" value="@address.Id" />
+            <input class="col" readonly name="[@countAddress].Country" value="@address.Country" />
+            <input class="col" readonly name="[@countAddress].City" value="@address.City" />
+
+        </div>
+        @foreach (var user in address.Users)
+        {
+<div class="row  bg-info">
+    <input type="hidden" name="[@countAddress].Users[@count].IsMale" class="col" value="@user.IsMale" />
+    <input type="hidden" name="[@countAddress].Users[@count].BirthDay" class="col" value="@user.BirthDay" />
+    <input type="hidden" name="[@countAddress].Users[@count].Id" class="col" value="@user.Id" />
+    <input type="text" name="[@countAddress].Users[@count].FirstName" class="col" value="@user.FirstName" />
+    <input type="text" name="[@countAddress].Users[@count].LastName" class="col" value="@user.LastName" />
+    <input type="text" name="[@countAddress].Users[@count].Age" class="col" value="@user.Age" />
+</div>
+            count++;
+        }
+        count = 0;
+        countAddress++;
+    }
+    <button class="btn btn-success" type="submit">Обновить</button>
+
+</form>
