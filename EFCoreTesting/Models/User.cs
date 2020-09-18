@@ -14,6 +14,7 @@ namespace EFCoreTesting.Models
         [MaxLength(100, ErrorMessage ="Имя не может быть длиннее 100 символов")]
         public string FirstName { get; set; }
 
+        [Required]
         [MinLength(3, ErrorMessage ="В фамилии должно быть не менее 3 символов")]
         public string LastName { get; set; }
         public int Age { get; set; }

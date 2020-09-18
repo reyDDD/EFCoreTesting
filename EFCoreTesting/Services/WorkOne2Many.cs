@@ -33,11 +33,8 @@ namespace EFCoreTesting.Services
                     {
                         user.Address = addressOrigin;
                     }
-              
-                    
-                    context.Users.Add(user);
                 }
-                 
+                context.Users.Add(user);
 
             }
             else if (user.Id != 0)

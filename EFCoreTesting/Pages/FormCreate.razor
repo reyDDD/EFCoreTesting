@@ -1,0 +1,41 @@
+﻿@page "/formcreate"
+@inherits BasesWithInject
+
+<h3>FormCreate</h3>
+<EditForm EditContext="editContext" OnSubmit="AddTobase">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-Value="@Userec.FirstName" />
+    <InputText @bind-Value="@Userec.LastName" />
+    <InputNumber @bind-Value="@Userec.Age" />
+    <InputCheckbox @bind-Value="Userec.IsMale" />
+    <InputDate @bind-Value="Userec.BirthDay" />
+    <InputText @bind-Value="@Userec.Address.Country" />
+    <InputText @bind-Value="@Userec.Address.City" />
+ 
+    <button type="submit">Добавить</button>
+</EditForm>
+
+@code {
+    public User Userec { get; set; } = new User() { Address = new Address { City = "Донецк", Country = "Ukraine" } };
+
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(Userec);
+    }
+
+    public void AddTobase()
+    {
+        var isValid = editContext.Validate();
+
+        if (isValid)
+        {
+            Add(Userec);
+        }
+
+    }
+
+
+}
