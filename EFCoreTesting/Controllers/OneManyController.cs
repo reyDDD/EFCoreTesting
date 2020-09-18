@@ -17,6 +17,7 @@ namespace EFCoreTesting.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.WorkingAddress = TempData["WorkAddress"];
             var res = one2Many.GetUsersWithAddresses();
             return View(res);
         }
@@ -26,6 +27,19 @@ namespace EFCoreTesting.Controllers
         {
             var res = one2Many.UpdateAddressWithUsers(address);
             return RedirectToAction("Index", res);
+        }
+
+        [HttpPost]
+        public ActionResult<IEnumerable<Address>> AddUserThroughAddress(Address address)
+        {
+            var res = one2Many.UpdateAddressWithUsers(address);
+            return RedirectToAction("Index", res);
+        }
+
+        public IActionResult UpdateUsers(int id)
+        {
+            TempData["WorkAddress"] = id;
+            return RedirectToAction(nameof(Index));
         }
     }
 }

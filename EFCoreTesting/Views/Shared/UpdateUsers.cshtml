@@ -1,0 +1,28 @@
+﻿@model Address
+@{ 
+    int count = 0;
+}
+<form asp-action="AddUserThroughAddress" asp-controller="OneMany" method="post">
+    <input type="hidden" asp-for="Id" />
+    @*<input type="hidden" name="Country" value="@Model.Country" />*@
+    <input type="hidden" asp-for="Country" />
+    <input type="hidden" asp-for="City" />
+
+    @foreach (var user in Model.Users)
+    {
+        <input type="hidden" name="Users[@count].Id" value="@user.Id" />
+        <input type="hidden" name="Users[@count].FirstName" value="@user.FirstName" />
+        <input type="hidden" name="Users[@count].LastName" value="@user.LastName" />
+        <input type="hidden" name="Users[@count].Age" value="@user.Age" />
+        <input type="hidden" name="Users[@count].IsMale" value="@user.IsMale" />
+        <input type="hidden" name="Users[@count].BirthDay" value="@user.BirthDay" />
+        count++;
+    }
+    <input type="text" name="Users[@count].FirstName" value="" />
+    <input type="text" name="Users[@count].LastName" value="" />
+    <input type="number" name="Users[@count].Age" value="" />
+    <input type="checkbox" name="Users[@count].IsMale" value="" />
+    <input type="date" name="Users[@count].BirthDay" value="" />
+
+    <button type="submit">Добавить нового пользователя в базу</button>
+</form>

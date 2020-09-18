@@ -23,12 +23,19 @@ namespace EFCoreTesting.Models
         }
 
 
-#warning что происходит с данными, которые не включались в модель во вьюхе? Они обнуляются? Если да, как сделать так, чтобы обновлялись только изменившиеся данные?
         public IEnumerable<Address> UpdateAddressWithUsers(IEnumerable<Address> addresses)
         {
             connect.Addresses.UpdateRange(addresses);
             connect.SaveChanges();
             return connect.Addresses;
         }
+
+        public IEnumerable<Address> UpdateAddressWithUsers(Address addresses)
+        {
+            connect.Addresses.Update(addresses);
+            connect.SaveChanges();
+            return connect.Addresses;
+        }
+
     }
 }
