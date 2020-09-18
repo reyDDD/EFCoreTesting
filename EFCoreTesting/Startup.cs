@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace EFCoreTesting
-{
+{ 
     public class Startup
     {
         public IConfiguration Configuration { get; }
