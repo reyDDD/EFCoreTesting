@@ -1,0 +1,14 @@
+﻿@page "/constraint"
+@*@page "/constraint/{Id:int}"*@
+@page "/constraint/{Id2:datetime}"
+<h3>TypeConstraint</h3>
+
+
+<p>тут int - @Id</p>
+<p>тут дата - @Id2.Date</p>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public DateTime Id2 { get; set; }
+}
