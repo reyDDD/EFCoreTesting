@@ -3,8 +3,13 @@
 
 <AttribChild @attributes="CollAttr"  />
 
-
+<input type="checkbox" checked="@Yes"/>
+<input type="checkbox" checked="@No" />
+<input type="checkbox" checked="@Nul" />
 @code {
+    public bool Yes { get; set; } = true;
+    public bool No { get; set; } = false;
+    public string Nul { get; set; } = null;
 
     private Dictionary<string, object> CollAttr { get; set; } = new Dictionary<string, object>
     {
