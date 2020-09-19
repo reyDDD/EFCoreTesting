@@ -1,0 +1,24 @@
+﻿<h3>KeyIn</h3>
+
+@foreach (var item in Dict)
+{
+    <li>@item.Key ---- @item.Value</li>
+}
+
+<button @onclick="(Add)">dd</button>
+@code {
+    public int Count { get; set; } = 4;
+
+    private Dictionary<int, string> Dict { get; set; } = new Dictionary<int, string>
+{
+        {1,"one" },
+        {2, "two" },
+        {3, "three" }
+    };
+
+    private void Add()
+    {
+        Dict[Count] = $"{Count} текст {new Random().Next(100, 33333)}";
+        Dict[3] = $"{Count} текст {new Random().Next(100, 33333)}";
+    }
+}

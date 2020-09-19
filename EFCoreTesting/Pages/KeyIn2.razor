@@ -1,0 +1,17 @@
+﻿ 
+        <li tt="@MyProperty">@user.FirstName ---- @user.LastName</li>
+ 
+
+<button @onclick="Update">обновить содержимое</button>
+
+@code {
+    public int MyProperty { get; set; } = new Random().Next(22, 444444);
+    [Parameter]
+    public User user { get; set; }
+
+    public void Update()
+    {
+        user.FirstName = "new value";
+        user.Id = 434;
+    }
+}

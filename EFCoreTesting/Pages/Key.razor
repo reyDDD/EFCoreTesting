@@ -1,0 +1,50 @@
+﻿@page "/key"
+
+<h3>Key</h3>
+
+
+<ul>
+    @*при обновлении значения ключа вложенные элементы и компоненты перерисовуются*@
+    <KeyIn @key="my" />
+</ul>
+
+<button @onclick="Update">Обновить буль</button>
+
+<h6>Второй вариант</h6>
+
+@*компонент перерисуется, только если @key задано такое значениеб которое меняется в компоненте*@
+<ul>
+    @foreach (var user in Users)
+    {
+        <KeyIn2  @key="user.LastName" User="@user" />
+
+    }
+</ul>
+
+<button @onclick="DeleteOne">Обновить список, оставить толкьо второй элемент</button>
+
+@code {
+    
+
+    public bool my { get; set; } = true;
+
+    private List<User> Users { get; set; } = new List<User>
+{
+        new User{FirstName = "One", LastName = "One", Id = 22},
+        new User{FirstName = "Two", LastName = "Two", Id = 33}
+    };
+
+    void Update()
+    {
+        my = !my;
+    }
+    void UpdateTwo()
+    {
+        Users.First().FirstName = "update stroca 2";
+    }
+    void DeleteOne()
+    {
+        Users.Remove(Users.ElementAt(1));
+    }
+}
+
