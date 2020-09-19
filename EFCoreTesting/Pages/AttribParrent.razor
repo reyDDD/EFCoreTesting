@@ -1,12 +1,14 @@
 ﻿@page "/parrrent"
 <h3>AttribParrent</h3>
 
+@((MarkupString)myMarkup)
 <AttribChild @attributes="CollAttr"  />
 
 <input type="checkbox" checked="@Yes"/>
 <input type="checkbox" checked="@No" />
 <input type="checkbox" checked="@Nul" />
 @code {
+    private string myMarkup = "<p><b>жирный кусок текста</b><p>";
     public bool Yes { get; set; } = true;
     public bool No { get; set; } = false;
     public string Nul { get; set; } = null;
