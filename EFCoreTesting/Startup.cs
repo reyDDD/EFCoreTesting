@@ -38,6 +38,7 @@ namespace EFCoreTesting
             services.AddScoped<InjectServices>();
             services.AddScoped<One2Many>();
             services.AddScoped<NotifyService>();
+            services.AddScoped<ICartRepository, CartRepositoryInMemory>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

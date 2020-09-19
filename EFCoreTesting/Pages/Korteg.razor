@@ -9,6 +9,7 @@
 
     public (int x, string y) one { get; set; }
     public (int, string) two { get; set; }
+    public (int Age, string Name) fouth { get; set; }
 
     private (int Age, string Name) three()
     {
@@ -27,6 +28,10 @@
     }
     protected override void OnInitialized()
     {
+        fouth = (Age: 5, Name: "gjug" );
+        fouth = (5, "gjug");
+
+
         Math(5, "че как");
         I(6, "все не так");
     }

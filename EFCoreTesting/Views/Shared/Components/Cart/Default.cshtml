@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Cart>
+
+@foreach (var item in Model)
+{
+    <div>@item.Id @item.Name @item.Articul @item.Count</div>
+}
+<form asp-action="Add" asp-controller="Cart" method="post">
+    <input type="text" name="Name" />
+    <input type="text" name="Articul" />
+    <input type="number" name="Count" />
+    <button type="submit">Add</button>
+</form>

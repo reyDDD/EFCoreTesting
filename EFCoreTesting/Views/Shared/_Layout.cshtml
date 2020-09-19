@@ -8,6 +8,8 @@
     <base href="~/" />
 </head>
 <body>
+    @await Component.InvokeAsync(nameof(Cart)) 
+
     <div class="btn-success btn-block">Это содержимое макета MVC</div>
     <div>
         @RenderBody()
