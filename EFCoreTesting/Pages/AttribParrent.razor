@@ -1,7 +1,7 @@
 ﻿@page "/parrrent"
 <h3>AttribParrent</h3>
 
-<AttribChild @attributes="CollAttr" Onther="MyProperty" />
+<AttribChild @attributes="CollAttr"  />
 
 
 @code {
@@ -10,7 +10,8 @@
     {
         {"one", 12 },
         {"two", 312 },
-        {"three", 342 }
+        {"three", 342 },
+        {"Onther", 6 }
     };
 
     public int MyProperty { get; set; } = 6;

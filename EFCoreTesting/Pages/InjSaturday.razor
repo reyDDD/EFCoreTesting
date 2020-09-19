@@ -1,0 +1,44 @@
+﻿@page "/injc"
+@inject NotifyService Notify
+@implements IDisposable
+@inject InjectService Serv1
+
+<h3>InjSaturday</h3>
+
+<button @onclick="@(() => Notify.Start(3, "fd"))">жми</button>
+<p>инт: @MyProperty</p>
+<p>стринг: @MyProperty2</p>
+
+
+<p>Сервис 1 содержит @(Serv1.ReturnListFriends().Count())  элементов</p>
+<p>Сервис 2 содержит @(Serv2.ReturnListFriends().Count())  элементов</p>
+@code {
+    [Inject]
+    public InjectService2 Serv2 { get; set; }
+
+    public int MyProperty { get; set; }
+    public string MyProperty2 { get; set; }
+    public string MyProperty3 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Notify.uvedomlyalka += Work;
+    }
+
+    public async Task<string> Work(int x, string y)
+    {
+        await InvokeAsync(() =>
+        {
+            MyProperty = x;
+            MyProperty2 = y;
+            StateHasChanged();
+        });
+
+        return MyProperty + MyProperty2;
+    }
+
+    public void Dispose()
+    {
+        Notify.uvedomlyalka -= Work;
+    }
+}

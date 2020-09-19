@@ -1,0 +1,33 @@
+﻿@page "/notichild"
+@implements IDisposable
+@inject NotifyService Notify
+
+<h3>NotifyChild</h3>
+<button @onclick="@(() => Notify.Start(4, "ff"))">Жми</button>
+
+<p>значение x: @MyProperty</p>
+<p>значение y: @MyProperty2</p>
+@code {
+    public int MyProperty { get; set; }
+    public string MyProperty2 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Notify.uvedomlyalka += Method;
+    }
+    public void Dispose()
+    {
+        Notify.uvedomlyalka -= Method;
+    }
+
+    public async Task<string> Method(int x, string y)
+    {
+        await InvokeAsync(() =>
+        {
+            MyProperty = x;
+            MyProperty2 = y;
+            StateHasChanged();
+        });
+        return MyProperty + MyProperty2;
+    }
+}
