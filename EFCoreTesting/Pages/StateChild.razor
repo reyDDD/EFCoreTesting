@@ -1,0 +1,26 @@
+﻿<h3 @onclick="Changed">StateChild = @Stable</h3>
+
+@if (Stable)
+{
+    <p>тут отображается визуализируемый фрагмент из родительского компонента: @ChildContent</p>
+}
+
+@code {
+    private bool Stable { get; set; }
+
+    [Parameter]
+    public bool State { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public void Changed()
+    {
+        Stable = !Stable;
+    }
+
+    protected override void OnInitialized()
+    {
+        Stable = State;
+    }
+
+}
