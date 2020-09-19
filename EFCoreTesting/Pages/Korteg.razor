@@ -1,0 +1,33 @@
+﻿@page "/korteg"
+
+<h3>Korteg</h3>
+<p>один: @one.y</p>
+<p>один: @two.Item2</p>
+<p>один: @(three().Name)</p>
+
+@code {
+
+    public (int x, string y) one { get; set; }
+    public (int, string) two { get; set; }
+
+    private (int Age, string Name) three()
+    {
+        return (33, "Котлован");
+    }
+
+    private void Math(int x, string res)
+    {
+        one = (x, res);
+    }
+
+    private void I(int x, string res)
+    {
+        var two1 =  new {In= x, Ba= res };
+        two = (two1.In, two1.Ba);
+    }
+    protected override void OnInitialized()
+    {
+        Math(5, "че как");
+        I(6, "все не так");
+    }
+}
