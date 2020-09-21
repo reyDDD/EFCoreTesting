@@ -36,7 +36,6 @@ namespace EFCoreTesting.Models
             return res;
         }
 
-
         public IEnumerable<Address> GetUsersWithAddresses()
         {
             return connect.Addresses.Include(a => a.Users);

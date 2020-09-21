@@ -1,0 +1,23 @@
+﻿
+<h3 @attributes="dict" @onclick="EventCallback2">Repeat_21_09_Child - количество = @Count</h3>
+<p>А тут отображается контент из родительского компонента - @ChildContent</p>
+
+@code {
+    [Parameter]
+    public int Count { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> dict { get; set; }
+
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> EventCallback2 { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public int ReturnWithRef()
+    {
+        return 5;
+    }
+}

@@ -1,0 +1,31 @@
+﻿@page "/repeat2109"
+@inherits Repeat2109
+@inject Context connect
+@inject One2Many one2Many
+
+ 
+
+
+<h3>Repeat_21_09 </h3>
+<p>обработчик события в виде математической операции задан в родительском компоненте, а вызов события осуществляется в дочернем компоненте - result = @MyProperty</p>
+
+<Repeat_21_09_Child @ref ="childec" Count="3" @attributes="list" EventCallback2="@Arifmetic">
+    Текст из родительского компонета попадает в дочерний
+
+</Repeat_21_09_Child>
+
+<div>
+    <p @onclick="@(() =>Result = @childec.ReturnWithRef())">тут вызываю метод из дочернего компонента в родительском, путем получения ссылки на него - @Result</p>
+</div>
+
+@foreach (var item in ReturnList())
+{
+    <div>@item.City @item.Country @item.Users.First().FirstName</div>
+}
+
+@code{
+    private Repeat_21_09_Child childec;
+
+    public int Result { get; set; }
+
+}
