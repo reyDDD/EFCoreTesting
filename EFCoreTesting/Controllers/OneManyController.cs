@@ -15,6 +15,19 @@ namespace EFCoreTesting.Controllers
         {
             this.one2Many = one2Many;
         }
+
+
+        public ActionResult<IEnumerable<Address>> BoundIncludeFilter1()
+        {
+            var res = one2Many.GetAddressWithFilter1();
+            return View(nameof(Index), res);
+        }
+        public ActionResult<IEnumerable<Address>> BoundIncludeFilter2()
+        {
+            var res = one2Many.GetAddressWithFilter2();
+            return View(nameof(Index), res);
+        }
+
         public IActionResult Index()
         {
             ViewBag.WorkingAddress = TempData["WorkAddress"];

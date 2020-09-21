@@ -17,6 +17,26 @@ namespace EFCoreTesting.Models
         }
 
 
+        public IEnumerable<Address> GetAddressWithFilter1()
+        {
+            IEnumerable<Address> listAddress = connect.Addresses.ToArray();
+            foreach (var adres in listAddress)
+            {
+                connect.Entry(adres).Collection(x => x.Users).Query().Where(x => x.Age > 22).Load();
+            }
+            return listAddress;
+        }
+        public IEnumerable<Address> GetAddressWithFilter2()
+        {
+            IEnumerable<Address> res = connect.Addresses.Include(x => x.Users).ToArray();
+            foreach (var adres in res)
+            {
+                connect.Entry(adres).Collection(x => x.Users).Query().Where(x => x.Age > 22).Load();
+            }
+            return res;
+        }
+
+
         public IEnumerable<Address> GetUsersWithAddresses()
         {
             return connect.Addresses.Include(a => a.Users);
