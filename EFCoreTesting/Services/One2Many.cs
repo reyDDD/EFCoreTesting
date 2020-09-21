@@ -17,6 +17,19 @@ namespace EFCoreTesting.Models
         }
 
 
+        public Address Work2109()
+        {
+            return connect.Addresses.Include(p => p.Users).First();
+        }
+        public Address Work2109Update(Address address)
+        {
+            connect.Addresses.Update(address);
+            connect.SaveChanges();
+            return connect.Addresses.Include(p=> p.Users).Where(id => id.Id == address.Id).First();
+        }
+
+
+
         public IEnumerable<Address> GetAddressWithFilter1()
         {
             IEnumerable<Address> listAddress = connect.Addresses.ToArray();

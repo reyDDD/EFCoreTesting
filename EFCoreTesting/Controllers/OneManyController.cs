@@ -17,10 +17,31 @@ namespace EFCoreTesting.Controllers
         }
 
 
+        public IActionResult Index()
+        {
+            ViewBag.WorkingAddress = TempData["WorkAddress"];
+            var res = one2Many.GetUsersWithAddresses();
+            return View(res);
+        }
+
+        public IActionResult Work2109()
+        {
+            var res = one2Many.Work2109();
+            return View("Work2109", res);
+        }
+
+        [HttpPost]
+        public ActionResult<IEnumerable<Address>> Update2109Address(Address address)
+        {
+            var res = one2Many.Work2109Update(address);
+            return RedirectToAction("Work2109", res);
+        }
+
+
         public ActionResult<IEnumerable<Address>> BoundIncludeFilter1()
         {
             var res = one2Many.GetAddressWithFilter1();
-            return View(nameof(Index), res);
+            return View("Index", res);
         }
         public ActionResult<IEnumerable<Address>> BoundIncludeFilter2()
         {
@@ -28,12 +49,8 @@ namespace EFCoreTesting.Controllers
             return View(nameof(Index), res);
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.WorkingAddress = TempData["WorkAddress"];
-            var res = one2Many.GetUsersWithAddresses();
-            return View(res);
-        }
+       
+
 
         [HttpPost]
         public ActionResult<IEnumerable<Address>> UpdateUsers(IEnumerable<Address> address)
