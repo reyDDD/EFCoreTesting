@@ -1,0 +1,18 @@
+﻿<h3>CHild2309</h3>
+
+<input type="checkbox" checked="@Check" />
+<div>@((MarkupString)text)</div>
+<div>@TextIn @(new Random().Next(2, 222222))</div>
+@code {
+    [Parameter]
+    public int Check { get; set; }
+    private string text = "<p><b>Жирный текст</b></p>";
+
+    private string TextIn { get; set; } 
+    [Parameter]
+    public string TextOut { get; set; }
+    protected override void OnInitialized()
+    {
+        TextIn = TextOut;
+    }
+}

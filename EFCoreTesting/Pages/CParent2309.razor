@@ -1,0 +1,18 @@
+﻿@page "/parent2309"
+
+<h3>CParent2309</h3>
+<button @onclick="@(() => Count++)">Увеличить счетчик</button>
+
+<CHild2309 @key="Count" Check="0" TextOut="@MyProperty">
+
+</CHild2309>
+
+<div>@Count</div>
+<div>
+    <button @onclick="@(() => MyProperty = "новый текст")" @onclick:stopPropagation="true">изменить текст @MyProperty</button>
+</div>
+
+@code {
+    public int Count { get; set; }
+    public string MyProperty { get; set; } = "текст внешний";
+}
