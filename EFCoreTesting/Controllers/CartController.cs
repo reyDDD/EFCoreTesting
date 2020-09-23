@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace EFCoreTesting.Controllers
 {
+    [ViewComponent(Name = "PartialComponent")]
     public class CartController : Controller
     {
         private ICartRepository repo;
@@ -54,6 +56,13 @@ namespace EFCoreTesting.Controllers
         {
             var res = repos.Work2109Update(address);
             return RedirectToAction(nameof(Work2309), nameof(Cart), res);
+        }
+
+
+        public IViewComponentResult Invoke()
+        {
+            var res = repos.Work2309Get();
+            return new ViewViewComponentResult() {ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Address>(ViewData, res) };
         }
 
     }

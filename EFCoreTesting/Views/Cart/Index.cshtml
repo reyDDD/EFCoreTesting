@@ -1,4 +1,8 @@
 ﻿@model Address
+<p>Совместный с контроллером компонент</p>
+@await Component.InvokeAsync("PartialComponent")
+
+
 <p>вьюха, в которой прикрепляю компонент</p>
 
 @await Component.InvokeAsync("AddUser", Model) 
