@@ -27,7 +27,10 @@ namespace EFCoreTesting.Models
             connect.SaveChanges();
             return connect.Addresses.Include(p=> p.Users).Where(id => id.Id == address.Id).First();
         }
-
+        public Address Work2309Get()
+        {
+            return connect.Addresses.Include(p => p.Users).First();
+        }
 
 
         public IEnumerable<Address> GetAddressWithFilter1()

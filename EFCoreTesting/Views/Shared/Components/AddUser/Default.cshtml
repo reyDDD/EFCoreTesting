@@ -1,0 +1,32 @@
+﻿@model Address
+
+@{
+    int count = 0;
+}
+
+
+<form asp-action="Work2309Update" asp-controller="Cart" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Country" />
+    <input type="hidden" asp-for="City" />
+
+    @foreach (var user in Model.Users)
+    {
+        <input type="text" readonly name="Users[@count].FirstName" asp-for="@user.FirstName" />
+        <input type="text" readonly name="Users[@count].LastName" asp-for="@user.LastName" />
+        <input type="hidden" readonly name="Users[@count].Id" asp-for="@user.Id" />
+        <input type="number" readonly name="Users[@count].Age" asp-for="@user.Age" />
+        <input value="true" readonly name="Users[@count].IsMale" asp-for="@user.IsMale" />
+        <input type="date" readonly name="Users[@count].BirthDay" asp-for="@user.BirthDay" />
+        count++;
+        <br />
+    }
+
+    <input type="text" name="Users[@count].FirstName" />
+    <input type="text" name="Users[@count].LastName" />
+    <input type="hidden" name="Users[@count].Id" />
+    <input type="number" name="Users[@count].Age" />
+    <input type="checkbox" name="Users[@count].IsMale" value="true" />
+    <input type="date" name="Users[@count].BirthDay" />
+    <button type="submit">Отправить</button>
+</form>
