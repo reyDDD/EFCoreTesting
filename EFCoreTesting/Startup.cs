@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace EFCoreTesting
-{ 
+{
     public class Startup
     {
         public IConfiguration Configuration { get; }
@@ -39,6 +39,7 @@ namespace EFCoreTesting
             services.AddScoped<One2Many>();
             services.AddScoped<NotifyService>();
             services.AddScoped<ICartRepository, CartRepositoryInMemory>();
+            services.AddSingleton<Notifiyer>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,7 +53,7 @@ namespace EFCoreTesting
             app.UseRouting();
 
 
-           
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=One2Many}/{action=Index}/{id?}");
@@ -60,7 +61,7 @@ namespace EFCoreTesting
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToController("Blazor", "Home");
-               // endpoints.MapFallbackToPage("/_Host");
+                // endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

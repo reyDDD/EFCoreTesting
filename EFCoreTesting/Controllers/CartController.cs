@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
+using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreTesting.Controllers
@@ -11,11 +12,25 @@ namespace EFCoreTesting.Controllers
     {
         private ICartRepository repo;
         private One2Many repos;
-        public CartController(ICartRepository repo, One2Many repos)
+        private Notifiyer notifiyer;
+        public CartController(ICartRepository repo, One2Many repos, Notifiyer notifiyer)
         {
             this.repo = repo;
             this.repos = repos;
+            this.notifiyer = notifiyer;
         }
+
+        public IActionResult Notify()
+        {
+            return View(nameof(Notify));
+        }
+        [HttpPost]
+        public IActionResult Notify(int Age, string name)
+        {
+             notifiyer.PuskNotify(Age, name).GetAwaiter();
+            return RedirectToAction(nameof(Notify));
+        }
+
 
         public IActionResult Index()
         {

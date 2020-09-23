@@ -1,0 +1,30 @@
+﻿@page "/not2309"
+@inject Notifiyer Notifys
+@implements IDisposable
+
+<h3>Notify2309</h3>
+<p>обновленное содержимое^  @Name - @Age</p>
+@code {
+    public int Age { get; set; } = 1;
+    public string Name { get; set; } = "default";
+
+    protected override void OnInitialized()
+    {
+        Notifys.WorkNotify += WorkMethod;
+    }
+
+    public async Task WorkMethod(int x, string y)
+    {
+        await InvokeAsync(() =>
+        {
+            Age = x;
+            Name = y;
+            StateHasChanged();
+        }) ;
+
+    }
+    public void Dispose()
+    {
+        Notifys.WorkNotify -= WorkMethod;
+    }
+}
