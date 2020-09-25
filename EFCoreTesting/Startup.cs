@@ -40,6 +40,7 @@ namespace EFCoreTesting
             services.AddScoped<NotifyService>();
             services.AddScoped<ICartRepository, CartRepositoryInMemory>();
             services.AddSingleton<Notifiyer>();
+            services.AddScoped<WorkRelation>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
