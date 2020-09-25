@@ -30,5 +30,18 @@ namespace EFCoreTesting.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult UpdateAddressThroughUser(long id)
+        {
+            User us = workRelation.GetUser(id);
+            return View(nameof(UpdateAddressThroughUser), us);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAddressThroughUser(User changeUser, User originUser = null)
+        {
+            workRelation.UpdateAddressThroughUser(changeUser, originUser);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

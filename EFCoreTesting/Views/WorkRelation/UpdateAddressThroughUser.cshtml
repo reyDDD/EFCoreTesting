@@ -1,0 +1,21 @@
+﻿@model User
+
+
+<form asp-action="UpdateAddressThroughUser" asp-controller="WorkRelation" method="post">
+
+    <input type="hidden" name="originUser.Address.Id" asp-for="Address.Id" />
+    <input type="hidden" name="originUser.Address.City" asp-for="Address.City" />
+    <input type="hidden" name="originUser.Address.Country" asp-for="Address.Country" />
+
+    <input type="hidden" name="Id" asp-for="Id" />
+    <input type="hidden" name="FirstName" asp-for="FirstName" />
+    <input type="hidden" name="LastName" asp-for="LastName" />
+    <input type="hidden" name="BirthDay" asp-for="BirthDay" />
+    <input type="hidden" name="IsMale" asp-for="IsMale" value="true" />
+    <input type="hidden" name="Age" asp-for="Age" />
+    <input type="hidden" name="Address.Id" asp-for="Address.Id" />
+    <input type="text" name="Address.City" asp-for="Address.City" />
+    <input type="text" name="Address.Country" asp-for="Address.Country" />
+
+    <button type="submit">Отправить</button>
+</form>
