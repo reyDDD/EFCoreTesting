@@ -65,7 +65,7 @@ namespace EFCoreTesting.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<int>("Age")
@@ -97,7 +97,9 @@ namespace EFCoreTesting.Migrations
                 {
                     b.HasOne("EFCoreTesting.Models.Address", "Address")
                         .WithMany("Users")
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

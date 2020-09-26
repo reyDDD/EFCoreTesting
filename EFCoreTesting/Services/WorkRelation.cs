@@ -32,5 +32,30 @@ namespace EFCoreTesting.Services
             connect.SaveChanges();
             return changeUser;
         }
+
+
+        public void RemoveUserThroughAddress(long idUser, bool deleteWithAddress, bool deleteAddress)
+        {
+            var user = connect.Users.Where(i => i.Id == idUser).FirstOrDefault();
+            if (deleteAddress)
+            {
+                Address address = connect.Addresses.Where(i => i.Id == user.AddressId).FirstOrDefault();
+                connect.Remove<Address>(address);
+            }
+            else
+            {
+                if (deleteWithAddress)
+                {
+                    connect.Remove<User>(user);
+                }
+                else
+                {
+                    user.Address = null;
+                    connect.Remove<User>(user);
+                }
+            }
+
+            connect.SaveChanges();
+        }
     }
 }

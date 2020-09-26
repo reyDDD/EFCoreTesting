@@ -43,5 +43,20 @@ namespace EFCoreTesting.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public IActionResult DeleteUser(long Id)
+        {
+            workRelation.GetUser(Id);
+            return View(nameof(DeleteUser));
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(long Id, bool deleteWithAddress, bool deleteAddress)
+        {
+            workRelation.RemoveUserThroughAddress(Id, deleteWithAddress, deleteAddress);
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

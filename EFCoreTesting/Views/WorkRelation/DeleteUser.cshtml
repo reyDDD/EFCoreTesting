@@ -1,0 +1,13 @@
+﻿@model User
+
+
+<form asp-action="DeleteUser" asp-controller="WorkRelation" method="post">
+
+
+    <input type="hidden" name="Id" asp-for="Id" />
+    <input type="checkbox" name="deleteWithAddress" value="true" />
+    <p>если нужно удалить не пользователя, а адрес</p>
+    <input type="checkbox" name="deleteAddress" value="true" />
+    deleteAddress
+    <button type="submit">Удалить</button>
+</form>
