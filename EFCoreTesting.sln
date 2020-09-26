@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreTesting", "EFCoreTesting\EFCoreTesting.csproj", "{20B04D27-8475-493F-8BCC-5651D59EB42C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{7539838D-7581-469B-8D9B-5A2FE16C033A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "XUnitTestProject1\XUnitTestProject1.csproj", "{7539838D-7581-469B-8D9B-5A2FE16C033A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

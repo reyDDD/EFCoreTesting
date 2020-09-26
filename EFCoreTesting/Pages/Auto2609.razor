@@ -1,0 +1,29 @@
+﻿@page "/autos"
+
+<h3>Auto</h3>
+<EditForm Model="@autos" OnValidSubmit="@Work">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputNumber @bind-Value="autos.MaxSpeed" />
+    <InputText @bind-Value="autos.Brand" />
+
+    <button type="submit">отправить форму</button>
+</EditForm>
+
+
+
+
+@Success
+
+@code {
+    private Auto autos  = new Auto();
+    public string  Success { get; set; }
+
+    public void Work()
+    {
+        Success = autos.Brand + " " + autos.MaxSpeed;
+
+    }
+ 
+}
