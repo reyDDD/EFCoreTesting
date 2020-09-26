@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace EFCoreTesting.Infrastructure.TagHelpers
     {
         [HtmlAttributeNotBound]
         [ViewContext]
-        public ViewContext ViewContextData { get; set; }
+        public ViewContext ViewContextData { get; set; }  
 
         public string NewClass { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -30,7 +31,9 @@ namespace EFCoreTesting.Infrastructure.TagHelpers
             output.PostContent.SetHtmlContent("</b>");
 
             TagBuilder builder = new TagBuilder("div");
-            builder.InnerHtml.AppendHtml($"<p>добавка перед основным содержимым: {ViewContextData.RouteData.Values["controller"].ToString()} / {ViewContextData.RouteData.Values["action"].ToString()}</p>");
+            builder.InnerHtml.AppendHtml($"<p>добавка перед основным содержимым: </p>");
+            //builder.InnerHtml.AppendHtml($"<p>добавка перед основным содержимым: {ViewContextData.RouteData.Values["controller"].ToString()} / {ViewContextData.RouteData.Values["action"].ToString()}</p>");
+
             builder.Attributes.Add("class", "bg-success");
 
             output.PreElement.AppendHtml(builder);
