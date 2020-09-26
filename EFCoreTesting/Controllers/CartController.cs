@@ -24,8 +24,17 @@ namespace EFCoreTesting.Controllers
 
         public IActionResult Notify()
         {
-            return View(nameof(Notify));
+            (int x, string y) corteg = (3, "text");
+
+
+            return View(nameof(Notify), Co());
         }
+
+        (int, string) Co()
+        {
+            return (3, "dsd");
+        }
+
         [HttpPost]
         public IActionResult Notify(int Age, string name)
         {

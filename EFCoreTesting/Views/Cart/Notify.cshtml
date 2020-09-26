@@ -1,4 +1,7 @@
-﻿
+﻿@model (int , string y)
+
+<p>@Model.Item1  --- @Model.y</p>
+ 
 <form asp-action="Notify" asp-controller="Cart" method="post">
     <input type="number" name="Age" />
     <input type="text" name="Name" />
