@@ -1,6 +1,8 @@
 ﻿@page "/route/"
 @page "/route/{param}"
 @inject NavigationManager NavManager
+@using Microsoft.AspNetCore.WebUtilities
+
 
 <h3>RouteDot</h3>
 @Param
@@ -11,10 +13,25 @@
     <li @onclick="@(() =>@NavManager.NavigateTo("/route/route"))">переход</li>
 </ul>
 
-
+<p>queryValue: @queryValue</p>
+<p>new Uri(NavManager.Uri).Query: @query</p>
+<p>NavManager.Uri: @query2</p>
 @code {
     [Parameter]
     public string Param { get; set; }
 
+    private string queryValue = "Not set";
+    private string query = "Not set";
+    private string query2 = "Not set";
 
+    protected override void OnInitialized()
+    {
+        query = new Uri(NavManager.Uri).Query;
+        query2 = NavManager.Uri;
+
+        if (QueryHelpers.ParseQuery(query).TryGetValue("list", out var value))
+        {
+            queryValue = value;
+        }
+    }
 }
