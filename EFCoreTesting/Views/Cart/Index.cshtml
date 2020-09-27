@@ -4,5 +4,11 @@
 
 
 <p>вьюха, в которой прикрепляю компонент</p>
+@if (Model != null)
+{
+    @await Component.InvokeAsync("AddUser", Model)
+}
 
-@await Component.InvokeAsync("AddUser", Model) 
+
+
+@await Component.InvokeAsync("MyString") 
