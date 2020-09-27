@@ -1,10 +1,20 @@
 ﻿@page "/route/"
 @page "/route/{param}"
+@inject NavigationManager NavManager
 
 <h3>RouteDot</h3>
 @Param
+<ul>
+    <li>BaseUri: @NavManager.BaseUri</li>
+    <li>Uri: @NavManager.Uri</li>
+    <li>преобразует относительный ToAbsoluteUri: @NavManager.ToAbsoluteUri("fd")</li>
+    <li @onclick="@(() =>@NavManager.NavigateTo("/route/route"))">переход</li>
+</ul>
+
 
 @code {
     [Parameter]
     public string Param { get; set; }
+
+
 }
