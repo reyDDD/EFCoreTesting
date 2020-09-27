@@ -1,5 +1,6 @@
 ﻿@page "/autos"
-@page "/autos/{text}"
+@page "/autos/{text:int}"
+@inject Notifiyer Notify
 
 <h3>Auto</h3>
 <EditForm Model="@autos" OnValidSubmit="@Work">
@@ -14,13 +15,30 @@
 
 
 
+<button @onclick="ServiceWork">Вызов метода из класса, внедренного в помощью зависимости</button>
 
 @Success
 <p>@Text</p>
+<p>инжекчу событие: @TextWork </p>
 
 @code {
+
+    public string TextWork { get; set; }
+
+    private async Task Work(int x, string y)
+    {
+        TextWork = x + y;
+    }
+
+    public async void ServiceWork()
+    {
+        Notify.WorkNotify += Work;
+        await Notify.PuskNotify(12, " текст в переменной");
+    }
+
+
     [Parameter]
-    public string Text { get; set; } = "def";
+    public int Text { get; set; } = 0;
 
     private Auto autos = new Auto();
     public string Success { get; set; }
