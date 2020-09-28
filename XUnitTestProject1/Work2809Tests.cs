@@ -27,35 +27,50 @@ namespace XUnitTestProject1
         [Fact]
         public void TestInheritanceContext()
         {
-            using (var context = Fixture.CreateContext())
+            using (var transaction = Fixture.Connection.BeginTransaction())
             {
-                var res = context.Users.ToListAsync().Result;
-                Assert.True("Ариэль" == res[0].FirstName);
+                using (var context = Fixture.CreateContext(transaction))
+                {
+                    var res = context.Users.ToListAsync().Result;
+                    Assert.True("Ариэль" == res[0].FirstName);
+                }
             }
-
         }
 
         [Fact]
         public void TestServiceWithContext()
         {
-            var serv = new Work2809(Fixture.CreateContext());
-            var res = serv.GetAddressWithUser();
+            using (var transaction = Fixture.Connection.BeginTransaction())
+            {
+                var serv = new Work2809(Fixture.CreateContext(transaction));
+                serv.AddUser("Ivan", "Pokryskin", 23);
+                var res = serv.GetAddressWithUser();
 
-            string name = res.Users.First().FirstName;
-            Assert.True("Ivan" == name);
+                string name = res.Users.Where(i=> i.FirstName == "Ivan" & i.LastName== "Pokryskin").FirstOrDefault()?.FirstName;
+                Assert.True("Ivan" == name);
+                //transaction.Commit();
+            }
 
+            using (Work2809 serv = new Work2809(Fixture.CreateContext()))
+            {
+                var res = serv.GetAddressWithUser();
+                string name = res.Users.Where(i => i.FirstName == "Ivan" & i.LastName == "Pokryskin").FirstOrDefault()?.FirstName;
+                Assert.False("Ivan" == name);
+            }
         }
 
         [Fact]
         public void TestControllerWithContext()
         {
-            var serv = new Work2809(Fixture.CreateContext());
-            var controller = new Work2809Controller(serv);
-            var adress = (controller.Index() as ViewResult).ViewData.Model as Address;
+            using (var transaction = Fixture.Connection.BeginTransaction())
+            {
+                var serv = new Work2809(Fixture.CreateContext(transaction));
+                var controller = new Work2809Controller(serv);
+                var adress = (controller.Index() as ViewResult).ViewData.Model as Address;
+               
 
-             
-            Assert.Equal("Ivan", adress.Users.First().FirstName);
-
+                Assert.Equal("Ivan", adress.Users.First().FirstName);
+            }
         }
 
     }

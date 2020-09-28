@@ -12,7 +12,7 @@ namespace EFCoreTesting.Services
 
     }
 
-    public class Work2809
+    public class Work2809 : IDisposable
     {
         private Context context;
 
@@ -38,6 +38,19 @@ namespace EFCoreTesting.Services
         {
             var adr = context.Users.Include(p => p.Address).AsQueryable();
             return adr;
+        }
+
+        public void AddUser(string name, string lastName, int Age)
+        {
+            var address = context.Addresses.First();
+            var user = new User {Age = Age, FirstName = name, LastName = lastName, IsMale = true, BirthDay = new DateTime(2012,12, 23), Address = address };
+            context.Add(user);
+            context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
     }
 }

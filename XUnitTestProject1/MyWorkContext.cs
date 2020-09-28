@@ -16,12 +16,19 @@ namespace XUnitTestProject1
         public MyWorkContext()
         {
             Connection = new SqlConnection(@"Server=(localdb)\mssqllocaldb;Database=EFCoreTests;Trusted_Connection=True;MultipleActiveResultSets=True;App=EntityFramework;");
+            Connection.Open();
         }
 
 
-        public Context CreateContext()
+        public Context CreateContext(DbTransaction transaction = null)
         {
-            return new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(Connection).Options);
+           var context =  new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(Connection).Options);
+            if (transaction != null)
+            {
+                context.Database.UseTransaction(transaction);
+            }
+
+            return context;
         }
 
 
