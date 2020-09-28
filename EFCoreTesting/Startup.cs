@@ -41,6 +41,7 @@ namespace EFCoreTesting
             services.AddScoped<ICartRepository, CartRepositoryInMemory>();
             services.AddSingleton<Notifiyer>();
             services.AddScoped<WorkRelation>();
+            services.AddScoped<Work2809>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
