@@ -23,5 +23,16 @@ namespace EFCoreTesting.Services
                  context.Entry(adr).Collection(i => i.Users).Query().Where(x => x.Id > 5).Load();
             return adr;
         }
+
+        public Address GetAddressWithUser()
+        {
+            var adr = context.Addresses.Include(i=>i.Users).First();
+            return adr;
+        }
+        public IEnumerable<User> GetAddressWithUser2()
+        {
+            var adr = context.Users.Include(p=>p.Address).AsQueryable();
+            return adr;
+        }
     }
 }

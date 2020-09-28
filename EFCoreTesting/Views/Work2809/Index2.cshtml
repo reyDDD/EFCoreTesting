@@ -1,0 +1,12 @@
+﻿@model IEnumerable<User>
+
+@foreach (var user in Model)
+{
+    <p>@user.FirstName</p>
+    foreach (var item in @user.Address?.Users)
+    {
+        <p>@item.LastName</p>
+    }
+
+    <br />
+}

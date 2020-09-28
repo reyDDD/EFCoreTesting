@@ -21,5 +21,13 @@ namespace EFCoreTesting.Controllers
             var res = work2809.GetAddressWithFilterUser(3);
             return View(res);
         }
+
+        public IActionResult Index2()
+        {
+            var res = work2809.GetAddressWithUser2();
+            return View(res);
+        }
+
+
     }
 }
