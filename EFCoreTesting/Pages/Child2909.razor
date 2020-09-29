@@ -1,0 +1,11 @@
+﻿<h3>Child2909</h3>
+
+<div>Это текст из родителя - @Text. данные из родительского компонента ниже: </div>
+<div>@ChildContent</div>
+@code {
+
+    [Parameter]
+    public string Text { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
