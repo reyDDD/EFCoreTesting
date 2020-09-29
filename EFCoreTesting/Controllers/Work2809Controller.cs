@@ -19,6 +19,13 @@ namespace EFCoreTesting.Controllers
             this.vozvrat2909 = vozvrat2909;
         }
 
+        public IActionResult AddUser(string name = "Alex", string lastName = "Popkorn", int Age = 22)
+        {
+            work2809.AddUser(name, lastName, Age);
+            return View();
+        }
+
+
         public IActionResult Index()
         {
             var res = work2809.GetAddressWithFilterUser(3);
