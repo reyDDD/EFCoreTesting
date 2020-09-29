@@ -44,5 +44,20 @@ namespace EFCoreTesting.Controllers
             return View("Index3", res);
         }
 
+
+        public IActionResult Index4()
+        {
+            var res = vozvrat2909.Work2909();
+            return View("Index4", res);
+        }
+
+        [HttpPost]
+        public IActionResult Index4(Address address, Address original = null)
+        {
+            var res = vozvrat2909.UpdateAddressU(address, original);
+            return View("Index4", res);
+        }
+
+
     }
 }

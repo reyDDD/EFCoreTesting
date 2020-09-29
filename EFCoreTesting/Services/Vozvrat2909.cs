@@ -29,6 +29,17 @@ namespace EFCoreTesting.Services
             return addresse.Entity;
         }
 
+        public Address UpdateAddressU(Address address, Address original)
+        {
+            if (original != null)
+            {
+                original.City = address.City;
+                original.Country = address.Country;
 
+            }
+            var addresse = connect.Addresses.Update(original);
+            connect.SaveChanges();
+            return addresse.Entity;
+        }
     }
 }

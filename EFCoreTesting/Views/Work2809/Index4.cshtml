@@ -1,0 +1,29 @@
+﻿@model Address
+
+@{
+    int count = 0;
+}
+
+<form asp-action="Index4" asp-controller="Work2809" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="text" asp-for="Country" />
+    <input type="text" asp-for="City" />
+    <br />
+    @foreach (var user in Model.Users)
+    {
+        <input type="hidden" name="original.Id" asp-for="Id" />
+        <input type="hidden" name="original.Users[@count].Id" value="@user.Id" />
+        <input type="text" name="original.Users[@count].FirstName" value="@user.FirstName" />
+        <input type="text" name="original.Users[@count].LastName" value="@user.LastName" />
+        <input asp-for="@user.BirthDay" name="original.Users[@count].BirthDay" />
+        <input type="checkbox" checked="@user.IsMale" name="original.Users[@count].IsMale" value="true" />
+        <input type="number" name="original.Users[@count].Age" value="@user.Age" />
+        count++;
+        <br />
+    }
+
+
+
+
+    <button type="submit">Обновить</button>
+</form>
