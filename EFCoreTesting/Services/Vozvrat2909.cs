@@ -21,5 +21,14 @@ namespace EFCoreTesting.Services
             connect.Entry(address).Collection(i => i.Users).Query().Where(i => i.Age > 20).Load();
             return address;
         }
+
+        public Address UpdateAddress(Address address)
+        {
+            var addresse = connect.Addresses.Update(address);
+            connect.SaveChanges();
+            return addresse.Entity;
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +34,14 @@ namespace EFCoreTesting.Controllers
         public IActionResult Index3()
         {
             var res = vozvrat2909.Work2909();
-            return View(res);
+            return View("Index3", res);
+        }
+
+        [HttpPost]
+        public IActionResult Index3(Address address)
+        {
+            var res = vozvrat2909.UpdateAddress(address);
+            return View("Index3", res);
         }
 
     }
