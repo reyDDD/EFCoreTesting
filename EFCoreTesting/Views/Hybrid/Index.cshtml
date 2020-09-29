@@ -1,0 +1,6 @@
+﻿@model string
+
+
+<p>текст из модели контроллера: @Model</p>
+<p>а тут подключаю компонент: </p>
+@await Component.InvokeAsync("Hybrid", "Текст в гибридный компонент"); 
