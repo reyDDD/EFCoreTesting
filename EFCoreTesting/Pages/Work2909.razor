@@ -1,0 +1,9 @@
+﻿@page "/morning2909"
+@inherits Inject2909
+
+<h3>Work2909</h3>
+<p @onclick="(() => { result = Work2809.GetAddressWithUser().City; StateHasChanged(); })">тут по клику результат вывода метода, который имеет завистимость от другой зависимости: @result</p>
+@code {
+
+    private string result = String.Empty;
+}
