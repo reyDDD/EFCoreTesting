@@ -37,6 +37,44 @@ namespace EFCoreTesting.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("EFCoreTesting.Models.Auto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AutoSuplierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("MaxSpeed")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutoSuplierId");
+
+                    b.ToTable("Autos");
+                });
+
+            modelBuilder.Entity("EFCoreTesting.Models.AutoSuplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DilerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AutoSupliers");
+                });
+
             modelBuilder.Entity("EFCoreTesting.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +129,15 @@ namespace EFCoreTesting.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("EFCoreTesting.Models.Auto", b =>
+                {
+                    b.HasOne("EFCoreTesting.Models.AutoSuplier", "AutoSuplier")
+                        .WithMany("Autos")
+                        .HasForeignKey("AutoSuplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCoreTesting.Models.User", b =>

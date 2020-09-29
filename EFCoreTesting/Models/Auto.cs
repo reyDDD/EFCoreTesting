@@ -16,5 +16,8 @@ namespace EFCoreTesting.Models
 
         [MinLength(3, ErrorMessage ="Название производителя состоит минимум из 3 символов")]
         public string Brand { get; set; }
+
+        public int AutoSuplierId { get; set; }
+        public AutoSuplier AutoSuplier { get; set; }
     }
 }
