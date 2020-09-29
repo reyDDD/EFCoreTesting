@@ -10,10 +10,12 @@ namespace EFCoreTesting.Controllers
     public class Work2809Controller : Controller
     {
         private Work2809 work2809;
+        private Vozvrat2909 vozvrat2909;
 
-        public Work2809Controller(Work2809 work2809)
+        public Work2809Controller(Work2809 work2809, Vozvrat2909 vozvrat2909)
         {
             this.work2809 = work2809;
+            this.vozvrat2909 = vozvrat2909;
         }
 
         public IActionResult Index()
@@ -28,6 +30,11 @@ namespace EFCoreTesting.Controllers
             return View(res);
         }
 
+        public IActionResult Index3()
+        {
+            var res = vozvrat2909.Work2909();
+            return View(res);
+        }
 
     }
 }
