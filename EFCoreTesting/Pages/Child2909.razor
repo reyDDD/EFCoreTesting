@@ -1,6 +1,6 @@
 ﻿<h3>Child2909</h3>
 
-<div @onclick="Call">Это текст из родителя - @Text. данные из родительского компонента ниже: </div>
+<div @onclick="Call" @attributes="slovar">Это текст из родителя - @Text. данные из родительского компонента ниже: </div>
 <div>@ChildContent</div>
 @code {
 
@@ -9,7 +9,11 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
- 
+
     [Parameter]
     public EventCallback<MouseEventArgs> Call { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+
+    public Dictionary<string, object> slovar { get; set; }
 }
