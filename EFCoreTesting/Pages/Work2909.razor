@@ -4,16 +4,22 @@
 <h3>Work2909</h3>
 <p @onclick="(() => { result = Work2809.GetAddressWithUser().City; StateHasChanged(); })">тут по клику результат вывода метода, который имеет завистимость от другой зависимости: @result</p>
 
-<Child2909 Text="юхуху" Call="Work" @attributes="dict">
+<Child2909 Text="юхуху" Call="Work" @attributes="dict" @ref="child2909">
     <p>Неужели все так просто?</p>
 </Child2909>
 
 <p>запуск события через делегат из дочернего элемента: @MyProperty</p>
+<p @onclick="@(() => ChildValue = child2909.ReturnText("new text!!!!"))">А тут я бы вызвал метод из дочернего компонента (по клику): @ChildValue</p>
+
 @code {
+
+    public string ChildValue { get; set; }
 
     public IReadOnlyDictionary<string, object> dict = new Dictionary<string, object> { { "class", "btn btn-info" }, {"my", "not" } };
 
     public string MyProperty { get; set; }
+
+    private Child2909 child2909;
 
     public void Work()
     {

@@ -9,6 +9,10 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    public string ReturnText(string text)
+    {
+        return text;
+    }
 
     [Parameter]
     public EventCallback<MouseEventArgs> Call { get; set; }
