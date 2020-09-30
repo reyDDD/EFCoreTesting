@@ -12,7 +12,7 @@ namespace EFCoreTesting.Controllers
     [ViewComponent(Name = "Hybrid")]
     public class HybridController : Controller
     {
-
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Index()
         {
             return View("ogogo" as object);

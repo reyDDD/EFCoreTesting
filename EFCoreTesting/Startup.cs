@@ -7,6 +7,7 @@ using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,10 +29,23 @@ namespace EFCoreTesting
         {
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped<WorkOne2Many>();
-            services.AddMvc();
+
+
+            services.AddMvc(opt =>
+            {
+                opt.CacheProfiles.Add("Caching2", new CacheProfile() { Duration = 30 });
+                opt.CacheProfiles.Add("NoCaching2", new CacheProfile()
+                {
+                    Location = ResponseCacheLocation.None,
+                    NoStore = true
+                }
+                );
+            });
+
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
+            services.AddResponseCaching();
 
             services.AddScoped<InjectService>();
             services.AddScoped<InjectService2>();
@@ -53,6 +67,7 @@ namespace EFCoreTesting
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseResponseCaching();
             app.UseStaticFiles();
             app.UseStatusCodePages();
             app.UseRouting();
