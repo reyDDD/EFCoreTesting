@@ -37,9 +37,23 @@ namespace EFCoreTesting.Services
                 original.Country = address.Country;
 
             }
-            var addresse = connect.Addresses.Update(original);
-            connect.SaveChanges();
-            return addresse.Entity;
+
+            Address addresse = new Address();
+       
+
+
+            var strategy = connect.Database.CreateExecutionStrategy();
+
+            strategy.ExecuteInTransaction(connect,
+              operation: context =>
+               {
+                   addresse = connect.Addresses.Update(original).Entity;
+                   connect.SaveChanges(acceptAllChangesOnSuccess: false);
+               },
+              verifySucceeded: connect => connect.Addresses.Include(i => i.Users).AsNoTracking().Any(i => i.City == original.City && i.Country == original.Country)
+                );
+            
+            return addresse;
         }
     }
 }
