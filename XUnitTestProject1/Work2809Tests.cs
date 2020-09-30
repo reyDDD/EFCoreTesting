@@ -65,7 +65,9 @@ namespace XUnitTestProject1
             using (var transaction = Fixture.Connection.BeginTransaction())
             {
                 var serv = new Work2809(Fixture.CreateContext(transaction));
-                var controller = new Work2809Controller(serv);
+                var vozvr = new Vozvrat2909(Fixture.CreateContext(transaction));
+
+                var controller = new Work2809Controller(serv, vozvr);
                 var adress = (controller.Index() as ViewResult).ViewData.Model as Address;
                
 
