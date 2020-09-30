@@ -12,11 +12,13 @@ namespace EFCoreTesting.Controllers
     {
         private Work2809 work2809;
         private Vozvrat2909 vozvrat2909;
+        private ServiceWithAnalogDBContext analogContext;
 
-        public Work2809Controller(Work2809 work2809, Vozvrat2909 vozvrat2909)
+        public Work2809Controller(Work2809 work2809, Vozvrat2909 vozvrat2909, ServiceWithAnalogDBContext analogContext)
         {
             this.work2809 = work2809;
             this.vozvrat2909 = vozvrat2909;
+            this.analogContext = analogContext;
         }
 
         public IActionResult AddUser(string name = "Alex", string lastName = "Popkorn", int Age = 22)
@@ -28,7 +30,7 @@ namespace EFCoreTesting.Controllers
 
         public IActionResult Index()
         {
-            var res = work2809.GetAddressWithFilterUser(3);
+            var res = analogContext.GetAddressWithFilterUser(3);
             return View(res);
         }
 
