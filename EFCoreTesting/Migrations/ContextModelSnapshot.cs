@@ -96,6 +96,43 @@ namespace EFCoreTesting.Migrations
                     b.ToTable("Carts");
                 });
 
+            modelBuilder.Entity("EFCoreTesting.Models.House", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Home")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StreetDataId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StreetDataId");
+
+                    b.ToTable("Houses");
+                });
+
+            modelBuilder.Entity("EFCoreTesting.Models.NotNullModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NotNullModels");
+                });
+
             modelBuilder.Entity("EFCoreTesting.Models.User", b =>
                 {
                     b.Property<long>("Id")
@@ -136,6 +173,15 @@ namespace EFCoreTesting.Migrations
                     b.HasOne("EFCoreTesting.Models.AutoSuplier", "AutoSuplier")
                         .WithMany("Autos")
                         .HasForeignKey("AutoSuplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EFCoreTesting.Models.House", b =>
+                {
+                    b.HasOne("EFCoreTesting.Models.NotNullModel", "StreetData")
+                        .WithMany("House")
+                        .HasForeignKey("StreetDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -66,8 +66,9 @@ namespace XUnitTestProject1
             {
                 var serv = new Work2809(Fixture.CreateContext(transaction));
                 var vozvr = new Vozvrat2909(Fixture.CreateContext(transaction));
+                var analContext = new ServiceWithAnalogDBContext();
 
-                var controller = new Work2809Controller(serv, vozvr);
+                var controller = new Work2809Controller(serv, vozvr, analContext);
                 var adress = (controller.Index() as ViewResult).ViewData.Model as Address;
                
 

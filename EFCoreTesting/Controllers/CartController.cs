@@ -15,17 +15,22 @@ namespace EFCoreTesting.Controllers
         private ICartRepository repo;
         private One2Many repos;
         private Notifiyer notifiyer;
-        public CartController(ICartRepository repo, One2Many repos, Notifiyer notifiyer)
+        private NotNullModelService notNullServ;
+        public CartController(ICartRepository repo, One2Many repos, Notifiyer notifiyer, NotNullModelService notNullServ)
         {
             this.repo = repo;
             this.repos = repos;
             this.notifiyer = notifiyer;
+            this.notNullServ = notNullServ;
         }
 
         public IActionResult Notify()
         {
             (int x, string y) corteg = (3, "text");
 
+            
+           var res3 = notNullServ.ReturnHouseWithoutStreet();
+            string res4 = res3.Home;
 
             return View(nameof(Notify), Co());
         }

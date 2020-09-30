@@ -19,5 +19,7 @@ namespace EFCoreTesting.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Auto> Autos { get; set; }
         public DbSet<AutoSuplier> AutoSupliers { get; set; }
+        public DbSet<NotNullModel> NotNullModels { get; set; }
+        public DbSet<House> Houses { get; set; }
     }
 }
