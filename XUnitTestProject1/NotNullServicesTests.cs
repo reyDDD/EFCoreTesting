@@ -30,7 +30,7 @@ namespace XUnitTestProject1
             NotNullModelService service = new NotNullModelService(context.CreateContext());
 
             //дествие
-            var result = service.AddHouseToStreet(notNullModel);
+            var result = service.AddHouseToStreet(notNullModel, true);
 
 
             //утверждение

@@ -30,9 +30,9 @@ namespace EFCoreTesting.Controllers
         {
             (int x, string y) corteg = (3, "text");
 
-            
-           var res3 = notNullServ.ReturnHouseWithoutStreet();
- 
+
+            var res3 = notNullServ.ReturnHouseWithoutStreet();
+
 
             return View("Notify", Co());
         }
@@ -45,7 +45,7 @@ namespace EFCoreTesting.Controllers
         [HttpPost]
         public IActionResult Notify(int Age, string name)
         {
-             notifiyer.PuskNotify(Age, name).GetAwaiter();
+            notifiyer.PuskNotify(Age, name).GetAwaiter();
             return RedirectToAction(nameof(Notify));
         }
 
@@ -78,7 +78,7 @@ namespace EFCoreTesting.Controllers
         public IViewComponentResult Invoke()
         {
             var res = repos.Work2309Get();
-            return new ViewViewComponentResult() {ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Address>(ViewData, res) };
+            return new ViewViewComponentResult() { ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Address>(ViewData, res) };
         }
 
     }
