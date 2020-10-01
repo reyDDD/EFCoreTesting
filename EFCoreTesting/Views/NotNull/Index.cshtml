@@ -1,0 +1,52 @@
+﻿@model NotNullModel
+
+@{
+    int count = 0;
+}
+
+@if (Model == null)
+{
+    <p>Ссори, модель пуста. Хотите добавить новую улицу и дом?</p>
+
+    <form asp-action="Index" asp-controller="NotNull" method="post">
+
+        <div>Улица: </div>
+        <input type="text" name="Street" />
+
+        <p>добавить новый дом:</p>
+        <input type="text" name="House[@count].Home" />
+
+        <input type="hidden" name="isTrue" value="true"/>
+        <button type="submit">Отправить</button>
+    </form>
+
+}
+else
+{
+    @if (ViewBag.Re == "11")
+    {
+        <p>ты допустил ошибки при добавлении записи</p>
+    }
+<form asp-action="Index" asp-controller="NotNull" method="post">
+
+    <div>Улица: </div>
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="text" asp-for="@Model.Street" />
+
+    <div>Дома на этой улице: </div>
+    @foreach (var item in @Model.House)
+    {
+        <input type="hidden" name="House[@count].Id" asp-for="@item.Id" />
+        <input type="text" name="House[@count].Home" value="@item.Home" />
+        <input type="hidden" name="House[@count].StreetData" value="@item.StreetData" />
+        count++;
+    }
+    <p>добавить новый дом:</p>
+    <input type="text" name="House[@count].Home" />
+    <input type="hidden" name="House[@count].StreetData" value="@(new NotNullModel { Street ="ff"})" />
+
+    <button type="submit">Отправить</button>
+</form>
+
+
+}

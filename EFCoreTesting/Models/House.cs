@@ -11,9 +11,9 @@ namespace EFCoreTesting.Models
         public int Id { get; set; }
 
         [Required]
-        public string Home { get; set; } = null!;
+        public string Home { get; set; }
 
-        [Required]
-        public NotNullModel StreetData { get; set; } = null!;
+
+        public NotNullModel StreetData { get; set; }  
     }
 }
