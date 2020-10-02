@@ -36,7 +36,8 @@ namespace XUnitTestProject1
             var controllerModel = new HybridController.My();
 
             //действие
-            var res = controller.Index(controllerModel);
+            //var res = controller.Index(controllerModel);
+            var res = controller.Index(my: null);
 
             //утверждение
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(res); //проверка на тип возвращаемого экшна - ошибку 404

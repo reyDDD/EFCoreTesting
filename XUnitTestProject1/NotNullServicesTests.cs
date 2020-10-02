@@ -82,7 +82,7 @@ namespace XUnitTestProject1
         public void NotNullController_InvokeMethod_Test()
         {
             //чтобы отпработала проверка вызова метода класс контроллера в конструкторе должен принимать интерфейс, а не класс
-            //в качестве экземляра для передачи в параметр можно как создать объект воручную, так и с помощью It.IsAny<NotNullModel>()
+            //в качестве экземляра для передачи в параметр можно как создать объект вручную, так и с помощью It.IsAny<NotNullModel>()
             //если в Verifiable передать аргумент, он появиться в комментариях об ошибке в результатах теста
 
  
@@ -91,7 +91,7 @@ namespace XUnitTestProject1
 
             NotNullController controller = new NotNullController(mockService.Object);
 
-            var para = new NotNullModel { Id = 7, Street = "вотблядская улица" };
+            var para = new NotNullModel { Id = 0, Street = "вотблядская улица" };
 
             //действие
             var result = controller.Index2(para);
@@ -104,6 +104,26 @@ namespace XUnitTestProject1
 
             mockService.Verify(); //метод позволяет проверить, что все установленные методы в mockService были вызваны в процессе отправботки метода
         }
+
+
+
+        [Fact]
+        public void NotNullController_Index2_RepoReurnNull_Test()
+        {
+            var mock = new Mock<INotNullModelService>();
+            mock.Setup(i => i.ReturnNotNullModelWithHose(It.IsAny<NotNullModel>())).Returns((NotNullModel)null);
+            NotNullController controller = new NotNullController(mock.Object);
+
+            //дествие
+            var result = controller.Index2(new NotNullModel {Id = 4, Street = "есть такая никакая" });
+
+
+            //утверждение
+            Assert.IsType<NotFoundObjectResult>(result);
+
+
+        }
+
 
     }
 }

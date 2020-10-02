@@ -36,6 +36,10 @@ namespace EFCoreTesting.Controllers
                 }
 
                 var model = serciceNotNull.ReturnNotNullModelWithHose(streetas);
+                if (model == null)
+                {
+                    return NotFound(streetas.Id);
+                }
                 return View("Index", model);
             }
                 return View("Index");
