@@ -7,7 +7,17 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Services
 {
-    public class NotNullModelService
+
+    public interface INotNullModelService
+    {
+        NotNullModel ReturnNotNullModelWithHose(NotNullModel street);
+        NotNullModel AddHouseToStreet(NotNullModel street, bool isTrue);
+        NotNullModel CreateStreet();
+        House ReturnHouseWithoutStreet();
+        House Hhouse();
+    }
+
+    public class NotNullModelService : INotNullModelService
     {
         private Context context;
 
@@ -15,7 +25,10 @@ namespace EFCoreTesting.Services
         {
             this.context = context;
         }
+        public NotNullModelService()
+        {
 
+        }
 
         public NotNullModel ReturnNotNullModelWithHose(NotNullModel street)
         {

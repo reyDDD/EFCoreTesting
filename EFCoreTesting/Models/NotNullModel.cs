@@ -11,10 +11,10 @@ namespace EFCoreTesting.Models
         public int Id { get; set; }
         
         [Required]
-        public string Street { get; set; } = null!;
+        public string Street { get; set; } 
 
 
-        public IEnumerable<House> House { get; set; } = null!;
+        public IEnumerable<House> House { get; set; }
 
     }
 }

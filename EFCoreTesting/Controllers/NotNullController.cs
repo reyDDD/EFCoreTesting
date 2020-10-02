@@ -11,16 +11,20 @@ namespace EFCoreTesting.Controllers
 {
     public class NotNullController : Controller
     {
-        private NotNullModelService serciceNotNull;
+        private INotNullModelService serciceNotNull;
 
-        public NotNullController(NotNullModelService serciceNotNull)
+        public NotNullController(INotNullModelService serciceNotNull)
         {
             this.serciceNotNull = serciceNotNull;
         }
 
         public IActionResult Index2(NotNullModel? streetas)
         {
-            if (streetas!.Id != 0 || streetas.Street != null)
+             if (streetas == null)
+            {
+                return new BadRequestResult();
+            }
+            else if(streetas!.Id != 0 || streetas.Street != null)
             {
                 if (TempData != null)
                 {

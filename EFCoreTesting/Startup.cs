@@ -59,6 +59,7 @@ namespace EFCoreTesting
             services.AddScoped<Vozvrat2909>();
             services.AddScoped<ServiceWithAnalogDBContext>();
             services.AddScoped<NotNullModelService>();
+            services.AddScoped<INotNullModelService, NotNullModelService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
