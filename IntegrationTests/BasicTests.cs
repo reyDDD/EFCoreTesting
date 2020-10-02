@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using HtmlAgilityPack;
+using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -32,5 +34,30 @@ namespace IntegrationTests
             Assert.Equal("text/html; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
         }
+
+
+        [Theory]
+        [InlineData("https://localhost:44356/OneMany/Work2109/")]
+        public async Task ParseDom(string url)
+        {
+            // Arrange
+            HtmlDocument doc = new HtmlWeb().Load(url);
+
+            // Act
+            string res = string.Empty;
+            var nodes = doc.DocumentNode.SelectNodes("//input");
+
+            foreach (var node in nodes)
+            {
+                if (node.Attributes["name"]?.Value == "Users[1].LastName")
+                {
+                    res = node.Attributes["value"]?.Value;
+                }
+            }
+            // Assert
+            Assert.Equal("Popkorn", res);
+        }
+
+
     }
 }
