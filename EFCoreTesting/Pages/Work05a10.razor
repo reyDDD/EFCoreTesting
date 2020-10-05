@@ -1,0 +1,28 @@
+﻿@page "/work05a10"
+
+<h3>Work05a10</h3>
+
+@foreach (var item in Users)
+{
+    <Work05a10Child @key="@item.FirstName">
+        @item.FirstName -- @item.LastName -- @item.Age
+    </Work05a10Child>
+}
+
+<button @onclick="@(() => UpdateUser())">обновить ключ</button>
+
+@code {
+
+    public List<User> Users { get; set; } = new List<User>
+{
+        new User{Id = 1, Age  = 12, FirstName =   "Ivan", LastName = "Petrov", IsMale = true},
+         new User{Id = 2, Age  = 22, FirstName =   "Natasha", LastName = "Moloca", IsMale = false},
+          new User{Id = 3, Age  = 32, FirstName =   "Artur", LastName = "Nekrasov", IsMale = true}
+    };
+
+    public void UpdateUser()
+    {
+        Users[1].FirstName = "Anton";
+    }
+
+}
