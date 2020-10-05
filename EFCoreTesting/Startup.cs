@@ -60,6 +60,7 @@ namespace EFCoreTesting
             services.AddScoped<ServiceWithAnalogDBContext>();
             services.AddScoped<NotNullModelService>();
             services.AddScoped<INotNullModelService, NotNullModelService>();
+            services.AddScoped<ReturnDateSevice>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

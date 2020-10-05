@@ -1,0 +1,33 @@
+﻿@page "/work0510"
+@inject ReturnDateSevice DateService
+@implements  IDisposable  
+
+<h3>Work0510</h3>
+
+<p class="btn btn-danger" @onclick="() => DateService.StartTimer()"> запуск сервиса(из любого места приложения не работает, выяснить причину. Возможно, проблема в синхронности и нужно делать асинхронный вызов)</p>
+<p>Дата обновилась: @Datee</p>
+
+@code {
+    public DateTime Datee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        DateService.Sobitiye += Working;
+    }
+
+    public Task Working(DateTime netsmisla)
+    {
+        InvokeAsync(() =>
+        {
+            Datee = netsmisla;
+            StateHasChanged();
+        });
+        return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        DateService.Sobitiye -= Working;
+    }
+
+}
