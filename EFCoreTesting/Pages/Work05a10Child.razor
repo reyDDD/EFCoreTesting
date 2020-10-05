@@ -3,10 +3,15 @@
 <p>демонстрирую, что дочернее содержимое не меняется - @originName</p>
 <p>а это то, что попадает из параметра - @TestingName</p>
 
+<input type="checkbox" checked="@Userec.IsMale" />
+
 @code {
     private string originName;
 
     public int Rand { get; set; }
+
+    [Parameter]
+    public User Userec { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

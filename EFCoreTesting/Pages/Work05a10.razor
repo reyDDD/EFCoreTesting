@@ -4,7 +4,7 @@
 
 @foreach (var item in Users)
 {
-    <Work05a10Child @key="@item.FirstName" TestingName="@ValueForParameter">
+    <Work05a10Child @key="@item.FirstName" TestingName="@ValueForParameter" Userec="@item">
         @item.FirstName -- @item.LastName -- @item.Age
     </Work05a10Child>
 }
