@@ -4,14 +4,17 @@
 
 @foreach (var item in Users)
 {
-    <Work05a10Child @key="@item.FirstName">
+    <Work05a10Child @key="@item.FirstName" TestingName="@ValueForParameter">
         @item.FirstName -- @item.LastName -- @item.Age
     </Work05a10Child>
 }
 
 <button @onclick="@(() => UpdateUser())">обновить ключ</button>
+<button @onclick="@(() => { ValueForParameter = "newValue"; StateHasChanged();})">обновить содержимое параметра: атуальное значение - @ValueForParameter</button>
 
 @code {
+
+    public string ValueForParameter { get; set; } = "startValue";
 
     public List<User> Users { get; set; } = new List<User>
 {

@@ -1,7 +1,11 @@
-﻿ 
+﻿
 <p>@ChildContent  -- @Rand</p>
+<p>демонстрирую, что дочернее содержимое не меняется - @originName</p>
+<p>а это то, что попадает из параметра - @TestingName</p>
 
 @code {
+    private string originName;
+
     public int Rand { get; set; }
 
     [Parameter]
@@ -10,5 +14,9 @@
     protected override void OnInitialized()
     {
         Rand = new Random().Next(1, 33333);
+        originName = TestingName;
     }
+
+    [Parameter]
+    public string TestingName { get; set; }
 }
