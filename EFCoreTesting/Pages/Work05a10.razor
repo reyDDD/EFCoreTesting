@@ -1,4 +1,5 @@
 ﻿@page "/work05a10"
+@page "/work05a10/{param}"
 
 <h3>Work05a10</h3>
 
@@ -13,6 +14,8 @@
 <button @onclick="@(() => { ValueForParameter = "newValue"; StateHasChanged();})">обновить содержимое параметра: атуальное значение - @ValueForParameter</button>
 
 @code {
+    [Parameter]
+    public string Param { get; set; }
 
     public string ValueForParameter { get; set; } = "startValue";
 
