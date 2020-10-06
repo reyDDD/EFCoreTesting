@@ -4,8 +4,11 @@
 <p>а это то, что попадает из параметра - @TestingName</p>
 
 <input type="checkbox" checked="@Userec.IsMale" />
+<p>а тут необработанный html - @((MarkupString)HtmlRaw)</p>
 
 @code {
+
+    public string HtmlRaw { get; set; } = "<b>жирненький</b>";
     private string originName;
 
     public int Rand { get; set; }
