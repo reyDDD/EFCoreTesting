@@ -50,5 +50,18 @@ namespace EFCoreTesting.Controllers
             return View("ListUser", res);
         }
 
+
+        public IActionResult Work0810()
+        {
+            var res = workOne2Many.GetListWithError();
+            return View("Work0810", res.FirstOrDefault());
+        }
+
+        [HttpPost]
+        public IActionResult Work0810(User changed, User original)
+        {
+            workOne2Many.UpdUserAdnAddress(changed, original);
+            return View("Work0810");
+        }
     }
 }

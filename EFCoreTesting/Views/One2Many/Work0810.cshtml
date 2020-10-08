@@ -1,0 +1,25 @@
+﻿@model User
+
+<form asp-action="Work0810" asp-controller="One2Many" method="post">
+    <input type="hidden" name="original.Id" value="@Model.Id" />
+    <input type="hidden" name="original.FirstName" value="@Model.FirstName" />
+    <input type="hidden" name="original.LastName" value="@Model.LastName" />
+    <input type="hidden" name="original.IsMale" value="@Model.IsMale" checked="@Model.IsMale" />
+    <input type="hidden" name="original.Age" value="@Model.Age" />
+    <input type="hidden" name="original.BirthDay" value="@Model.BirthDay" />
+    <input type="hidden" name="original.Address.Id" value="@Model.Address.Id" />
+    <input type="hidden" name="original.Address.City" value="@Model.Address.City" />
+    <input type="hidden" name="original.Address.Country" value="@Model.Address.Country" />
+
+    <input type="text" name="changed.FirstName" value="@Model.FirstName" />
+    <input type="text" name="changed.LastName" value="@Model.LastName" />
+    <input type="checkbox" name="changed.IsMale" value="@Model.IsMale" checked="@Model.IsMale" />
+    <input type="number" name="changed.Age" value="@Model.Age" />
+    <input type="date" name="changed.BirthDay" value="@Model.BirthDay" />
+    <input type="text" name="changed.Address.City" value="@Model.Address?.City" />
+    <input type="text" name="changed.Address.Country" value="@Model.Address?.Country" />
+
+
+    <button type="submit">Отправить</button>
+</form>
+

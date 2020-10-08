@@ -71,7 +71,7 @@ namespace EFCoreTesting.Services
             catch (Exception ex)
             {
                 return new List<User> { new User { FirstName = "Masha" } };
-            }  
+            }
         }
 
         public IEnumerable<Address> GetListAdresses()
@@ -88,15 +88,29 @@ namespace EFCoreTesting.Services
             {
                 context.Entry(addres).Collection(u => u.Users).Query().Where(x => x.FirstName != "Masha").Load();
             }
-            return listAddreses;   
+            return listAddreses;
         }
 
         public IEnumerable<User> GetListWithError()
         {
             IQueryable<User> res = context.Users;
-            res = res.Include(u=>u.Address);
+            res = res.Include(u => u.Address);
 
             return res;
+        }
+
+        public void UpdUserAdnAddress(User changed, User original)
+        {
+            original.FirstName = changed.FirstName;
+            original.LastName = changed.LastName;
+            original.Age = changed.Age;
+            original.BirthDay = changed.BirthDay;
+            original.IsMale = changed.IsMale;
+            original.Address.City = changed.Address.City;
+            original.Address.Country = changed.Address.Country;
+            context.Users.Update(original);
+            context.SaveChanges();
+
         }
     }
 }
