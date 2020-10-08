@@ -11,7 +11,7 @@ namespace EFCoreTesting.Components
 
         public IViewComponentResult Invoke(string name)
         {
-             return View("Work0810", name + "прибавка к жалованию");
+             return View("Work0810", name + " прибавка к жалованию");
         }
     }
 }
