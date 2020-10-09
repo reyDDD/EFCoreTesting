@@ -1,5 +1,6 @@
 ﻿@page "/work0910"
 @inject NavigationManager Navigatorec
+@using Microsoft.AspNetCore.WebUtilities
 
 
 
@@ -10,6 +11,7 @@
     <li>BaseUri: @BaseUri</li>
     <li>ToAbsoluteUri: @ToAbsoluteUri</li>
     <li>ToBaseRelativePathUri: @ToBaseRelativePathUri</li>
+    <li>А это значение ключа keyok - @ValueQuery</li>
 </ul>
 @code {
 
@@ -17,6 +19,8 @@
     public string BaseUri { get; set; }
     public string ToAbsoluteUri { get; set; }
     public string ToBaseRelativePathUri { get; set; }
+
+    public string ValueQuery { get; set; }
 
     protected override void OnInitialized()
     {
@@ -26,6 +30,12 @@
         ToBaseRelativePathUri = Navigatorec.ToBaseRelativePath(Uri);
         ToAbsoluteUri = Navigatorec.ToAbsoluteUri("dsd").ToString();
 
+
+        var query = new Uri(Navigatorec.Uri).Query;
+        if (QueryHelpers.ParseQuery(query).TryGetValue("keyok", out var resulta))
+        {
+            ValueQuery = resulta.ToString();
+        }
     }
 
     private void Perehod()
