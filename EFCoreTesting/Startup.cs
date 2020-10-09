@@ -61,6 +61,7 @@ namespace EFCoreTesting
             services.AddScoped<NotNullModelService>();
             services.AddScoped<INotNullModelService, NotNullModelService>();
             services.AddScoped<ReturnDateSevice>();
+            services.AddScoped<ComponentBasese>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
