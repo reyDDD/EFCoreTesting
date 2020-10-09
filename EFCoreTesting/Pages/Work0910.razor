@@ -1,0 +1,38 @@
+﻿@page "/work0910"
+@inject NavigationManager Navigatorec
+
+
+
+<h3>Work0910</h3>
+<p @onclick="Perehod">переход  по клику</p>
+<ul>
+    <li>Uri: @Uri</li>
+    <li>BaseUri: @BaseUri</li>
+    <li>ToAbsoluteUri: @ToAbsoluteUri</li>
+    <li>ToBaseRelativePathUri: @ToBaseRelativePathUri</li>
+</ul>
+@code {
+
+    public string Uri { get; set; }
+    public string BaseUri { get; set; }
+    public string ToAbsoluteUri { get; set; }
+    public string ToBaseRelativePathUri { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Uri = Navigatorec.Uri;
+        BaseUri = Navigatorec.BaseUri;
+
+        ToBaseRelativePathUri = Navigatorec.ToBaseRelativePath(Uri);
+        ToAbsoluteUri = Navigatorec.ToAbsoluteUri("dsd").ToString();
+
+    }
+
+    private void Perehod()
+    {
+        Navigatorec.NavigateTo("morning2909");
+
+    }
+
+
+}
