@@ -25,7 +25,15 @@ namespace EFCoreTesting.Services
         public Address UpdateAddress(Address address)
         {
             var addresse = connect.Addresses.Update(address);
-            connect.SaveChanges();
+
+            var strategy = connect.Database.CreateExecutionStrategy();
+
+            strategy.ExecuteInTransaction(connect,
+                operation: cont => cont.SaveChanges(acceptAllChangesOnSuccess: false),
+                verifySucceeded: cont => cont.Addresses.AsNoTracking().Any(b => b.Id == address.Id && b.City == address.City && b.Country == address.Country)
+                );
+            connect.ChangeTracker.AcceptAllChanges();
+
             return addresse.Entity;
         }
 
