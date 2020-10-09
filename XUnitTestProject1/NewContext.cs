@@ -20,7 +20,7 @@ namespace XUnitTestProject1
 
         public Context CreateContext(DbTransaction transaction = null)
         {
-            var context = new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(Connection).Options);
+            var context = new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(Connection, option => option.EnableRetryOnFailure()).Options);
             if (transaction != null)
             {
                 context.Database.UseTransaction(transaction);

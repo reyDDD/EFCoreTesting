@@ -3,6 +3,7 @@ using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -22,34 +23,40 @@ namespace XUnitTestProject1
         [Fact]
         public void TestWork2809()
         {
-            using (var transaction = context.Connection.BeginTransaction())
+            using (var conne = context.CreateContext())
             {
-                using (var conn = context.CreateContext(transaction))
-                {
-                    Work2809 work2809 = new Work2809(conn);
-                    var controller = new Work0810Controller(work2809);
+                var strategy = conne.Database.CreateExecutionStrategy();
+                strategy.Execute(() =>
+                    {
+                        using (var transaction = context.Connection.BeginTransaction())
+                        {
+                            using (var conn = context.CreateContext(transaction))
+                            {
+                                Work2809 work2809 = new Work2809(conn);
+                                var controller = new Work0810Controller(work2809);
 
-                    var action = controller.Index2();
+                                var action = controller.Index2();
 
-                    var result = Assert.IsType<ViewResult>(action);
-                    Assert.IsType<Address>(result.ViewData.Model);
-                }
+                                var result = Assert.IsType<ViewResult>(action);
+                                Assert.IsType<Address>(result.ViewData.Model);
+                            }
 
-                using (var conn = context.CreateContext(transaction))
-                {
-                    Work2809 work2809 = new Work2809(conn);
-                    var controller = new Work0810Controller(work2809);
+                            using (var conn = context.CreateContext(transaction))
+                            {
+                                Work2809 work2809 = new Work2809(conn);
+                                var controller = new Work0810Controller(work2809);
 
-                    var action = controller.Invoke();
+                                var action = controller.Invoke();
 
-                    var result = Assert.IsType<ViewViewComponentResult>(action);
-                    var model = Assert.IsType<string>(result.ViewData.Model);
-                    Assert.Equal("текст для модели", model);
-                }
+                                var result = Assert.IsType<ViewViewComponentResult>(action);
+                                var model = Assert.IsType<string>(result.ViewData.Model);
+                                Assert.Equal("текст для модели", model);
+                            }
 
-                transaction.Rollback();
+                            transaction.Commit();
+                        }
+                    });
             }
-
         }
     }
 }
