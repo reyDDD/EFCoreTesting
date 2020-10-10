@@ -4,6 +4,7 @@ using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -60,5 +61,20 @@ namespace XUnitTestProject1
                     });
             }
         }
+
+
+        [Fact]
+        public void TestWork2809_MethodExecute()
+        {
+            var mock = new Mock<IWork2809>();
+            mock.Setup(m => m.GetAddressWithUser()).Returns(new Address()).Verifiable();
+
+            var controller = new Work0810Controller(mock.Object);
+            var action = controller.Index2("not error"); //при вызове метода без параметра содержащийся внутри метод вызван не будет
+
+            //Assert.IsType<ViewResult>(action);
+            mock.Verify();
+        }
+
     }
 }

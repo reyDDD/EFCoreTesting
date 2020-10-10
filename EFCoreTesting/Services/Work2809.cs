@@ -11,8 +11,17 @@ namespace EFCoreTesting.Services
     {
 
     }
+    public interface IWork2809
+    {
+        public User GetUserWithoutAddress();
+        public Address GetAddressWithFilterUser(int id);
+        public Address GetAddressWithUser();
+        public IEnumerable<User> GetAddressWithUser2();
+        public void AddUser(string name, string lastName, int Age);
 
-    public class Work2809 : IDisposable
+    }
+
+    public class Work2809 : IDisposable, IWork2809
     {
         private Context context;
 

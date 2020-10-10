@@ -13,9 +13,9 @@ namespace EFCoreTesting.Controllers
     public class Work0810Controller : Controller
     {
 
-        private Work2809 work2809;
+        private IWork2809 work2809;
 
-        public Work0810Controller(Work2809 work2809)
+        public Work0810Controller(IWork2809 work2809)
         {
             this.work2809 = work2809;
         }
