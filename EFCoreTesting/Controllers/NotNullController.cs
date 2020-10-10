@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreTesting.Controllers
 {
+
+   
     public class NotNullController : Controller
     {
         private INotNullModelService serciceNotNull;
@@ -18,7 +20,23 @@ namespace EFCoreTesting.Controllers
             this.serciceNotNull = serciceNotNull;
         }
 
-        public IActionResult Index2(NotNullModel? streetas)
+        [ResponseCache(Duration = 12)]
+        public IActionResult Index24()
+        {
+            return View("Index");
+        }
+
+
+        [ResponseCache(Duration = 12)] //работает при условии, что на странице не содержится форма
+        public IActionResult Index22(NotNullModel? streetas)
+        {
+            return View("Index22");
+        }
+
+
+
+
+            public IActionResult Index2(NotNullModel? streetas)
         {
              if (streetas == null)
             {
