@@ -1,0 +1,14 @@
+﻿@model User
+
+<form asp-action="Index" asp-controller="Work1010" method="post">
+    <input asp-for="FirstName" />
+    <input asp-for="LastName" />
+    <input type="date" asp-for="BirthDay" />
+    <input asp-for="IsMale" value="true" type="checkbox" />
+    <input asp-for="Age" type="number"/>
+
+    <input asp-for="Address.City" />
+    <input asp-for="Address.Country" />
+    
+    <button type="submit">Отправить</button>
+</form>
