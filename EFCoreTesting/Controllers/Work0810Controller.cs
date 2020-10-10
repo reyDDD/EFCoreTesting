@@ -19,14 +19,11 @@ namespace EFCoreTesting.Controllers
         {
             this.work2809 = work2809;
         }
-        public Work0810Controller()
-        {
+         
 
-        }
-
-        public IActionResult Index()
+        public IActionResult Indexer()
         {
-            return View();
+            return View("Index");
         }
 
         public IActionResult Index2(string forError = null)
@@ -36,7 +33,7 @@ namespace EFCoreTesting.Controllers
                 return BadRequest(ModelState);
             }
             var res = work2809.GetAddressWithUser();
-            return View("Index", res);
+            return View("Indexer", res);
         }
 
 

@@ -25,7 +25,7 @@ namespace EFCoreTesting.Controllers
             this.notNullServ = notNullServ;
         }
 
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 6)]
+        //[ResponseCache(Location = ResponseCacheLocation.Any, Duration = 6)]
         public IActionResult Notify()
         {
             (int x, string y) corteg = (3, "text");
@@ -49,11 +49,13 @@ namespace EFCoreTesting.Controllers
             return RedirectToAction(nameof(Notify));
         }
 
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+
         public IActionResult Index()
         {
             return View();
         }
+
+
         [HttpPost]
         public IActionResult Add(Cart cart)
         {
@@ -61,12 +63,13 @@ namespace EFCoreTesting.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [ResponseCache(CacheProfileName = "Caching")]
+
         public IActionResult Work2309()
         {
             var res = repos.Work2309Get();
             return View(nameof(Index), res);
         }
+
         [HttpPost]
         public IActionResult Work2309Update(Address address)
         {

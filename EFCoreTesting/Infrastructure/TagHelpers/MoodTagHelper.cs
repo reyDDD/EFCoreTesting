@@ -19,10 +19,7 @@ namespace EFCoreTesting.Infrastructure.TagHelpers
         private ComponentBasese componentBasese;
 
         public MoodTagHelper(ComponentBasese componentBasese) => this.componentBasese = componentBasese;
-        public MoodTagHelper()
-        {
-
-        }
+  
         public string Moodak { get; set; }
 
         [HtmlAttributeNotBound]
