@@ -29,8 +29,12 @@ namespace EFCoreTesting.Controllers
             return View();
         }
 
-        public IActionResult Index2()
+        public IActionResult Index2(string forError = null)
         {
+            if (forError == null)
+            {
+                return BadRequest(ModelState);
+            }
             var res = work2809.GetAddressWithUser();
             return View("Index", res);
         }

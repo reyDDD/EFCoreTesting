@@ -34,11 +34,13 @@ namespace XUnitTestProject1
                             {
                                 Work2809 work2809 = new Work2809(conn);
                                 var controller = new Work0810Controller(work2809);
-
+                                controller.ModelState.AddModelError("myError", "my error Message");
                                 var action = controller.Index2();
 
-                                var result = Assert.IsType<ViewResult>(action);
-                                Assert.IsType<Address>(result.ViewData.Model);
+                                var result = Assert.IsType<BadRequestObjectResult>(action);
+                                Assert.IsType<SerializableError>(result.Value);
+                                //var result = Assert.IsType<ViewResult>(action);
+                                //Assert.IsType<Address>(result.ViewData.Model);
                             }
 
                             using (var conn = context.CreateContext(transaction))
