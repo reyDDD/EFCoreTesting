@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.Mvc.Testing;
+using HtmlAgilityPack;
 
 namespace IntegrationTests
 {
@@ -33,5 +34,33 @@ namespace IntegrationTests
             response.EnsureSuccessStatusCode();
             Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
+
+        [Theory]
+        [InlineData("https://localhost:44356/Cart/Index")]
+        [InlineData("https://localhost:44356/Work1010/Index")]
+        [InlineData("https://localhost:44356/Work1010/Index1111111111")]
+        public void TestHtmlPagesWithAgility(string url)
+        {
+            //организация
+            HtmlDocument doc = new HtmlWeb().Load(url);
+            List<string> val = new List<string>();
+
+
+            //действие
+            var nodes = doc.DocumentNode.SelectNodes("//form");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.Attributes["action"]?.Value != null)
+                    {
+                        val.Add(node.Attributes["action"]?.Value);
+                    }
+                }
+            }
+            //утверждение
+            Assert.True(val.Count > 0);
+        }
+
     }
 }
