@@ -21,6 +21,13 @@ namespace EFCoreTesting.Services
             this.context = context;
         }
 
+        public User GetUserWithoutAddress()
+        {
+            var usr = context.Users.FirstOrDefault();
+            return usr;
+        }
+
+
         public Address GetAddressWithFilterUser(int id)
         {
             var adr = context.Addresses.Where(i => i.Id == id).First();
