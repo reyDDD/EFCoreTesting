@@ -17,6 +17,17 @@ namespace EFCoreTesting.Controllers
             return View("Index");
         }
 
+        public IActionResult ReturnUserById(long? id)
+        {
+            var context = new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(new SqlConnection(@"Server=(localdb)\mssqllocaldb;Database=EFCoreTests;Trusted_Connection=True;MultipleActiveResultSets=True;App=EntityFramework;")).Options);
+            var user = context.Users.Find(id);
+            if (id == 0 || user == null)
+            {
+                return Content("this user not found");
+            }
+            return View("Index", user);
+        }
+
 
         [HttpPost]
         public IActionResult Index(User user)
