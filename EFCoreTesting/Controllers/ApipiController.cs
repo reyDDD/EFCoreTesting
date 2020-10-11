@@ -23,15 +23,22 @@ namespace EFCoreTesting.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return $"value + {id}";
         }
 
         // POST api/<ApipiController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] string value)
+        public async Task<ActionResult<string>> Post([FromBody] Testoviy value)
         {
-            return CreatedAtAction("Get", 3, value);
+            return  value.Text + " addons";
         }
+
+        public class Testoviy
+        {
+            public string Text { get; set; }
+
+        }
+
 
         // PUT api/<ApipiController>/5
         [HttpPut("{id}")]

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Xunit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using HtmlAgilityPack;
+using System.Net.Http;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace IntegrationTests
 {
@@ -61,6 +64,28 @@ namespace IntegrationTests
             //утверждение
             Assert.True(val.Count > 0);
         }
+
+
+        [Theory]
+        [InlineData("https://localhost:44356/api/Apipi")]
+        public async void SendData(string url)
+        {
+            //организация
+            var client = factory.CreateClient();
+
+            //действие
+            var response =  client.SendAsync(new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(url),
+               Content = new StringContent("{\"Text\":\"John Doe\"}", encoding: Encoding.UTF8, mediaType: "application/json")
+            }).Result;
+
+            //утверждение
+           Assert.Equal("John Doe addons", response.Content.ReadAsStringAsync().Result);
+
+        }
+
 
     }
 }
