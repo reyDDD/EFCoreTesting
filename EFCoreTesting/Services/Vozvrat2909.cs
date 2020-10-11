@@ -37,6 +37,16 @@ namespace EFCoreTesting.Services
             return addresse.Entity;
         }
 
+        public async void AddUser()
+        {
+            var addr = await connect.Addresses.FirstOrDefaultAsync();
+            var user = new User { FirstName = "Michael", LastName = "Shumacher", Age = 53, BirthDay = new DateTime(2000, 05, 23), IsMale = true, Address = addr };
+
+            await connect.Users.AddAsync(user);
+            await connect.SaveChangesAsync();
+        }
+
+
         public Address UpdateAddressU(Address address, Address original)
         {
             if (original != null)
@@ -47,7 +57,7 @@ namespace EFCoreTesting.Services
             }
 
             Address addresse = new Address();
-       
+
 
 
             var strategy = connect.Database.CreateExecutionStrategy();
@@ -60,8 +70,21 @@ namespace EFCoreTesting.Services
                },
               verifySucceeded: connect => connect.Addresses.Include(i => i.Users).AsNoTracking().Any(i => i.City == original.City && i.Country == original.Country)
                 );
-            
+
             return addresse;
+        }
+
+        public async void Seed()
+        {
+            var addr = new Address { City = "Lviv", Country = "Ukraine" };
+
+            List<User> list = new List<User>
+             {
+                 new User{FirstName = "Ivan", LastName ="Ivanov", Age = 33, BirthDay = new DateTime(2012, 05, 23), IsMale = true, Address = addr },
+                 new User{FirstName = "Masha", LastName ="Piligrim", Age = 25, BirthDay = new DateTime(2002, 09, 14), IsMale = false , Address = addr }
+             };
+            connect.AddRange(list);
+            await connect.SaveChangesAsync();
         }
     }
 }
