@@ -45,6 +45,23 @@ namespace EFCoreTesting.Services
             await connect.Users.AddAsync(user);
             await connect.SaveChangesAsync();
         }
+        public async void DeleteUser()
+        {
+            var user = await connect.Users.FirstOrDefaultAsync();
+            connect.Users.Remove(user);
+            await connect.SaveChangesAsync();
+        }
+
+        public async void DeleteUser(long id)
+        {
+            var user = await connect.Users.FindAsync(id);
+            if (user != null)
+            {
+                connect.Users.Remove(user);
+                await connect.SaveChangesAsync();
+            }
+            
+        }
 
 
         public Address UpdateAddressU(Address address, Address original)

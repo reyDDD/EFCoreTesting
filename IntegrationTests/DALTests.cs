@@ -35,8 +35,6 @@ namespace IntegrationTests
         [Fact]
         public void NewContextAddUser()
         {
-
-
             using (var connect = new Context(TestDbContextOptions.CreateOptions()))
             {
                 //размещение
@@ -50,9 +48,47 @@ namespace IntegrationTests
                 //утверждение
                 Assert.Equal(3, address.Count());
             }
-
         }
 
+
+
+        [Fact]
+        public void TestDeleteRow()
+        {
+            using (var connect = new Context(TestDbContextOptions.CreateOptions()))
+            {
+                //размещение
+                var vozvrat2909 = new Vozvrat2909(connect);
+                vozvrat2909.Seed();
+                int countStart = connect.Users.Count();
+
+                //действие
+                vozvrat2909.DeleteUser();
+                int countEnd = connect.Users.Count();
+
+                //утверждение
+                Assert.True((countStart - countEnd) == 1);
+            }
+        }
+        [Fact]
+        public void TestNotDeleteRowWhereIdNull()
+        {
+            using (var connect = new Context(TestDbContextOptions.CreateOptions()))
+            {
+                //размещение
+                var vozvrat2909 = new Vozvrat2909(connect);
+                vozvrat2909.Seed();
+                int countStart = connect.Users.Count();
+
+                //действие
+                vozvrat2909.DeleteUser(111);
+
+                int countEnd = connect.Users.Count();
+
+                //утверждение
+                Assert.True((countStart - countEnd) == 0);
+            }
+        }
 
     }
 }
