@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+    <title>@ViewBag.Title</title>
+    <base href="~/" />
+</head>
+<body>
+    @RenderSection("Head", required: false)
+
+    <div class="btn-success btn-block">Новый макет MVC</div>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="_framework/blazor.server.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
