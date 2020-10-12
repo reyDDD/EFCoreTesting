@@ -7,7 +7,17 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Services
 {
-    public class Vozvrat2909
+    public interface IVozvrat2909
+    {
+        Address Work2909();
+        Address UpdateAddress(Address address);
+        void AddUser();
+        void DeleteUser();
+        void DeleteUser(long id);
+        void Seed();
+    }
+
+    public class Vozvrat2909 : IVozvrat2909
     {
         private Context connect;
         public Vozvrat2909(Context connect)

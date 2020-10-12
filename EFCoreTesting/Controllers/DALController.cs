@@ -11,18 +11,26 @@ namespace EFCoreTesting.Controllers
 {
     public class DALController : Controller
     {
-        private Context context { get; }
-        private Vozvrat2909 vozvrat2909;
+        private IVozvrat2909 vozvrat2909;
 
-        public DALController(DbContextOptions<Context> options)
+        public string Country { get; set; }
+        public DALController(IVozvrat2909 vozvrat2909)
         {
-            this.context = new Context(options);
-            vozvrat2909 = new Vozvrat2909(context);
+            this.vozvrat2909 = vozvrat2909;
         }
         public IActionResult Index()
         {
             var res = vozvrat2909.Work2909();
             return View(res);
         }
+
+        public IActionResult SetCountry()
+        {
+            var res = vozvrat2909.Work2909();
+            Country = res.Country;
+            return View(res);
+        }
+
+
     }
 }

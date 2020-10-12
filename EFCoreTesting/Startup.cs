@@ -64,6 +64,7 @@ namespace EFCoreTesting
             services.AddScoped<ComponentBasese>();
             services.AddScoped<IWork2809, Work2809>();
             services.AddScoped<Iintegra, Integra>();
+            services.AddScoped<IVozvrat2909, Vozvrat2909>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

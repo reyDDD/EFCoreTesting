@@ -1,11 +1,15 @@
-﻿using EFCoreTesting.Models;
+﻿using EFCoreTesting.Controllers;
+using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+ 
+
 
 namespace IntegrationTests
 {
@@ -70,6 +74,7 @@ namespace IntegrationTests
                 Assert.True((countStart - countEnd) == 1);
             }
         }
+
         [Fact]
         public void TestNotDeleteRowWhereIdNull()
         {
@@ -90,5 +95,21 @@ namespace IntegrationTests
             }
         }
 
+        [Fact]
+        public void TestReturnProperty()
+        {
+            //размещение
+            var mock = new Mock<IVozvrat2909>();
+            mock.Setup(m => m.Work2909()).Returns(new Address { City = "Gonduras", Country = "tudage" });
+            var control = new DALController(mock.Object);
+
+            //действие
+            control.SetCountry();
+ 
+
+            //утверждение
+            Assert.True("tudage" == control.Country);
+
+        }
     }
 }
