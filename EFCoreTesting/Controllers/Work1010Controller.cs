@@ -9,7 +9,7 @@ using Microsoft.Data.SqlClient;
 
 namespace EFCoreTesting.Controllers
 {
-    public class Work1010 : Controller
+    public class Work1010Controller : Controller
     {
 
         public IActionResult Index()

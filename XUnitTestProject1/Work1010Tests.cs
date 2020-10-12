@@ -13,7 +13,7 @@ namespace XUnitTestProject1
         [Fact]
         public void ReturnNullOr()
         {
-            Work1010 work1010 = new Work1010();
+            Work1010Controller work1010 = new Work1010Controller();
             var res = work1010.ReturnUserById(10000);
 
 
