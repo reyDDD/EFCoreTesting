@@ -1,0 +1,15 @@
+﻿@page "/work1210/{Id}"
+@page "/work1210/{Ids:int}"
+
+<h3>Work1210</h3>
+<p>@Id - where Id is string</p>
+<p>@Ids - where Ids is int</p>
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public int Ids { get; set; }
+}
