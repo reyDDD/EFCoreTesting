@@ -11,7 +11,7 @@ namespace EFCoreTesting.Models
         [Key]
         public long Id { get; set; }
 
-        [Range(1, 3000, ErrorMessage = "Скорость авто может быть не более 300 км/час")]
+        [Range(1, 300, ErrorMessage = "Скорость авто может быть не более 300 км/час")]
         public decimal MaxSpeed { get; set; }
 
         [MinLength(3, ErrorMessage ="Название производителя состоит минимум из 3 символов")]

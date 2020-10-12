@@ -5,11 +5,30 @@
 <p>@Id - where Id is string</p>
 <p>@Ids - where Ids is int</p>
 
+<EditForm Model="@auto" OnValidSubmit="@Successed">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
+    <InputText @bind-Value="auto.Brand" />
+    <InputNumber @bind-Value="auto.MaxSpeed" />
+
+    <button type="submit">запулить</button>
+</EditForm>
+
+<p>Уведомление о факте отправки формы: @Success</p>
 @code {
     [Parameter]
     public string Id { get; set; }
 
     [Parameter]
     public int Ids { get; set; }
+
+    public string Success { get; set; }
+
+    private Auto auto  = new Auto();
+
+    void Successed()
+    {
+        Success = "форма отправлена успешно";
+    }
 }
