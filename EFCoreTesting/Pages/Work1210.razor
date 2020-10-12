@@ -1,5 +1,6 @@
 ﻿@page "/work1210/{Id}"
 @page "/work1210/{Ids:int}"
+@inject InjectService Service
 
 <h3>Work1210</h3>
 <p>@Id - where Id is string</p>
@@ -16,6 +17,13 @@
 </EditForm>
 
 <p>Уведомление о факте отправки формы: @Success</p>
+<p>У тут работа и внедренным сервисом </p>
+@foreach (var item in Service.ReturnListFriends())
+	{
+		 <i>@item</i><br />
+	}
+
+
 @code {
     [Parameter]
     public string Id { get; set; }
