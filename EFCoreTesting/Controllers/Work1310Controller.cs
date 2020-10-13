@@ -40,5 +40,17 @@ namespace EFCoreTesting.Controllers
 
             return View("Route", (id, takaya));
         }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public string Route([FromBody]Address address)
+        {
+            GetContextFromIServiceProvider provider = new GetContextFromIServiceProvider();
+            var context = provider.ReturnContext(serviceProvider);
+            context.Addresses.Add(address);
+            context.SaveChanges();
+
+            return "work";
+        }
     }
 }
