@@ -5,27 +5,32 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using EFCoreTesting.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace XUnitTestProject1
 {
-    public class Work1310 : IClassFixture<IServiceProvider>
+    public class Work1310 : IClassFixture<WebApplicationFactory<EFCoreTesting.Startup>>
     {
-        private IServiceProvider serviceProvider;
+        private readonly WebApplicationFactory<EFCoreTesting.Startup> factory;
 
-        public Work1310(IServiceProvider serviceProvider)
+        public Work1310(WebApplicationFactory<EFCoreTesting.Startup> factory)
         {
-            this.serviceProvider = serviceProvider;
+            this.factory = factory;
         }
 
         [Fact]
-        public void TestAddressContainsElemets()
+        public async void TestAddressContainsElemets()
         {
-            var mock = new Mock<IServiceProvider>();
+            var client = factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false, BaseAddress = new Uri("https://localhost:44356") });
 
-            var controller = new Work1310Controller(mock.Object);
-            var action = controller.Index();
+            var defaultpaged = await client.GetAsync("/Work1310/Index");
+            var contentd = defaultpaged.Content.ReadAsStringAsync().Result;
 
-            Assert.IsNotType<BadRequestObjectResult>(action);
+            Assert.False((contentd.Contains("The base contains null elements Address")));
 
             //мораль сей басни такова - для тестов используй нормальное создание экземляра DB через DI
         }

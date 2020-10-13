@@ -34,5 +34,11 @@ namespace EFCoreTesting.Controllers
 
             return View("Address", res);
         }
+
+        public IActionResult Route(int id, string takaya)
+        {
+
+            return View("Route", (id, takaya));
+        }
     }
 }
