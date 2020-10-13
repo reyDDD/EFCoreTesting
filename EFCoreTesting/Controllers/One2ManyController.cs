@@ -18,7 +18,7 @@ namespace EFCoreTesting.Controllers
         }
 
  
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
             return View();
         }

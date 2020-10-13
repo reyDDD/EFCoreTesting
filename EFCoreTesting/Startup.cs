@@ -82,7 +82,7 @@ namespace EFCoreTesting
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=One2Many}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
@@ -90,6 +90,8 @@ namespace EFCoreTesting
                 endpoints.MapFallbackToPage("/route/{param}", "/_Host");
                 // endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
+                endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
+                
             });
         }
     }

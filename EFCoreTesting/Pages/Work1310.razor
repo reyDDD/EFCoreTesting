@@ -1,0 +1,13 @@
+﻿@page "/work1310"
+@page "/work1310/{param}"
+
+<h3>Work1310</h3>
+<p>@Param - это содержится в параметре</p>
+
+<NavLink href="morning2909" Match="NavLinkMatch.All">ссылка /morning2909 </NavLink>
+<NavLink href="work1310" Match="NavLinkMatch.Prefix">ссылка /morning2909 </NavLink>
+@code {
+
+    [Parameter]
+    public string Param { get; set; }
+}
