@@ -43,7 +43,7 @@ namespace EFCoreTesting.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public string Route([FromBody]Address address)
+        public string Route([Bind("Country")][FromBody] Address address)
         {
             GetContextFromIServiceProvider provider = new GetContextFromIServiceProvider();
             var context = provider.ReturnContext(serviceProvider);
