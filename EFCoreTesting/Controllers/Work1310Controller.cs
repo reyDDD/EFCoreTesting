@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,8 +20,19 @@ namespace EFCoreTesting.Controllers
         {
             GetContextFromIServiceProvider provider = new GetContextFromIServiceProvider();
             var context = provider.ReturnContext(serviceProvider);
-            var res = provider.ReturnDataFromBase(context);
-            return View("Address", res.Result);
+
+            Address res = default;
+
+            if (context.Addresses.Any())
+            {
+                res = provider.ReturnDataFromBase(context).Result;
+            }
+            else
+            {
+                return BadRequest("The base contains null elements Address");
+            }
+
+            return View("Address", res);
         }
     }
 }
