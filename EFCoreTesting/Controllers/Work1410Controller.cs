@@ -5,21 +5,22 @@ using System.Net;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
-
+ 
 namespace EFCoreTesting.Controllers
 {
     public class Work1410Controller : Controller
     {
         private Context context;
-
+ 
         public Work1410Controller(Context context)
         {
+ 
             this.context = context;
         }
 
         public IActionResult Index()
         {
-             
+            
             return new StatusCodeResult((int)HttpStatusCode.NotFound);
         }
 
@@ -39,7 +40,8 @@ namespace EFCoreTesting.Controllers
                     ModelState.AddModelError("", "Model has error(s)");
                 }
             }
-            
+ 
+       
             return RedirectToAction("GetAddress", new { id = adres.Id });
         }
 
