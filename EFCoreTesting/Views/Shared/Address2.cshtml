@@ -1,0 +1,20 @@
+﻿@model Address
+
+
+<form asp-action="UpdateAddress" asp-controller="Work1410" method="post">
+    <div asp-validation-summary="All"></div>
+
+
+    @if (@Model != null)
+    {
+        <input type="text" asp-for="Id"  />
+        <input type="text" asp-for="City" />
+        <input type="text" asp-for="Country" />
+    }
+    else
+    {
+        <p>Не передал id города - форма не отобразилась</p>
+    }
+
+    <button type="submit">Отправить</button>
+</form>

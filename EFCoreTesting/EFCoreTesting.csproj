@@ -27,4 +27,9 @@
 	  <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Work1010\" />
+    <Folder Include="Views\Work1410\" />
+  </ItemGroup>
+
 </Project>
