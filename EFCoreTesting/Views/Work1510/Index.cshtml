@@ -1,0 +1,21 @@
+﻿@model (List<Address>, SelectList)
+
+
+<form asp-controller="Work1510" asp-action="index" method="get">
+    <label for="Город" >
+        <input type="text" name="searchCity" value="" />
+    </label>
+    <label for="Страны">
+        <select name="country" asp-items="Model.Item2">
+            <option value="" disabled>Все</option>
+        </select>
+    </label>
+    <button type="submit">отправить</button>
+</form>
+
+
+<h2>Список городо и стран</h2>
+@foreach (var item in Model.Item1)
+{
+    <p>@item.Country --- @item.City</p>
+}

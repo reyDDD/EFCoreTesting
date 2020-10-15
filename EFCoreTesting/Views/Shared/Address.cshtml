@@ -9,8 +9,11 @@
 
 <form asp-action="Route" asp-controller="Work1310" method="post">
     <div asp-validation-summary="All"></div>
-
-    <input type="text" asp-for="@Model.City" value="" />
-    <input type="text" asp-for="@Model.Country" value="" />
+    <div>
+        <input type="text" asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    
+    <input type="text" asp-for="Country" />
     <button type="submit">Отправить</button>
 </form>

@@ -41,16 +41,24 @@ namespace EFCoreTesting.Controllers
             return View("Route", (id, takaya));
         }
 
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [HttpPost]
-        public string Route([Bind("Country")][FromBody] Address address)
+        public string Route([Bind("Country")] Address address)
+        //public string Route([Bind("Country")][FromBody] Address address) //[FromBody] нужно для гет-запроса с передачей модели в теле, но данные можно закинуть и https://localhost:44356/Work1310/Route?City=cxcv
         {
+            if (address.Country != null) //ModelState.isValid не отработает, потому как он проверяет саму модель на стороне сервера, а я никаких ограничений не задавал
+            { 
             GetContextFromIServiceProvider provider = new GetContextFromIServiceProvider();
             var context = provider.ReturnContext(serviceProvider);
             context.Addresses.Add(address);
             context.SaveChanges();
 
             return "work";
+            }
+            else
+            {
+                return "model was null";
+            }
         }
     }
 }
