@@ -98,6 +98,9 @@ namespace EFCoreTesting
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
+                endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
                 endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
@@ -107,7 +110,7 @@ namespace EFCoreTesting
                 // endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
                 endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
-                
+
             });
         }
     }
