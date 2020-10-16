@@ -1,0 +1,24 @@
+﻿@model ModelForCheck
+
+<form asp-controller="Work1610" asp-action="Index" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <input asp-for="Price" onblur="ff()"/>
+        <span asp-validation-for="Price" ></span>
+    </div>
+    <div>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button type="submit">Отправить</button>
+</form>
+<p>Цена: @Model?.Price</p>
+
+<script>
+    var ff = function() {
+        var forms = document.forms[0];
+        var field = forms.elements.Price;
+        var res = field.value.replace('.', ',').replace(' ', '');
+        document.getElementById('Price').value = res;
+    }
+</script>

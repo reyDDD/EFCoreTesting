@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
@@ -7,6 +8,7 @@ using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -71,6 +73,19 @@ namespace EFCoreTesting
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            //настройка русской локализации
+            var defaultCulture = new CultureInfo("ru-RU");
+            //defaultCulture = new CultureInfo("en-GB");
+            var localizationOptions = new RequestLocalizationOptions()
+            {
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            };
+            app.UseRequestLocalization(localizationOptions);
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
