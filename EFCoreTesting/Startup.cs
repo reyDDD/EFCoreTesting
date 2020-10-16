@@ -76,7 +76,6 @@ namespace EFCoreTesting
 
             //настройка русской локализации
             var defaultCulture = new CultureInfo("ru-RU");
-            //defaultCulture = new CultureInfo("en-GB");
             var localizationOptions = new RequestLocalizationOptions()
             {
                 DefaultRequestCulture = new RequestCulture(defaultCulture),

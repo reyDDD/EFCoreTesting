@@ -1,0 +1,26 @@
+﻿@page "/work1610b"
+
+<h3>Work1610 have @list.Count(m => m.id < 12) items</h3>
+@foreach (var item in list)
+{
+    <p>@item.id -- @item.Name -- @item.Price</p>
+}
+ 
+    <input type="text" placeholder="price" @bind="@price" />
+    <input type="text" placeholder="name" @bind="@name" />
+    <button @onclick="AddCheck">добавить в список</button>
+ 
+@code {
+    private List<ModelForCheck> list = new List<ModelForCheck>();
+    private string price;
+    private string name;
+    private int count;
+
+    private void AddCheck()
+    {
+        list.Add(new ModelForCheck() { id = count, Name = name, Price = price });
+        name = default;
+        price = default;
+        count = count + 1;
+    }
+}
