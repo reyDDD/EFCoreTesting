@@ -5,13 +5,17 @@
 <p @onclick="GetDependency">По клику получаю зависимость </p>
 <p>@Dependas?.City</p>
 
-<Work1810Child TextFromParent="Из родителя текст" OnClickCallBack="Start" @attributes="MassParam">
+<Work1810Child TextFromParent="Из родителя текст" OnClickCallBack="Start" @attributes="MassParam" @ref="childRef">
     <p>а это блок кода из родителя</p>
 </Work1810Child>
 
 @Reta   
 
+<p @onclick="@(() => Iee = childRef.MethodOr())">а это вызов метода в дочернем компоненте - @Iee</p>
 @code {
+    public string Iee { get; set; }
+
+    private Work1810Child childRef;
 
     public string Reta { get; set; }
 
