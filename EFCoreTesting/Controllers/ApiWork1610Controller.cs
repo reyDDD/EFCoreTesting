@@ -28,5 +28,11 @@ namespace EFCoreTesting.Controllers
         {
             return $@"privet {priyem} Index";
         }
+
+        [HttpGet("inta/{priyem}", Name = "specificRoute")]
+        public string Indexec(int priyem)
+        {
+            return $@"nazad {priyem} Index";
+        }
     }
 }

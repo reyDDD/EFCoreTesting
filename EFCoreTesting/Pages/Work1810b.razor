@@ -1,0 +1,15 @@
+﻿@page "/work1810b"
+@inject Work1810Service Servicee
+
+<h3>Work1810b</h3>
+<p @onclick="GetDependency">По клику получаю зависимость </p>
+<p>@Dependas?.City</p>
+@code {
+    public Address Dependas { get; set; }
+    public void GetDependency()
+    {
+        Dependas = Servicee.ReturAddressFirst();
+    }
+
+ 
+}
