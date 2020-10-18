@@ -1,6 +1,6 @@
 ﻿<h3>Work1810Child</h3>
 
-<h3>Заголовк на основании текста из родителя гласит: @TextFromParent</h3>
+<h3 @onclick="OnClickCallBack">Заголовк на основании текста из родителя гласит: @TextFromParent</h3>
 <div>
     @ChildContent
 </div>
@@ -12,4 +12,7 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallBack { get; set; }
 }

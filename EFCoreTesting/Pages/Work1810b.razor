@@ -5,10 +5,19 @@
 <p @onclick="GetDependency">По клику получаю зависимость </p>
 <p>@Dependas?.City</p>
 
-<Work1810Child TextFromParent="Из родителя текст">
+<Work1810Child TextFromParent="Из родителя текст" OnClickCallBack="Start">
     <p>а это блок кода из родителя</p>
 </Work1810Child>
+
+@Reta   
+
 @code {
-   
- 
+
+    public string Reta { get; set; }
+
+    public void Start()
+    {
+        Reta = "событие обработано";
+    }
+
 }
