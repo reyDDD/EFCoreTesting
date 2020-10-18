@@ -1,7 +1,7 @@
 ﻿<h3>Work1810Child</h3>
 
 <h3 @onclick="OnClickCallBack">Заголовк на основании текста из родителя гласит: @TextFromParent</h3>
-<div>
+<div @attributes="Slovar">
     @ChildContent
 </div>
 
@@ -15,4 +15,7 @@
 
     [Parameter]
     public EventCallback<MouseEventArgs> OnClickCallBack { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> Slovar { get; set; }
 }

@@ -5,7 +5,7 @@
 <p @onclick="GetDependency">По клику получаю зависимость </p>
 <p>@Dependas?.City</p>
 
-<Work1810Child TextFromParent="Из родителя текст" OnClickCallBack="Start">
+<Work1810Child TextFromParent="Из родителя текст" OnClickCallBack="Start" @attributes="MassParam">
     <p>а это блок кода из родителя</p>
 </Work1810Child>
 
@@ -20,4 +20,9 @@
         Reta = "событие обработано";
     }
 
+    public Dictionary<string, object> MassParam { get; set; } = new Dictionary<string, object> {
+        { "tutu", "one" },
+        { "dada", "two" },
+        { "nana", "three" }
+    };
 }
