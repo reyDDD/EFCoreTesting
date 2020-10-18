@@ -4,6 +4,10 @@
 <h3>Work1810b</h3>
 <p @onclick="GetDependency">По клику получаю зависимость </p>
 <p>@Dependas?.City</p>
+
+<Work1810Child TextFromParent="Из родителя текст">
+    <p>а это блок кода из родителя</p>
+</Work1810Child>
 @code {
    
  

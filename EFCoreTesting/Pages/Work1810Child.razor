@@ -1,0 +1,15 @@
+﻿<h3>Work1810Child</h3>
+
+<h3>Заголовк на основании текста из родителя гласит: @TextFromParent</h3>
+<div>
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+
+    public string TextFromParent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
