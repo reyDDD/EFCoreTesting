@@ -28,6 +28,12 @@ namespace EFCoreTesting.Services
             this.connect = connect;
         }
 
+        public async Task<Address> AddAddress(Address address)
+        {
+            var res = connect.Addresses.Add(address);
+            await connect.SaveChangesAsync();
+            return res.Entity;
+        }
 
         public async Task<IQueryable<Address>> GetAddress()
         {
