@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace EFCoreTesting.Infrastructure.TagHelpers
 {
     [HtmlTargetElement("chto", Attributes = "propa")]
+    [HtmlTargetElement("itak", Attributes = "propa")]
     public class Work1910TagHelper : TagHelper
     {
 
