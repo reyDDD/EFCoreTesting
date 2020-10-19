@@ -1,0 +1,15 @@
+﻿@model IQueryable<Address>
+
+@foreach (var adres in Model)
+{
+    <p>@adres.City -- @adres.Country</p>
+    <br />
+    if (@adres.Users.Count() > 0)
+    {
+        foreach (var item in @adres.Users)
+        {
+            <i>@item.FirstName -- @item.LastName</i>
+        }
+    }
+
+}

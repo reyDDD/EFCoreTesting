@@ -1,0 +1,34 @@
+﻿@model Address
+
+@{ 
+    int count = 0;
+}
+<form asp-action="UpdateWithNavigation" asp-controller="Work1910" method="post">
+    <div asp-validation-summary="All"></div>
+
+
+    @if (@Model != null)
+    {
+        <input type="text" asp-for="Id" />
+        <input type="text" asp-for="City" />
+        <input type="text" asp-for="Country" />
+        <br />
+        @foreach (var user in Model?.Users)
+        {
+            <input name="Users[@count].Id" value="@user.Id" />
+            <br />
+            <input name="Users[@count].FirstName" value="@user.FirstName" /> <br />
+            <input name="Users[@count].LastName" value="@user.LastName" /> <br />
+            <input name="Users[@count].Age" value="@user.Age" /> <br />
+            <input type ="checkbox" name="Users[@count].IsMale" checked="@user.IsMale" /> <br />
+            <input name="Users[@count].BirthDay" value="@user.BirthDay" /><br />
+            count++;
+        }
+    }
+    else
+    {
+        <p>Не передал id города - форма не отобразилась</p>
+    }
+
+    <button type="submit">Отправить</button>
+</form>

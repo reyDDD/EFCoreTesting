@@ -10,8 +10,11 @@ namespace EFCoreTesting.Services
     public interface IVozvrat2909
     {
         Address Work2909();
+        Address GetAddressId(int id);
         Address UpdateAddress(Address address);
+        Task<IQueryable<Address>> GetAddress();
         void AddUser();
+        void UpdateAddress2(Address address);
         void DeleteUser();
         void DeleteUser(long id);
         void Seed();
@@ -25,12 +28,31 @@ namespace EFCoreTesting.Services
             this.connect = connect;
         }
 
+
+        public async Task<IQueryable<Address>> GetAddress()
+        {
+               return connect.Addresses.AsQueryable().Include(n=>n.Users);
+        }
+
+        public void UpdateAddress2(Address address)
+        {
+            connect.Addresses.Update(address);
+            connect.SaveChanges();
+        }
+
         public Address Work2909()
         {
             var address = connect.Addresses.FirstOrDefault();
             connect.Entry(address).Collection(i => i.Users).Query().Where(i => i.Age > 20).Load();
             return address;
         }
+
+        public Address GetAddressId(int id)
+        {
+            var address = connect.Addresses.Include(m=>m.Users).Where(i =>i.Id == id).FirstOrDefault();
+            return address;
+        }
+
 
         public Address UpdateAddress(Address address)
         {
@@ -70,7 +92,7 @@ namespace EFCoreTesting.Services
                 connect.Users.Remove(user);
                 await connect.SaveChangesAsync();
             }
-            
+
         }
 
 
