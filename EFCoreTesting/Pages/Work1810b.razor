@@ -1,5 +1,6 @@
 ﻿@page "/work1810b"
 @*@inject Work1810Service Servicee*@
+@inject NavigationManager NavManager
 
 <h3>Work1810b</h3>
 <p @onclick="GetDependency">По клику получаю зависимость </p>
@@ -10,6 +11,10 @@
 </Work1810Child>
 
 @Reta   
+
+<br />
+
+<p>добью навманагером</p>
 
 <p @onclick="@(() => Iee = childRef.MethodOr())">а это вызов метода в дочернем компоненте - @Iee</p>
 @code {
@@ -22,6 +27,7 @@
     public void Start()
     {
         Reta = "событие обработано";
+        NavManager.NavigateTo("/");
     }
 
     public Dictionary<string, object> MassParam { get; set; } = new Dictionary<string, object> {
