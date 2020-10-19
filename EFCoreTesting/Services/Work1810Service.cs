@@ -1,4 +1,5 @@
 ﻿using EFCoreTesting.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace EFCoreTesting.Services
         public Address ReturAddressFirst()
         {
             var res = connect.Addresses.FirstOrDefault();
+            connect.Entry(res).Collection(m => m.Users).Query().Where(i => i.Age > 12).Load();
             return res;
         }
 
