@@ -34,6 +34,11 @@ namespace EFCoreTesting.Controllers
             return View("Index", address);
         }
 
+        public IActionResult Index3(int id)
+        {
+            Address address = vozvrat2909.GetAddressId(id);
+            return View("AddUserView", address);
+        }
 
         [HttpPost]
         public IActionResult UpdateWithNavigation(Address address)

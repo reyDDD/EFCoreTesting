@@ -1,0 +1,37 @@
+﻿@model Address
+
+@{
+    int count = 0;
+}
+<form asp-action="UpdateWithNavigation" asp-controller="Work1910" method="post">
+    <div asp-validation-summary="All"></div>
+
+
+    @if (@Model != null)
+    {
+        <input type="text" asp-for="Id" />
+        <input type="text" asp-for="City" />
+        <input type="text" asp-for="Country" />
+        <br />
+        @foreach (var user in Model?.Users)
+        {
+            <input readonly name="Users[@count].Id" value="@user.Id" />
+            <input treadonly name="Users[@count].FirstName" value="@user.FirstName" />
+            <input treadonly name="Users[@count].LastName" value="@user.LastName" />
+            <input readonly name="Users[@count].Age" value="@user.Age" />
+            <input readonly name="Users[@count].IsMale" type="checkbox" value="true" checked="@user.IsMale" />
+            <input readonly name="Users[@count].BirthDay" value="@user.BirthDay" />
+            count++;
+            <br/>
+        }
+    }
+
+ 
+    <input type="text" name="Users[@count].FirstName" /> <br />
+    <input type="text" name="Users[@count].LastName" /> <br />
+    <input type="number" name="Users[@count].Age" /> <br />
+    <input type="checkbox" name="Users[@count].IsMale" value="true"  /> <br />
+    <input type="date" name="Users[@count].BirthDay" /><br />
+
+    <button type="submit">Отправить</button>
+</form>
