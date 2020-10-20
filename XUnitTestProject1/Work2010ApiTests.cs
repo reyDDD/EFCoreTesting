@@ -25,7 +25,7 @@ namespace XUnitTestProject1
 
             var res = await controller.ReurnUser(22);
 
-            var user = Assert.IsType<ActionResult<User>>(res);
+            var user = Assert.IsType<ActionResult<ApiWork2010Controller.Userec>>(res);
             Assert.True(user.Value.Id == 22);
         }
 

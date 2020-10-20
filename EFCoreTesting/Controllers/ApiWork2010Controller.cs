@@ -20,10 +20,18 @@ namespace EFCoreTesting.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> ReurnUser(long id)
+        public async Task<ActionResult<Userec>> ReurnUser(long id)
         {
             var user = await connect.Users.FindAsync(id);
-            return user;
+            var userec = new Userec { Id = user.Id, FirstName = user.FirstName, LastName = user.LastName };
+            return userec;
+        }
+
+        public class Userec
+        {
+            public long Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
         }
 
         [HttpPost("{addressId}")]
