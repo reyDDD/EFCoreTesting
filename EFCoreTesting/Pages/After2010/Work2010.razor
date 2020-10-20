@@ -1,0 +1,18 @@
+﻿@page "/work2010b"
+@using Microsoft.AspNetCore.WebUtilities;
+@inject NavigationManager Navmanager
+<h3>Work2010</h3>
+
+<p>Если query содержал ключ keyok , то его значение является @FindedKey</p>
+@code {
+    public string FindedKey { get; set; } = "пусто";
+
+    protected override void OnInitialized()
+    {
+        var query = new Uri(Navmanager.Uri).Query;
+        if (QueryHelpers.ParseQuery(query).TryGetValue("keyok", out var val))
+        {
+            FindedKey = val;
+        }
+    }
+}
