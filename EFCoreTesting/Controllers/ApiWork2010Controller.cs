@@ -12,7 +12,7 @@ namespace EFCoreTesting.Controllers
     public class ApiWork2010Controller : ControllerBase
     {
 
-        private Context connect;
+        public Context connect;
         public ApiWork2010Controller(Context connect)
         {
             this.connect = connect;
