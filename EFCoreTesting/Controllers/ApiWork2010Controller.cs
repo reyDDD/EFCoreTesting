@@ -37,6 +37,7 @@ namespace EFCoreTesting.Controllers
             return CreatedAtAction(nameof(ReurnUser), reta.Entity.Id, reta.Entity);
         }
 
+
         [HttpPut("{userId}")]
         public async Task<ActionResult<User>> UpdateUser(long userId, User user)
         {
@@ -58,7 +59,22 @@ namespace EFCoreTesting.Controllers
                 }
             }
             return NoContent();
+        }
 
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteUser(long id)
+        {
+            User user = await connect.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            connect.Users.Remove(user);
+            await connect.SaveChangesAsync();
+
+            return user;
         }
     }
 }

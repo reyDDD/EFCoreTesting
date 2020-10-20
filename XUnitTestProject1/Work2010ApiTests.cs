@@ -75,5 +75,34 @@ namespace XUnitTestProject1
             var result = controller.connect.Users.Where(i => i.Id == ussr.Id && i.FirstName == ussr.FirstName && i.LastName == ussr.LastName && i.IsMale == ussr.IsMale).FirstOrDefault();
             Assert.True(result != null);
         }
+
+        [Fact]
+        public async void RemoveUser()
+        {
+
+            var co = new Context(ContextOptions);
+            DbConnection con = co.Database.GetDbConnection();
+            con.Open();
+
+            using (var transact = con.BeginTransaction())
+            {
+                ApiWork2010Controller controller = new ApiWork2010Controller(co);
+                controller.connect.Database.UseTransaction(transact);
+
+                ActionResult<User> res = await controller.DeleteUser(1000);
+                Assert.IsType<NotFoundResult>(res.Result);
+
+
+                ActionResult<User> res2 = await controller.DeleteUser(42);
+                Assert.IsType<ActionResult<User>>(res2);
+
+                //transact.Commit();
+                transact.Rollback();
+            }
+
+ 
+
+            
+        }
     }
 }
