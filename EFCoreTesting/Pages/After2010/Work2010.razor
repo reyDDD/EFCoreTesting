@@ -4,7 +4,30 @@
 <h3>Work2010</h3>
 
 <p>Если query содержал ключ keyok , то его значение является @FindedKey</p>
+
+<p>данные для добавление в список</p>
+<input placeholder="сюда, плиз" type="text" @bind="ToList" />
+<button @onclick="AddStrintToList">Добавить в список</button>
+<p>содержимое списка</p>
+<ul>
+    @foreach (var item in listString)
+    {
+        <li>@item</li>
+    }
+</ul>
+
 @code {
+
+    public string ToList { get; set; }
+    IList<string> listString = new List<string>();
+
+
+    private void AddStrintToList()
+    {
+        listString.Add(ToList);
+        ToList = default;
+    }
+
     public string FindedKey { get; set; } = "пусто";
 
     protected override void OnInitialized()
