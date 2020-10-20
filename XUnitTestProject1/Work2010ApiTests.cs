@@ -52,11 +52,28 @@ namespace XUnitTestProject1
                 //transact.Commit();
                 transact.Rollback();
             }
+        }
 
-            
+
+        [Fact]
+        public async Task UpdateUserTest()
+        {
+            ApiWork2010Controller controller = new ApiWork2010Controller(new Context(ContextOptions));
+            User ussr = new User { Id = 35, FirstName = "Alex", LastName = "Krilofff", Age = 55, IsMale = true, BirthDay = new DateTime(2002, 12, 30, 0, 0, 0), AddressId = 3, Address = controller.connect.Addresses.Find(3) };
+
+            try
+            {
+                var res = await controller.UpdateUser(35, ussr);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.True(true);
+            }
 
 
-            
+            var result = controller.connect.Users.Where(i => i.Id == ussr.Id && i.FirstName == ussr.FirstName && i.LastName == ussr.LastName && i.IsMale == ussr.IsMale).FirstOrDefault();
+            Assert.True(result != null);
         }
     }
 }

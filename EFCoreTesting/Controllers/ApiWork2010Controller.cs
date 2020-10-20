@@ -1,5 +1,6 @@
 ﻿using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,30 @@ namespace EFCoreTesting.Controllers
             var reta = await connect.Users.AddAsync(user);
             await connect.SaveChangesAsync();
             return CreatedAtAction(nameof(ReurnUser), reta.Entity.Id, reta.Entity);
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<ActionResult<User>> UpdateUser(long userId, User user)
+        {
+            connect.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await connect.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                if (connect.Users.Find(userId) == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+
         }
     }
 }
