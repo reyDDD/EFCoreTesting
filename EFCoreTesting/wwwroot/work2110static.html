@@ -8,9 +8,11 @@
     <h2>добавить новый адрес в базу</h2>
 
     <form action="javascript:void(0);" method="post">
+        <input readonly type="number" id="add-id" />
         <input type="text" id="add-city" placeholder="город для добавления" />
         <input type="text" id="add-country" placeholder="страна для добавления" />
         <button type="submit" onclick="addCity()">добавить в базу</button>
+        <button type="submit" onclick="updateCity()">обновить в базе, но сначала клик на кнопке ниже получения данных об адресе</button>
     </form>
 
     <h2>получить из базы запись по указанному id</h2>

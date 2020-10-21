@@ -104,5 +104,17 @@ namespace EFCoreTesting.Controllers
             return newAddress;
         }
 
+
+        [HttpPut("{ids}")]
+        public async Task<IActionResult> UpdateAddress(int ids, Address address)
+        {
+            if (ids != address.Id)
+            {
+                return BadRequest();
+            }
+            await Task.Run(() => vozvrat2909.UpdateAddress(address));
+
+            return NoContent();
+        }
     }
 }

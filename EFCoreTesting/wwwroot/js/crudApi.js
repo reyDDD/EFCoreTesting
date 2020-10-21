@@ -25,7 +25,7 @@ function addCity() {
 
             inputTextBoxCountry.value = '',
                 inputTextBoxCity.value = '',
-            console.log(datas.Id , datas.Country , datas.City)
+                console.log(datas.Id, datas.Country, datas.City)
         })
         .catch(error => console.error('не получилось добавить адрес', error));
 }
@@ -35,11 +35,6 @@ async function getAddress() {
     let forInsert = document.getElementById('setAddress');
     let uris = 'https://localhost:44356/api/ApiWork1910/';
     let id = document.getElementById('get-id-address');
-    //fetch(uris + id.value)
-    //    .then(status => console.log('статус ответа: ' + status.status))
-    //    .then(response => response.json())
-    //    .then(data => forInsert.innerText = data.id + ' ' + data.country + ' ' + data.city)
-    //    .catch(error => console.error('ошибка получения записи из таблицы', error));
 
 
     let response = await fetch(uris + id.value);
@@ -51,6 +46,32 @@ async function getAddress() {
     else {
         let result = await response.json();
         forInsert.innerText = result.id + ' ' + result.country + ' ' + result.city;
+        document.getElementById('add-id').value = result.id;
+        document.getElementById('add-city').value = result.city;
+        document.getElementById('add-country').value = result.country;
     }
-    
+}
+
+
+async function updateCity() {
+    let id = document.getElementById('add-id').value;
+    var city = document.getElementById('add-city');
+    let country = document.getElementById('add-country');
+
+    let bodys = {
+        id: Number(id),
+        city: city.value,
+        country: country.value
+    }
+    let response = await fetch(`${uri}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodys)
+    });
+
+    //let result = await response.status;
+    //console.log(result + ' - статус ответа');
 }
