@@ -93,6 +93,7 @@ namespace EFCoreTesting
                 app.UseDeveloperExceptionPage();
             }
             app.UseResponseCaching();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseStatusCodePages();
             app.UseRouting();
