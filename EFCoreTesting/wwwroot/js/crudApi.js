@@ -45,8 +45,12 @@ async function getAddress() {
     let response = await fetch(uris + id.value);
 
     console.log('статус ответа: ' + response.status);
-
-    let result = await response.json();
-
-    forInsert.innerText = result.id + ' ' + result.country + ' ' + result.city;
+    if (response.status === 404) {
+        forInsert.innerText = 'запись с таким id не найдена';
+    }
+    else {
+        let result = await response.json();
+        forInsert.innerText = result.id + ' ' + result.country + ' ' + result.city;
+    }
+    
 }
