@@ -76,6 +76,10 @@ namespace EFCoreTesting.Controllers
         public async Task<ActionResult<NewAddress>> ReturnAddress(int id)
         {
             var res = vozvrat2909.GetAddressId(id);
+            if (res == null)
+            {
+                return NotFound();
+            }
             List<NewUser> newUser = new List<NewUser>();
             foreach (var user in res.Users)
             {
