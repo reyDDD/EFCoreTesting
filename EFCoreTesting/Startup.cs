@@ -15,6 +15,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 
 namespace EFCoreTesting
@@ -33,7 +36,7 @@ namespace EFCoreTesting
         {
             //services.AddDbContext<Context>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
- 
+
             services.AddScoped<WorkOne2Many>();
 
 
@@ -47,7 +50,30 @@ namespace EFCoreTesting
                 }
                 );
             });
-
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Testing my personal API",
+                    Description = "Here is descriptipn my test API",
+                    TermsOfService = new Uri("https://site.com.ua"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Alex",
+                        Email = "fd@mail.ru",
+                        Url = new Uri("https://mysiteUrl.com")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Describe for licenses",
+                        Url = new Uri("https://siteApiLicense.com")
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                opt.IncludeXmlComments(xmlPath);
+            });
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
@@ -76,6 +102,9 @@ namespace EFCoreTesting
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
+
 
             //настройка русской локализации
             var defaultCulture = new CultureInfo("ru-RU");
@@ -96,10 +125,12 @@ namespace EFCoreTesting
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseStatusCodePages();
+
+
+
+
+
             app.UseRouting();
-
-
-
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllers();
