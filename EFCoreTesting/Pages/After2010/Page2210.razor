@@ -1,0 +1,39 @@
+﻿@page "/page2210"
+@inject Work2210Notifier Notifier
+@implements IDisposable
+<h3>Page2210</h3>
+
+<button @onclick="Start">запустить сервис</button>
+<p>Возвращаемый результат из уведомителя: @Age -- @Name </p>
+
+@code {
+    public int Age { get; set; }
+    public string Name { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Notifier.notiEvent += Work;
+    }
+
+    public void Start()
+    {
+        Notifier.StartTimer();
+    }
+
+
+
+    public async Task Work(int A, string N)
+    {
+        await InvokeAsync(() =>
+        {
+            Age = A;
+            Name = N;
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        Notifier.notiEvent -= Work;
+    }
+}

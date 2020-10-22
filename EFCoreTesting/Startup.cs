@@ -98,6 +98,7 @@ namespace EFCoreTesting
             services.AddScoped<Iintegra, Integra>();
             services.AddScoped<IVozvrat2909, Vozvrat2909>();
             services.AddScoped<Work1810Service>();
+            services.AddSingleton<Work2210Notifier>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

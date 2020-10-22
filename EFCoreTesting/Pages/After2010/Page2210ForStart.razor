@@ -1,0 +1,13 @@
+﻿@page "/2210forStart"
+@inject Work2210Notifier Notifier
+
+<h3>Page2210ForStart</h3>
+
+<button @onclick="Start">запустить сервис</button>
+@code {
+
+    public void Start()
+    {
+        Notifier.StartTimer();
+    }
+}
