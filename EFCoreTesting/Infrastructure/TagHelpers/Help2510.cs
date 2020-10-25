@@ -15,7 +15,7 @@ namespace EFCoreTesting.Infrastructure.TagHelpers
             output.TagName = "li";
             output.TagMode = TagMode.StartTagAndEndTag;
             output.Attributes.RemoveAll("names");
-            output.Content.Append("пустота внутри списка меню");
+            output.Content.Append("null in menulist");
         }
     }
 
