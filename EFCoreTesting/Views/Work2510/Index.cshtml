@@ -1,0 +1,30 @@
+﻿@model User
+
+@if (Model == null)
+{
+    <p>Sorry, model is empty</p>
+}
+else
+{
+<form asp-action="UpdateUserWithAddress" asp-controller="Work2510" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="AddressId" />
+    <input type="text" asp-for="FirstName" />
+    <input type="text" asp-for="LastName" />
+    <input type="number" asp-for="Age" />
+    <input type="date" asp-for="BirthDay" />
+    <input asp-for="IsMale"  checked="@Model.IsMale" />
+    <br />
+    <label asp-for="Address.Id">
+        <input type="number" readonly asp-for="Address.Id" />
+    </label>
+    <label asp-for="Address.City">
+        <input type="text" readonly asp-for="Address.City" />
+    </label>
+    <label asp-for="Address.Country">
+        <input type="text" readonly asp-for="Address.Country" />
+    </label>
+
+    <input type="submit" value="Отправить" />
+</form>
+}

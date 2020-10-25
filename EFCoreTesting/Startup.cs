@@ -19,7 +19,6 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 
-
 namespace EFCoreTesting
 {
     public class Startup
@@ -99,6 +98,7 @@ namespace EFCoreTesting
             services.AddScoped<IVozvrat2909, Vozvrat2909>();
             services.AddScoped<Work1810Service>();
             services.AddSingleton<Work2210Notifier>();
+            services.AddScoped<IWork2510Model, Work2510Model>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
