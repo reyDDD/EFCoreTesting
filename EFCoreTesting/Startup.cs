@@ -36,6 +36,7 @@ namespace EFCoreTesting
             //services.AddDbContext<Context>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
 
+            services.AddDbContext<Context2510>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
             services.AddScoped<WorkOne2Many>();
 
 
@@ -99,6 +100,7 @@ namespace EFCoreTesting
             services.AddScoped<Work1810Service>();
             services.AddSingleton<Work2210Notifier>();
             services.AddScoped<IWork2510Model, Work2510Model>();
+            services.AddScoped<Work2510ModelRepo2>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
