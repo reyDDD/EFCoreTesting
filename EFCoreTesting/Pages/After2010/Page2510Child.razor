@@ -1,0 +1,17 @@
+﻿<h3 class="@WorkRandom()">Page2510Child</h3>
+
+<p>нарисовал @Rand</p>
+
+@code {
+    public int Rand { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    
+
+    private int WorkRandom()
+    {
+        return Rand = new Random().Next(1, 1000000);
+    }
+}

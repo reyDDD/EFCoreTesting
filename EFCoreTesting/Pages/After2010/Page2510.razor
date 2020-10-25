@@ -1,0 +1,20 @@
+﻿@page "/page2510"
+
+<h3>Page2510</h3>
+
+@foreach (var user in users)
+{
+    <Page2510Child @key="user.Id" />
+}
+
+<button @onclick="() => users[1].Id = 33">Обновить ключ</button>
+
+
+@code {
+
+    IList<User> users = new List<User>
+{
+        new User{ Id = 1, Age = 33, FirstName = "Andrew"},
+        new User{ Id = 2, Age = 44, FirstName = "Ivan"}
+    };
+}
