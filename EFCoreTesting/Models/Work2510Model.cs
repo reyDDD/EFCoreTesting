@@ -28,12 +28,22 @@ namespace EFCoreTesting.Models
 
         public async Task UpdateUserAndAddress(User user)
         {
-           Address addres = await Connect.Addresses.FindAsync(user.Address.Id);
-            user.Address.City = addres.City;
-            user.Address.Country = addres.Country;
+            var strategy = Connect.Database.CreateExecutionStrategy();
 
-            Connect.Entry(user).State = EntityState.Modified;
-            await Connect.SaveChangesAsync();
+            await strategy.ExecuteAsync(async () =>
+            {
+                using (var transaction = await Connect.Database.BeginTransactionAsync())
+                {
+                    Address addres = await Connect.Addresses.FindAsync(user.Address.Id);
+                    user.Address.City = addres.City;
+                    user.Address.Country = addres.Country;
+
+                    Connect.Entry(user).State = EntityState.Modified;
+                    await Connect.SaveChangesAsync();
+
+                    await transaction.CommitAsync();
+                }
+            }); 
         }
     }
 }
