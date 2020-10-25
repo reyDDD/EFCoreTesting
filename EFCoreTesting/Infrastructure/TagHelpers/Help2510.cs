@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Infrastructure.TagHelpers
 {
+    [HtmlTargetElement("levak")]
     [HtmlTargetElement("li", Attributes = "names")]
     public class Help2510 : TagHelper
     {
@@ -15,7 +16,7 @@ namespace EFCoreTesting.Infrastructure.TagHelpers
             output.TagName = "li";
             output.TagMode = TagMode.StartTagAndEndTag;
             output.Attributes.RemoveAll("names");
-            output.Content.Append("null in menulist");
+            output.Content.Append("нулек такой нулёк");
         }
     }
 
