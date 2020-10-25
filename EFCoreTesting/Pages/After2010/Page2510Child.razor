@@ -1,17 +1,42 @@
 ﻿<h3 class="@WorkRandom()">Page2510Child</h3>
 
-<p>нарисовал @Rand</p>
+<p>@Ids , нарисовал @Rand , а это рандом был создан при нициализации @RandStart</p>
+<p>@Ids , нарисовал @Rand , а это рандом был создан в родителе @((int)Ids)</p>
+<p @onclick="@(() => Ids = 1000)">изменить содержимое </p>
+
+
+<h2 @onclick="@Toggle" class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
+
+@if (Expanded)
+{
+    <p class="card-text">ChildContent</p>
+}
 
 @code {
+
+    [Parameter]
+    public bool Expanded { get; set; }
+
+
+
+    private int RandStart { get; set; }
     public int Rand { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    
+    public long Ids { get; set; }
 
     private int WorkRandom()
     {
         return Rand = new Random().Next(1, 1000000);
+    }
+
+    protected override void OnInitialized()
+    {
+        RandStart = (int)Ids;
+    }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
     }
 }

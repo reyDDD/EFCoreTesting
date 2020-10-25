@@ -1,14 +1,23 @@
 ﻿@page "/page2510"
 
 <h3>Page2510</h3>
+<Page2510Child Ids="9999" Expanded="true"/>
 
 @foreach (var user in users)
 {
-    <Page2510Child @key="user.Id" />
+    <Page2510Child @key="user.Id" Ids="user.Id" />
 }
 
 <button @onclick="() => users[1].Id = 33">Обновить ключ</button>
 
+<button @onclick="StateHasChanged">обновить состояние</button>
+
+
+<button @onclick="StateHasChanged">
+    Call StateHasChanged
+</button>
+
+<input type="checkbox" checked="@(@users[1].Id != 33)" />
 
 @code {
 
@@ -17,4 +26,5 @@
         new User{ Id = 1, Age = 33, FirstName = "Andrew"},
         new User{ Id = 2, Age = 44, FirstName = "Ivan"}
     };
+
 }
