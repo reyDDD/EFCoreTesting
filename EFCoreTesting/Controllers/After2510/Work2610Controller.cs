@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,12 @@ namespace EFCoreTesting.Controllers.After2510
         public IActionResult Index()
         {
             return View("содержимое модели для демонстрации кеша" as object);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Index2(string text)
+        {
+            return View("Index", HtmlEncoder.Default.Encode(text) as object);
         }
     }
 }
