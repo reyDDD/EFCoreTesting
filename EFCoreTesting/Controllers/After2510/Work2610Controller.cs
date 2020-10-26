@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreTesting.Controllers.After2510
@@ -20,6 +21,25 @@ namespace EFCoreTesting.Controllers.After2510
         public IActionResult Index2(string text)
         {
             return View("Index", HtmlEncoder.Default.Encode(text) as object);
+        }
+
+
+        public IActionResult DataT()
+        {
+            Model2610 model = new Model2610()
+            {
+                Date = DateTime.Now,
+                Url = "https://site.com",
+                Mail = "info@mail.ru"
+            };
+            return View("DataT", model);
+        }
+
+        [HttpPost]
+        public IActionResult DataTy(Model2610 model)
+        {
+ 
+            return View("DataT", model);
         }
     }
 }

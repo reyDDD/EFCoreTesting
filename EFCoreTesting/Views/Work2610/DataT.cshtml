@@ -1,0 +1,21 @@
+﻿@model Model2610
+
+
+<ul>
+    <li>@Model.Date</li>
+    <li>@Model.Url</li>
+    <li>@Model.Mail</li>
+    <li>@Model.Password</li>
+    <li>@Model.Phone --- не работает</li>
+    <li>@Model.Card --- не работает</li>
+</ul>
+
+<form asp-action="DataTy" asp-controller="Work2610" method="post">
+    <input asp-for="Date" />
+    <input asp-for="Url" />
+    <input asp-for="Mail" />
+    <input asp-for="Phone" />
+    <input asp-for="Card" />
+    <input asp-for="Password" />
+    <input type="submit" value="Отправить" />
+</form>
