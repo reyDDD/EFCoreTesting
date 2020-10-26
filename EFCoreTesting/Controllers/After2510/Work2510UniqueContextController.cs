@@ -20,9 +20,26 @@ namespace EFCoreTesting.Controllers.After2510
         public async Task<IActionResult> Index(int id)
         {
             var res = await modelRepo2.GetUser(id);
+            if (res == null)
+            {
+                return NotFound();
+            }
             return View(res);
         }
+        public async Task<IActionResult> Index2(User user)
+        {
+            if (!ModelState.IsValid || user.Id == 0)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var res = await modelRepo2.GetUser(user.Id);
+            if (res == null)
+            {
+                return NotFound();
+            }
+            return View(res);
+        }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {

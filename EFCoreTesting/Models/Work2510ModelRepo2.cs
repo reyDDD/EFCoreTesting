@@ -14,7 +14,7 @@ namespace EFCoreTesting.Models
             this.context2510 = context2510;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUser(long id)
         {
             return await context2510.Users.Include(m => m.Address).Where(m => m.Id == id).FirstOrDefaultAsync();
         }
