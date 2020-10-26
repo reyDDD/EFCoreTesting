@@ -12,8 +12,8 @@ namespace EFCoreTesting.Controllers.After2510
     [ViewComponent(Name = ("Combinator"))]
     public class Work2510UniqueContextController : Controller
     {
-        private Work2510ModelRepo2 modelRepo2;
-        public Work2510UniqueContextController(Work2510ModelRepo2 modelRepo2)
+        private IWork2510ModelRepo2 modelRepo2;
+        public Work2510UniqueContextController(IWork2510ModelRepo2 modelRepo2)
         {
             this.modelRepo2 = modelRepo2;
         }

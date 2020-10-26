@@ -2,6 +2,7 @@
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,5 +55,42 @@ namespace XUnitTestProject1.After2610
             Assert.IsType<SerializableError>(badRequest.Value);
         }
 
+
+        [Fact]
+        public async void GetIdTests_WorkMethodTrue()
+        {
+            var user = new User { Id = 22, FirstName = "Malchik", LastName = "", Age = 22, IsMale = true, BirthDay = DateTime.Now, AddressId = 3 };
+
+            var repo = new Mock<IWork2510ModelRepo2>();
+
+            repo.Setup( m =>  m.GetUser(It.IsAny<long>())).ReturnsAsync(user).Verifiable();
+
+            var controller = new Work2510UniqueContextController(repo.Object);
+
+
+            var result = await controller.Index2(user);
+
+            var viewResult = Assert.IsAssignableFrom<ViewResult>(result);
+            var model = Assert.IsType<User>(viewResult.ViewData.Model);
+            Assert.Equal(22, model.Age);
+            repo.Verify();
+        }
+
+        [Fact]
+        public async void GetId_NullUser_ReturnNotFound()
+        {
+            var user = new User { Id = 22, FirstName = "Malchik", LastName = "", Age = 22, IsMale = true, BirthDay = DateTime.Now, AddressId = 3 };
+
+            var repo = new Mock<IWork2510ModelRepo2>();
+
+            repo.Setup(m => m.GetUser(It.IsAny<long>())).ReturnsAsync((User)null);
+
+            var controller = new Work2510UniqueContextController(repo.Object);
+
+
+            var result = await controller.Index2(user);
+
+            var viewResult = Assert.IsType<NotFoundResult>(result);
+        }
     }
 }
