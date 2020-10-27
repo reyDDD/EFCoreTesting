@@ -38,8 +38,25 @@ namespace EFCoreTesting.Controllers.After2510
             {
                 return NotFound();
             }
-            return View(res);
+            return View("Index", res);
         }
+
+
+        public async Task<IActionResult> GetUserAtData(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var res = await modelRepo2.GetUserAtData(user);
+            if (res == null)
+            {
+                return NotFound();
+            }
+            return View("Index", res);
+        }
+
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
