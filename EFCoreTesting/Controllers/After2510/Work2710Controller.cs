@@ -19,18 +19,18 @@ namespace EFCoreTesting.Controllers.After2510
             this.serviceProvider = serviceProvider;
         }
 
-        [HttpGet, ActionName("Suda")]
+        [HttpGet, ActionName("Suda")] //в случае пееропределения имени страница по имени методы становится недоступной
         public IActionResult Index(string? name)
         {
             var context = new Context(serviceProvider.GetRequiredService<DbContextOptions<Context>>());
             User user = default;
             if (context.Users.Any())
             {
-                context.Users.FirstOrDefault();
+                user = context.Users.FirstOrDefault();
             }
 
             
-            return View(user);
+            return View("Index", user);
         }
 
         [ValidateAntiForgeryToken]
