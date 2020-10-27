@@ -20,7 +20,13 @@ namespace EFCoreTesting.Controllers.After2510
         public IActionResult Index()
         {
             var context = new Context(serviceProvider.GetRequiredService<DbContextOptions<Context>>());
-            var user = context.Users.FirstOrDefault();
+            User user = default;
+            if (context.Users.Any())
+            {
+                context.Users.FirstOrDefault();
+            }
+
+            
             return View(user);
         }
     }
