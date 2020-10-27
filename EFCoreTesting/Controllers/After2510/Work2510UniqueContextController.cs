@@ -6,6 +6,7 @@ using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 
 namespace EFCoreTesting.Controllers.After2510
 {
@@ -63,17 +64,17 @@ namespace EFCoreTesting.Controllers.After2510
             return View("Index", res);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> UpdateUser(long idUser, User user)
         {
             var usssr = await modelRepo2.GetUser(idUser);
 
-            if (await TryUpdateModelAsync(usssr, "", m => m.FirstName, m => m.LastName))
+            if (await TryUpdateModelAsync(usssr, "", m => m.FirstName, m => m.LastName, m => m.Age))
             {
                 await modelRepo2.UpdateUser(usssr);
             }
 
-            return View("Index", usssr);
+            return RedirectToAction(nameof(GetUserAtData), new RouteValueDictionary(usssr));
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
