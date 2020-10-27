@@ -1,0 +1,26 @@
+﻿@model List<User>
+
+<form asp-controller="Work2710Search" asp-action="Index" method="get">
+    <div>
+        <label for="searchUser">
+            <input type="text" name="searchUser" />
+        </label>
+    </div>
+    <div>
+        <label for="country">
+            <select name="country" asp-items="@ViewBag.Country">
+                <option value="">All</option>
+                </select>
+</label>
+    </div>
+    <input type="submit" value="Фильтровать" />
+</form>
+
+<br /> 
+
+<ul>
+    @foreach (var user in Model)
+    {
+        <li>@user.LastName -- @user.Address.Country</li>
+    }
+</ul>
