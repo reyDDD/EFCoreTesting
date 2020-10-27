@@ -17,6 +17,12 @@ namespace EFCoreTesting.Controllers.After2510
         {
             this.modelRepo2 = modelRepo2;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.modelRepo2.Dispose();
+            base.Dispose(disposing);    
+        }
         public async Task<IActionResult> Index(int id)
         {
             var res = await modelRepo2.GetUser(id);
@@ -57,6 +63,18 @@ namespace EFCoreTesting.Controllers.After2510
             return View("Index", res);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(long idUser, User user)
+        {
+            var usssr = await modelRepo2.GetUser(idUser);
+
+            if (await TryUpdateModelAsync(usssr, "", m => m.FirstName, m => m.LastName))
+            {
+                await modelRepo2.UpdateUser(usssr);
+            }
+
+            return View("Index", usssr);
+        }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
@@ -65,5 +83,7 @@ namespace EFCoreTesting.Controllers.After2510
                 ViewData = new ViewDataDictionary<User>(ViewData, await modelRepo2.GetUser(22))
             };
         }
+
+   
     }
 }

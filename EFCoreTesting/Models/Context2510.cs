@@ -18,7 +18,7 @@ namespace EFCoreTesting.Models
     }
 
 
-    public class Context2510 : DbContext, IContext2510
+    public class Context2510 : DbContext //нельзя наследоваться от интерфейса, ибо станут недоступными методы для работы с базой данных
     {
         public Context2510(DbContextOptions<Context2510> options) : base(options)
         {

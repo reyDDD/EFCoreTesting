@@ -101,7 +101,7 @@ namespace EFCoreTesting
             services.AddSingleton<Work2210Notifier>();
             services.AddScoped<IWork2510Model, Work2510Model>();
             services.AddScoped<IWork2510ModelRepo2, Work2510ModelRepo2>();
-            services.AddScoped<IContext2510, Context2510>();
+            services.AddScoped<Context2510>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
