@@ -1,0 +1,39 @@
+﻿@model IList<Model2810>
+
+
+
+
+@if (Model != null)
+{
+    <form asp-action="Index" asp-controller="Work2810" method="get">
+        <input type="number" asp-for="@Model[0].Id" />
+        <input type="text" asp-for="@Model[0].Name" />
+        <input type="text" onblur="rename()" id="PriceBlack" asp-for="@Model[0].PriceBlack" />
+        <input type="submit" value="Отправить" />
+    </form>
+
+    @foreach (var item in Model)
+    {
+        <p>@item.Id -- @item.Name -- @item.Price </p>
+    }
+}
+else
+{
+    <form asp-action="Index" asp-controller="Work2810" method="get">
+        <input type="number" name="Id" />
+        <input type="text" name="Name" />
+        <input type="text" onblur="rename()" id="PriceBlack" name="PriceBlack" />
+        <input type="submit" value="Отправить" />
+    </form>
+}
+
+
+
+<script>
+    var rename = function () {
+        var price = document.getElementById("PriceBlack").value;
+
+        var znach = price.replace(".", ",");
+        document.getElementById("PriceBlack").value = znach;
+    }
+</script>
