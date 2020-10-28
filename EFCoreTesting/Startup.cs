@@ -102,6 +102,7 @@ namespace EFCoreTesting
             services.AddScoped<IWork2510Model, Work2510Model>();
             services.AddScoped<IWork2510ModelRepo2, Work2510ModelRepo2>();
             services.AddScoped<Context2510>();
+            services.AddScoped<Work2510ModelRepo2>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
