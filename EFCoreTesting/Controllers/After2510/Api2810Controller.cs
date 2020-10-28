@@ -67,5 +67,48 @@ namespace EFCoreTesting.Controllers.After2510
             }
             return new NoContentResult();
         }
+
+        [HttpPut("one/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<User>> UpdateUserAsync1(long id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+            var res = await repo.UpdateUser1Async(id, user);
+            if (!res)
+            {
+                return NotFound();
+            }
+            return new NoContentResult();
+        }
+
+        //[HttpPut("two/{id}")]
+        //[ProducesResponseType(StatusCodes.Status204NoContent)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesDefaultResponseType]
+        //public async Task<ActionResult<User>> UpdateUserAsync2(long id, User user)
+        //{
+            
+        //    if (id != user.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var forUpdate = await repo.GetUser(id);
+
+        //    await TryUpdateModelAsync(forUpdate, "", m => m.FirstName, m => m.LastName, m => m.Age);
+        //    var res = await repo.UpdateUser1Async(id, forUpdate);
+        //    if (!res)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return new NoContentResult();
+        //}
     }
 }
