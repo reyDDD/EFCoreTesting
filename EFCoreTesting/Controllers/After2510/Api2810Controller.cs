@@ -48,5 +48,24 @@ namespace EFCoreTesting.Controllers.After2510
             await repo.AddUserAsync(user);
             return CreatedAtAction("ReturnErrorData", user.Id, user);
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<User>> DeleteUserAsync(long id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+            var user = await repo.DeleteUserAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return new NoContentResult();
+        }
     }
 }

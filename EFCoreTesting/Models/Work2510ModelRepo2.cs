@@ -17,6 +17,7 @@ namespace EFCoreTesting.Models
         Task<User> GetUserAtData(User user);
         Task UpdateUser(User user);
         Task AddUserAsync(User user);
+        Task<User> DeleteUserAsync(long id);
     }
 
     public class Work2510ModelRepo2 :  IWork2510ModelRepo2
@@ -56,5 +57,14 @@ namespace EFCoreTesting.Models
             var res = await context2510.Users.AddAsync(user);
             await context2510.SaveChangesAsync();
         }
+
+        public async Task<User> DeleteUserAsync(long id)
+        {
+            var user = await context2510.Users.FindAsync(id);
+            context2510.Users.Remove(user);
+            await context2510.SaveChangesAsync();
+            return user;
+        }
+
     }
 }
