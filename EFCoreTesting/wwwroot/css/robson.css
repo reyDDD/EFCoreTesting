@@ -1,0 +1,15 @@
+﻿.myy {
+    line-height: 1.9em;
+    color: #444444;
+    font-style: italic;
+    font-family: Georgia, Georgia, 'Times New Roman', Times, serif;
+    border-color: black;
+    border-width: 1px;
+    border-style: dotted;
+    background-color: #a7cece;
+    padding: 25px;
+    margin: 30px;
+    background-image: url(/img/kitten-small.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,41 @@
+﻿@page "/page2810/{Paramas}"
+<h3>Page2810</h3>
+
+<NavLink href="page2810/tutu.html" Match="NavLinkMatch.All">
+    Ссылка один NavLinkMatch.All
+</NavLink>
+<br />
+<NavLink href="page2810/tuda" Match="NavLinkMatch.Prefix">
+    Ссылка два NavLinkMatch.Prefix
+</NavLink>
+
+<br />
+
+ 
+    <input type="text" @bind="Name" />
+    <button @onclick="AddToList">Добавить в список </button> 
+ 
+
+<br />
+<ul>
+    @foreach (var item in list)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+@code {
+
+    [Parameter]
+    public string Paramas { get; set; }
+
+    public string Name { get; set; }
+
+    private IList<string> list = new List<string>();
+
+    private void AddToList()
+    {
+        list.Add(Name);
+        Name = String.Empty;
+    }
+}

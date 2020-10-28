@@ -149,7 +149,7 @@ namespace EFCoreTesting
                 // endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
                 endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
-
+                endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
             });
         }
     }
