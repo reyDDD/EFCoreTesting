@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+   
+</head>
+<body>
+
+    <h1>получение пользователя из базы данных</h1>
+    <form action="javascript:void(0);" method="get">
+        <input type="number" id="getUserForId" />
+        <br />
+        <button type="submit" onclick="getUser()">Получить пользователя по id</button>
+    </form>
+    <div id="insertUserForGetId"></div>
+    <br />
+
+    <h1>Добавление нового пользователя в базу</h1>
+    <form>
+        <input type="text" id="adUserForId-FirstName" />
+        <input type="text" id="adUserForId-LastName" />
+        <input type="number" id="adUserForId-Age" />
+        <input type="number" id="adUserForId-NumAddress" />
+        <button type="submit" onclick="addUser()">Добавить пользователя в базу</button>
+    </form>
+    <div id="SuccessAddUser"></div>
+    <br />
+
+    <h1>Обновить пользователя в базе</h1>
+    <form>
+        <input type="text" id="updateUserForId-Id" />
+        <input type="text" id="updateUserForId-FirstName" />
+        <input type="text" id="updateUserForId-LastName" />
+        <input type="number" id="updateUserForId-Age" />
+        <input type="number" id="updateUserForId-NumAddress" />
+        <button onclick="updateUser()">Обновить пользователя в базе</button>
+    </form>
+    <div id="SuccessUpdateUser"></div>
+    <br />
+
+
+
+    <h1>Удаление пользователя из базы</h1>
+    <input type="number" id="getUserForId" />
+    <br />
+    <button onclick="deleteUser()">Удалить пользователя по id</button>
+    <div id="deletetUserForId"></div>
+    <br />
+    <script src="/js/crudApi2910.js"></script>
+</body>
+</html>

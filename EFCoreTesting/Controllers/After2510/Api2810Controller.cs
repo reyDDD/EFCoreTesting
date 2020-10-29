@@ -39,6 +39,13 @@ namespace EFCoreTesting.Controllers.After2510
             return "tut " + znach;
         }
 
+        [HttpGet("getuser/{id}")]
+        public async Task<ActionResult<User>> AddUserAsync(long id)
+        {
+            var user = await repo.GetUser(id);
+            return user; ;
+        }
+
 
 
         /// <summary>
