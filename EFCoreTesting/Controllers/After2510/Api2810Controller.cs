@@ -87,6 +87,63 @@ namespace EFCoreTesting.Controllers.After2510
             return new NoContentResult();
         }
 
+        [HttpGet("origin/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<OriginalUser>> GetOriginaluser(long id)
+        {
+            var user = await repo.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return new OriginalUser { Id = user.Id, LastName = user.LastName, FirstName = user.FirstName, Address = user.AddressId };
+        }
+
+
+        [HttpPost("origin")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult<OriginalUser>> AddOriginalUser(OriginalUser originalUser)
+        {
+            User user = new User { FirstName = originalUser.FirstName, LastName = originalUser.LastName, AddressId = originalUser.Address };
+                
+                await repo.AddUserAsync(user);
+
+            return CreatedAtAction(nameof(GetOriginaluser), new { id = user.Id }, user);
+        }
+
+        [HttpPut("origin/{id}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<OriginalUser>> UpdateOriginalUser(long id, OriginalUser originalUser)
+        {
+            if (id != originalUser.Id)
+            {
+                return BadRequest();
+            }
+            User user = new User { FirstName = originalUser.FirstName, LastName = originalUser.LastName, AddressId = originalUser.Address };
+
+            var res = await repo.UpdateUser1Async(id, user);
+            if (!res)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        public class OriginalUser
+        {
+            public long Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int Address { get; set; }
+        }
+
         //[HttpPut("two/{id}")]
         //[ProducesResponseType(StatusCodes.Status204NoContent)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -110,5 +167,7 @@ namespace EFCoreTesting.Controllers.After2510
         //    }
         //    return new NoContentResult();
         //}
+
+
     }
 }

@@ -75,7 +75,12 @@ namespace EFCoreTesting.Models
             {
                 return false;
             }
-            context2510.Entry(user).State = EntityState.Modified;
+            userec.FirstName = user.FirstName;
+            userec.LastName = user.LastName;
+            userec.AddressId = user.AddressId;
+
+
+            context2510.Entry(userec).State = EntityState.Modified;
             await context2510.SaveChangesAsync();
             return true;
         }
