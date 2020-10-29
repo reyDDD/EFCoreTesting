@@ -51,7 +51,7 @@ namespace EFCoreTesting
                 }
                 );
 
-                opt.OutputFormatters.RemoveType<StringOutputFormatter>(); //отключает переформатирование стринга по умолчанию в text/plain
+                //opt.OutputFormatters.RemoveType<StringOutputFormatter>(); //отключает форматирование стринга по умолчанию в text/plain
             });
             services.AddSwaggerGen(opt =>
             {

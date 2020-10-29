@@ -40,6 +40,31 @@ namespace EFCoreTesting.Controllers.After2510
         }
 
 
+
+        /// <summary>
+        /// Добавление нового пользователя в базу
+        /// </summary>
+        /// <param name="user"></param>
+        /// <remarks>
+        /// тАк может выглядеть тело запроса
+        /// {
+        ///"id": 0,
+        ///"firstName": "string",
+        ///"lastName": "string",
+        ///"age": 0,
+        ///"birthDay": "2020-10-29",
+        ///"isMale": true,
+        ///"addressId": 0,
+        ///"address": {
+        ///  "id": 0,
+        ///  "country": "string",
+        ///  "city": "string"
+        /// }
+        ///}
+        /// </remarks>
+        /// <returns>Итоги выполнения запроса</returns>
+        /// <response code="201">Запись была добавлена</response>
+        [Produces("application/json")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
@@ -108,8 +133,8 @@ namespace EFCoreTesting.Controllers.After2510
         public async Task<ActionResult<OriginalUser>> AddOriginalUser(OriginalUser originalUser)
         {
             User user = new User { FirstName = originalUser.FirstName, LastName = originalUser.LastName, AddressId = originalUser.Address };
-                
-                await repo.AddUserAsync(user);
+
+            await repo.AddUserAsync(user);
 
             return CreatedAtAction(nameof(GetOriginaluser), new { id = user.Id }, user);
         }
@@ -151,7 +176,7 @@ namespace EFCoreTesting.Controllers.After2510
         //[ProducesDefaultResponseType]
         //public async Task<ActionResult<User>> UpdateUserAsync2(long id, User user)
         //{
-            
+
         //    if (id != user.Id)
         //    {
         //        return BadRequest();
