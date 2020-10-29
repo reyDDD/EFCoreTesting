@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace EFCoreTesting
 {
@@ -49,6 +50,8 @@ namespace EFCoreTesting
                     NoStore = true
                 }
                 );
+
+                opt.OutputFormatters.RemoveType<StringOutputFormatter>(); //отключает переформатирование стринга по умолчанию в text/plain
             });
             services.AddSwaggerGen(opt =>
             {
