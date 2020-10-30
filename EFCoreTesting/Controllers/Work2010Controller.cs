@@ -14,7 +14,7 @@ namespace EFCoreTesting.Controllers
         }
 
         [HttpGet("[controller]/[action]/{name}")]
-        public IActionResult Index2(string name)
+        public IActionResult IndexPoydet(string name)
         {
             return View("Index");
         }

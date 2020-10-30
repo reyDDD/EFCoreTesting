@@ -19,6 +19,8 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using EFCoreTesting.Infrastructure;
 
 namespace EFCoreTesting
 {
@@ -77,6 +79,15 @@ namespace EFCoreTesting
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 opt.IncludeXmlComments(xmlPath);
             });
+
+
+            services.AddControllersWithViews(options =>
+            {
+                options.Conventions.Add(new RouteTokenTransformerConvention(new PreobrazovatelParametrov())); //выполняется преобразование названия имен в пути на основании соглашений
+            });
+
+
+
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
