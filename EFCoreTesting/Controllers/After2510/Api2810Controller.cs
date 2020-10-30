@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EFCoreTesting.Controllers.After2510
 {
     [Route("api/[controller]")]
+    //[Route("api/[controller]/[action]", Name = "[controller]_[action]")]
     [ApiController]
     public class Api2810Controller : ControllerBase
     {

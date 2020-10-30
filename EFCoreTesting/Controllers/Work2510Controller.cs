@@ -16,6 +16,7 @@ namespace EFCoreTesting.Controllers
             this.repo = repo;
         }
 
+  
         public async Task<IActionResult> Index(long id)
         {
             User user = await repo.GetUser(id);
