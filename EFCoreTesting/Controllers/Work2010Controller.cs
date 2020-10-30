@@ -12,5 +12,12 @@ namespace EFCoreTesting.Controllers
         {
             return View();
         }
+
+        [HttpGet("[controller]/[action]/{name}")]
+        public IActionResult Index2(string name)
+        {
+            return View("Index");
+        }
+
     }
 }
