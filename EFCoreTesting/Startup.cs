@@ -81,10 +81,10 @@ namespace EFCoreTesting
             });
 
 
-            services.AddControllersWithViews(options =>
-            {
-                options.Conventions.Add(new RouteTokenTransformerConvention(new PreobrazovatelParametrov())); //выполняется преобразование названия имен в пути на основании соглашений
-            });
+            //services.AddControllersWithViews(options =>
+            //{
+            //    options.Conventions.Add(new RouteTokenTransformerConvention(new PreobrazovatelParametrov())); //выполняется преобразование названия имен в пути на основании соглашений
+            //});
 
 
 

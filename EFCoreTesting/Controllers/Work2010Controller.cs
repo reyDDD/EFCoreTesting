@@ -13,6 +13,8 @@ namespace EFCoreTesting.Controllers
             return View();
         }
 
+        [Route("privet/{name}")]
+        [Route("[action]/{name}")]
         [HttpGet("[controller]/[action]/{name}")]
         public IActionResult IndexPoydet(string name)
         {
