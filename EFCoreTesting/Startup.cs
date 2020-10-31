@@ -152,6 +152,11 @@ namespace EFCoreTesting
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
+                endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
+                    defaults: new { Area = "Two" }, 
+                    constraints: new { Area = "Two" });
+
                 //endpoints.MapControllers();
                 endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
                 endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
