@@ -21,6 +21,7 @@ using System.IO;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using EFCoreTesting.Infrastructure;
+using EFCoreTesting.Areas.Two.Controllers;
 
 namespace EFCoreTesting
 {
@@ -42,6 +43,7 @@ namespace EFCoreTesting
             services.AddDbContext<Context2510>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection2")));
             services.AddScoped<WorkOne2Many>();
 
+            services.Configure<Uzver>(Configuration.GetSection("TestSection2")); //считал параметры из конфигурационного файла
 
             services.AddMvc(opt =>
             {
