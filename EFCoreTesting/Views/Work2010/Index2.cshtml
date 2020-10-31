@@ -1,3 +1,9 @@
 ﻿@model string
 
 <p>@Model</p>
+
+<br />
+
+<a href="@Url.Action("yessa", "otkudaOnVsyalsya", new { name = "tttt" })">Ссылка, с помощью  Url.Action()</a>
+
+<a href="@Url.RouteUrl("neraka", new { name = "tttt" })">Ссылка, с помощью  Url.RouteUrl()</a>
