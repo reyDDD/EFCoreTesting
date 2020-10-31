@@ -46,6 +46,8 @@ namespace EFCoreTesting
             //services.Configure<Uzver>(Configuration.GetSection("TestSection2")); //считал параметры из конфигурационного файла
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
+            services.Configure<ForTestCongigOptions>(Configuration);
+
             services.AddMvc(opt =>
             {
                 opt.CacheProfiles.Add("Caching2", new CacheProfile() { Duration = 30 });
