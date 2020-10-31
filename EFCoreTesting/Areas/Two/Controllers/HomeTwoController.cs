@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace EFCoreTesting.Areas.Two.Controllers
     public class Uzver
     {
         public readonly string nameConf = "Юзверь";
+        [MinLength(15)]
+        [StringLength(16)]
         public string User { get; set; }
         public string Age { get; set; }
     }
