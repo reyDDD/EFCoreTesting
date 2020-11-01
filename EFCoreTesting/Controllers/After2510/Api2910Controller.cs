@@ -48,5 +48,11 @@ namespace EFCoreTesting.Controllers.After2510
         {
             return new JsonResult(new User { Id = 5, FirstName = "Petrov", LastName = "Ivan" });
         }
+
+        [HttpGet("from")]
+        public IActionResult ReturnfrBody( int text)
+        {
+            return Ok(text + " from body");
+        }
     }
 }
