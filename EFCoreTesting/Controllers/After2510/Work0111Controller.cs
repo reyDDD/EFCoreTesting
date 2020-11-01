@@ -23,21 +23,31 @@ namespace EFCoreTesting.Controllers.After2510
                 vozvrat = DateTime.Now.TimeOfDay.ToString();
 
                 var cacheoption = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromSeconds(10))
-                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(40))
-                    ;
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(5))
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(20))
+                    .SetPriority(CacheItemPriority.High)
+                    .RegisterPostEvictionCallback(callback: EvictionCallBack, state: this);
 
                 cache.Set("myFirst", $"замостил {DateTime.Now.TimeOfDay}", cacheoption);
-            }
 
-            return View("Index", vozvrat);
+            }
+            string forExample = string.Empty;
+            cache.TryGetValue<string>("del", out forExample);
+            return View("Index", (vozvrat, forExample));
+        }
+
+        public static void EvictionCallBack(object key, object value, EvictionReason reason, object state)
+        {
+            var message = $"Сущность удалена из кеша. Причина: {reason}";
+            ((Work0111Controller)state).cache.Set("del", message);
         }
 
         public async Task<IActionResult> Index2()
         {
             string vozvrat = await cache.GetOrCreateAsync("mySecond", entry =>
             {
-                entry.SlidingExpiration = TimeSpan.FromSeconds(20);
+                entry.SlidingExpiration = TimeSpan.FromSeconds(5);
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(20);
                 return Task.FromResult("tutu" + DateTime.Now.TimeOfDay);
             });
             return View("Index", vozvrat);

@@ -1,3 +1,4 @@
-﻿@model string
+﻿@model (string, string)
 
-<p>Содержимое модели: @Model</p>
+<p>Содержимое модели: @Model.Item1</p>
+<p>причина удаления записи из кеша: @Model.Item2</p>
