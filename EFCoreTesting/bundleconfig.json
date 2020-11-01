@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/css/siteRobson.css",
+    "inputFiles": [
+      "wwwroot/css/site.css",
+      "wwwroot/css/robson.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/myScripts.js",
+    "inputFiles": [ "wwwroot/js/*.js" ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
