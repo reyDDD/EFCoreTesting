@@ -3,17 +3,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <environment include="Denelopment">
-        <link rel="stylesheet" href="~/css/siteRobson.css" />
-        <script src="~/js/myScripts.js"></script>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/siteRobson.css" asp-append-version="true" />
+        <script src="~/js/myScripts.js" asp-append-version="true"></script>
     </environment>
-    <environment exclude="Denelopment">
+    <environment exclude="Development">
         <link rel="stylesheet" href="~/css/siteRobson.min.css" />
         <script src="~/js/myScripts.min.js"></script>
     </environment>
 
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"
+          asp-fallback-href="/css/bootstrap/bootstrap.min.css"
+          asp-fallback-test-class="list-unstyled"
+          asp-fallback-test-property="padding-left"
+          asp-fallback-test-value="0"
+          asp-append-version="true"/>
+
+
     <title>@ViewBag.Title</title>
     <base href="~/" />
 </head>
