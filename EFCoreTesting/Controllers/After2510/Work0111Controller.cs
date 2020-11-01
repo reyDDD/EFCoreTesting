@@ -32,5 +32,15 @@ namespace EFCoreTesting.Controllers.After2510
 
             return View("Index", vozvrat);
         }
+
+        public async Task<IActionResult> Index2()
+        {
+            string vozvrat = await cache.GetOrCreateAsync("mySecond", entry =>
+            {
+                entry.SlidingExpiration = TimeSpan.FromSeconds(20);
+                return Task.FromResult("tutu" + DateTime.Now.TimeOfDay);
+            });
+            return View("Index", vozvrat);
+        }
     }
 }
