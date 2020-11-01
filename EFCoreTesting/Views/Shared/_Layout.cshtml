@@ -3,6 +3,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <environment include="Denelopment">
+        <link rel="stylesheet" href="~/css/siteRobson.css" />
+        <script src="~/js/myScripts.js"></script>
+    </environment>
+    <environment exclude="Denelopment">
+        <link rel="stylesheet" href="~/css/siteRobson.min.css" />
+        <script src="~/js/myScripts.min.js"></script>
+    </environment>
+
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
     <title>@ViewBag.Title</title>
