@@ -98,6 +98,7 @@ namespace EFCoreTesting.Controllers.After2510
                 entry.Value = token;
             }
             //ниже настраиваю токен изменений на содержимое токена, который содержится в другой записи из кеша
+            //ниже пример также показывает, как задать и токен отмены, и установить значение Size
             var opt = new MemoryCacheEntryOptions() { Size = 1 };
             opt.AddExpirationToken(new CancellationChangeToken(Cache.Get<CancellationTokenSource>("key5").Token));
             Cache.Set("key6", "znach6", opt);

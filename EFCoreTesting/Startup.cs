@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using EFCoreTesting.Infrastructure;
 using EFCoreTesting.Areas.Two.Controllers;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.SqlServer;
 
 namespace EFCoreTesting
 {
@@ -85,6 +87,14 @@ namespace EFCoreTesting
                 opt.IncludeXmlComments(xmlPath);
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;";
+                options.SchemaName = "dbo";
+                options.TableName = "TestCache";
+            });
+
 
             //services.AddControllersWithViews(options =>
             //{
@@ -124,6 +134,8 @@ namespace EFCoreTesting
             services.AddScoped<Work2510ModelRepo2>();
             services.AddSingleton<IService3110, Service3110>();
             services.AddSingleton<Cache0211>();
+            //services.AddSingleton<IDistributedCache, MemoryDistributedCache>();
+            services.AddSingleton<IDistributedCache, SqlServerCache>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -163,6 +175,7 @@ namespace EFCoreTesting
                 endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
                     defaults: new { Area = "Two" }, 
                     constraints: new { Area = "Two" });
+                endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
 
                 //endpoints.MapControllers();
                 endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
