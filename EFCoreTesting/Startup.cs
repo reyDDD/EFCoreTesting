@@ -123,6 +123,7 @@ namespace EFCoreTesting
             services.AddScoped<Context2510>();
             services.AddScoped<Work2510ModelRepo2>();
             services.AddSingleton<IService3110, Service3110>();
+            services.AddSingleton<Cache0211>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

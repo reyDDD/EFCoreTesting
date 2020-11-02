@@ -8,7 +8,7 @@ namespace EFCoreTesting.Controllers.After2510
 {
     [ApiController]
     [Route("api/[Controller]")]
-    public class Work0211 : ControllerBase
+    public class Api0211Controller : ControllerBase
     {
         public IActionResult ReturnString(string first)
         {
