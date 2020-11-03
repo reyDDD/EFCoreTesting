@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreTesting.Areas.DistributeCache.Controllers
 {
+    [Area("Distribute")]
     public class HomeController : Controller
     {
         public IActionResult Index()
