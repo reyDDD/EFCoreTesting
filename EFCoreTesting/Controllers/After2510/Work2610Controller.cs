@@ -8,7 +8,7 @@ using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCoreTesting.Controllers.After2510
-{
+{ 
     [ResponseCache(Duration = 30, VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any)]
     public class Work2610Controller : Controller
     {
