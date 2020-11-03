@@ -24,6 +24,8 @@ using EFCoreTesting.Infrastructure;
 using EFCoreTesting.Areas.Two.Controllers;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.SqlServer;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 namespace EFCoreTesting
 {
@@ -95,6 +97,19 @@ namespace EFCoreTesting
                 options.TableName = "TestCache";
             });
 
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
 
             //services.AddControllersWithViews(options =>
             //{
@@ -140,8 +155,10 @@ namespace EFCoreTesting
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseResponseCompression();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
+
 
 
             //настройка русской локализации
@@ -173,7 +190,7 @@ namespace EFCoreTesting
             {
                 endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
                 endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
-                    defaults: new { Area = "Two" }, 
+                    defaults: new { Area = "Two" },
                     constraints: new { Area = "Two" });
                 endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
 

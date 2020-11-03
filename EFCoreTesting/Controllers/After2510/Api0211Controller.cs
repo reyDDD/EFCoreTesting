@@ -10,6 +10,7 @@ namespace EFCoreTesting.Controllers.After2510
     [Route("api/[Controller]")]
     public class Api0211Controller : ControllerBase
     {
+        [HttpGet]
         public IActionResult ReturnString(string first)
         {
             return Ok(first + " success");

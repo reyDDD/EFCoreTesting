@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Controllers.After2510
 {
-    public class Work0211Controller : Controller
+    public class Work0211Controller : Controller, IDisposable
     {
         public MemoryCache Cache { get; set; }
         private ILogger<Work0211Controller> logger;
@@ -19,6 +19,12 @@ namespace EFCoreTesting.Controllers.After2510
         {
             Cache = cache.Cache;
             this.logger = logger;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Cache.Dispose();
+            base.Dispose(disposing);
         }
 
         [TempData]
