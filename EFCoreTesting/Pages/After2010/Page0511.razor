@@ -1,0 +1,20 @@
+﻿@page "/page0511"
+@inject NavigationManager NavManager 
+<h3>Page0511</h3>
+
+<button @onclick="Next">клик</button>
+<ul>
+    <li>Uri: @NavManager.Uri</li>
+    <li>BaseUri: @NavManager.BaseUri</li>
+    <li>ToAbsoluteUri(): @NavManager.ToAbsoluteUri("ljkl")</li>
+    <li>ToBaseRelativePath(): @NavManager.ToBaseRelativePath(@NavManager.ToAbsoluteUri(@NavManager.Uri).ToString())</li>
+</ul>
+
+@code {
+
+    public void Next()
+    {
+        NavManager.NavigateTo("/work0311/index");
+    }
+
+}
