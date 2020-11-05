@@ -1,13 +1,18 @@
 ﻿@page "/page0511"
-@inject NavigationManager NavManager 
-<h3>Page0511</h3>
+@inject NavigationManager NavManager
+@using Microsoft.AspNetCore.WebUtilities
 
+<h3>Page0511</h3>
+<br/>
 <button @onclick="Next">клик</button>
+<br />
 <ul>
     <li>Uri: @NavManager.Uri</li>
     <li>BaseUri: @NavManager.BaseUri</li>
     <li>ToAbsoluteUri(): @NavManager.ToAbsoluteUri("ljkl")</li>
     <li>ToBaseRelativePath(): @NavManager.ToBaseRelativePath(@NavManager.ToAbsoluteUri(@NavManager.Uri).ToString())</li>
+    <li>queryvalue: @queryvalue</li>
+
 </ul>
 
 @code {
@@ -17,4 +22,13 @@
         NavManager.NavigateTo("/work0311/index");
     }
 
+    private string queryvalue;
+    protected override void OnInitialized()
+    {
+        var query = new Uri(NavManager.Uri).Query;
+        if (QueryHelpers.ParseQuery(query).TryGetValue("key", out var valu))
+        {
+            queryvalue = valu;
+        }
+    }
 }
