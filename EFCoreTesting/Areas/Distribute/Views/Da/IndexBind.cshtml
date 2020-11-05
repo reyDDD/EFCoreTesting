@@ -1,0 +1,10 @@
+﻿@model User
+
+<form asp-action="IndexBind" method="get">
+    <input asp-for="FirstName" />
+    <input asp-for="LastName" />
+    <input asp-for="Age" type="number"/>
+    <input asp-for="BirthDay" type="date"/>
+    <input asp-for="IsMale" value="true" type="checkbox" />
+    <input type="submit" value="send" />
+</form>
