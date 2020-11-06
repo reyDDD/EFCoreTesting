@@ -1,0 +1,19 @@
+﻿@model IEnumerable<User>
+
+<form asp-action="GetUserWithFilter" asp-controller="Da" asp-area="Distribute">
+    <select name="country" asp-items="@ViewBag.Country">
+        <option value="">All Country</option>
+    </select>
+    <select name="city" asp-items="@ViewBag.City">
+        <option value="">All city</option>
+    </select>
+    <button type="submit">Отправить</button>
+</form>
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.FirstName -- @item.LastName -- @item.Address.Country -- @item.Address.City</li>
+    }
+</ul>

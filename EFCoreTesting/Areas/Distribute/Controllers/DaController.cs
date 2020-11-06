@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -87,6 +88,25 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                 context.SaveChanges();
             }
             return RedirectToAction("Blyat", new { id = userFromBase.Id });
+        }
+
+        public async Task<IActionResult> GetUserWithFilter(string country, string city)
+        {
+            ViewBag.City = new SelectList(context.Addresses.Distinct().Select(i => i.City));
+            ViewBag.Country = new SelectList(context.Addresses.Distinct().Select(i => i.Country));
+
+            var listUser = context.Users.Include(i => i.Address).AsNoTracking();
+
+            if (!String.IsNullOrEmpty(country))
+            {
+                listUser = listUser.Where(i => i.Address.Country == country);
+            }
+
+            if (!String.IsNullOrEmpty(city))
+            {
+                listUser = listUser.Where(i => i.Address.City == city);
+            }
+            return View("ListUser", listUser.ToList());
         }
 
     }
