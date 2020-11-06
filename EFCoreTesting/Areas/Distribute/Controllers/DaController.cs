@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         {
             if (!context.Users.Any())
             {
-                return NotFound();
+                return new StatusCodeResult((int)HttpStatusCode.NotFound);
             }
             User user = context.Users.FirstOrDefault();
             return View("IndexBind", user);
