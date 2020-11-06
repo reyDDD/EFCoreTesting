@@ -31,7 +31,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult IndexBind([Bind("FirstName,LastName")]User user)
+        public IActionResult IndexBind([Bind("FirstName,LastName")] User user)
         {
             //if (!ModelState.IsValid)
             //{
@@ -83,7 +83,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.NotFound);
             }
 
-            if (await TryUpdateModelAsync<User>(userFromBase,"", i=>i.FirstName, i=>i.LastName))
+            if (await TryUpdateModelAsync<User>(userFromBase, "", i => i.FirstName, i => i.LastName))
             {
                 context.SaveChanges();
             }
@@ -107,6 +107,23 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                 listUser = listUser.Where(i => i.Address.City == city);
             }
             return View("ListUser", listUser.ToList());
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetGoods()
+        {
+            Good good = new Good { Name = "first Good", PriceSave = "17,4" };
+            return View("Good", good);
+        }
+
+        [HttpPost]
+        public IActionResult SetGoods(Good good)
+        {
+            IList<Good> goods = new List<Good>();
+            goods.Add(good);
+            return View("Good", good);
         }
 
     }

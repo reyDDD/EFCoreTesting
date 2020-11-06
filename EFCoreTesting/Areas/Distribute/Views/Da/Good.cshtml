@@ -1,0 +1,17 @@
+﻿@model Good
+
+<form asp-action="SetGoods" asp-controller="Da" asp-area="Distribute" method="post">
+    <input asp-for="Name" />
+    <input onblur="replacePrice()" id="priceSave" asp-for="PriceSave" />
+    <button type="submit">отправить</button>
+</form>
+
+<script>
+    
+    function replacePrice() {
+
+        let dannie = document.getElementById("priceSave").value;
+        document.getElementById("priceSave").value = dannie.replace(".", ",");
+    }
+
+</script>
