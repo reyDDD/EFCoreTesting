@@ -50,7 +50,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         }
 
         [ActionName("Blyat")]
-        public IActionResult NewAction()
+        public IActionResult NewAction(long id)
         {
             return View("IndexBind");
         }
@@ -86,7 +86,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             {
                 context.SaveChanges();
             }
-            return RedirectToAction("Blyat");
+            return RedirectToAction("Blyat", new { id = userFromBase.Id });
         }
 
     }
