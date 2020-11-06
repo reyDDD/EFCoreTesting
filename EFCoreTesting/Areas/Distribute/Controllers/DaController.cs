@@ -28,7 +28,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View("Index", new TwoData { Data1 = DateTime.Now, Data2 = DateTime.Now });
         }
 
-
+        [ValidateAntiForgeryToken]
         public IActionResult IndexBind([Bind("FirstName,LastName")]User user)
         {
             //if (!ModelState.IsValid)
