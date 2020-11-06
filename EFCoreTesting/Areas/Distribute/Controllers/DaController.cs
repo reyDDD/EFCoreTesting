@@ -48,5 +48,17 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             User user = context.Users.FirstOrDefault();
             return View("IndexBind", user);
         }
+
+        [ActionName("Blyat")]
+        public IActionResult NewAction()
+        {
+            return View("IndexBind");
+        }
+
+        public IActionResult RedirectToBlyat()
+        {
+            return RedirectToAction("Blyat");
+        }
+
     }
 }
