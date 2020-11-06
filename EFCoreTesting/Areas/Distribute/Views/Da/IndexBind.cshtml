@@ -12,3 +12,16 @@
 <div>
     <put yestTakoy />
 </div>
+
+<p>Обновляю данные</p>
+
+<form asp-action="UpdateUser" asp-controller="Da" method="post">
+    <input asp-for="Id" />
+    <input asp-for="FirstName" />
+    <input asp-for="LastName" />
+    <input asp-for="Age" type="number" />
+    <input asp-for="BirthDay" type="date" />
+    <input asp-for="IsMale" value="true" type="checkbox" />
+    <input asp-for="AddressId" />
+    <input type="submit" value="send" />
+</form>

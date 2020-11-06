@@ -60,5 +60,34 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return RedirectToAction("Blyat");
         }
 
+
+        [HttpGet]
+        public IActionResult GetUser(long id)
+        {
+            User user = context.Users.Find(id);
+            return View("IndexBind", user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(long id, User user)
+        {
+            if (id != user.Id)
+            {
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+            }
+
+            var userFromBase = context.Users.Where(i => i.Id == id).FirstOrDefault();
+            if (userFromBase == null)
+            {
+                return new StatusCodeResult((int)HttpStatusCode.NotFound);
+            }
+
+            if (await TryUpdateModelAsync<User>(userFromBase,"", i=>i.FirstName, i=>i.LastName))
+            {
+                context.SaveChanges();
+            }
+            return RedirectToAction("Blyat");
+        }
+
     }
 }
