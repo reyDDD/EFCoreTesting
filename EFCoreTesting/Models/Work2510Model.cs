@@ -10,6 +10,7 @@ namespace EFCoreTesting.Models
     {
         Task<User> GetUser(long id);
         Task UpdateUserAndAddress(User user);
+        Task AddUserAndAddressForTestTransaction(User user);
     }
 
     public class Work2510Model : IWork2510Model
@@ -43,7 +44,19 @@ namespace EFCoreTesting.Models
 
                     await transaction.CommitAsync();
                 }
-            }); 
+            });
         }
+
+        public async Task AddUserAndAddressForTestTransaction(User user)
+        {
+
+            Address addres = Connect.Addresses.Where(i=> i.Id == user.AddressId).FirstOrDefault();
+            user.Address = addres;
+
+            Connect.Users.Add(user);
+            await Connect.SaveChangesAsync();
+        }
+
+
     }
 }

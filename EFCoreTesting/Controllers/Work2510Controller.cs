@@ -29,5 +29,12 @@ namespace EFCoreTesting.Controllers
             await repo.UpdateUserAndAddress(user);
             return RedirectToAction("Index", new { id = user.Id });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUserWithAddress2(User user)
+        {
+            await repo.AddUserAndAddressForTestTransaction(user);
+            return RedirectToAction("Index", new { id = user.Id });
+        }
     }
 }
