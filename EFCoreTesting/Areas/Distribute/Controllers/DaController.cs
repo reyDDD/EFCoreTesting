@@ -40,6 +40,10 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
 
         public IActionResult ReturnUser()
         {
+            if (!context.Users.Any())
+            {
+                return NotFound();
+            }
             User user = context.Users.FirstOrDefault();
             return View("IndexBind", user);
         }
