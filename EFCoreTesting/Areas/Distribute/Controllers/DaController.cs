@@ -5,18 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCoreTesting.Areas.Distribute.Controllers
 {
     [Area("Distribute")]
     public class DaController : Controller
     {
-
+        private Context context;
         private IConfiguration config;
 
-        public DaController()
+        public DaController(IServiceProvider provider)
         {
+            context = new Context(provider.GetRequiredService<DbContextOptions<Context>>());
             config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build(); //IConfigurationRoot реализует интерфейс iConfiguration
         }
         public IActionResult Index()
@@ -33,6 +36,12 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             //    return BadRequest();
             //}
             return View("IndexBind");
+        }
+
+        public IActionResult ReturnUser()
+        {
+            User user = context.Users.FirstOrDefault();
+            return View("IndexBind", user);
         }
     }
 }
