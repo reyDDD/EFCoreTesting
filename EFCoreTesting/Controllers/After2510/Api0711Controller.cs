@@ -20,6 +20,35 @@ namespace EFCoreTesting.Controllers.After2510
             this.context = context;
         }
 
+
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public IActionResult UpdateAddress(long id, Address address)
+        {
+            if (id != address.Id)
+            {
+                return BadRequest();
+            }
+
+            var addr = context.Addresses.Find(address.Id);
+            if (addr == null)
+            {
+                return NotFound();
+            }
+
+            addr.City = address.City;
+            addr.Country = address.Country;
+            context.Entry(addr).State = EntityState.Modified;
+            context.SaveChanges();
+            return NoContent();
+        }
+
+
+
         [HttpGet(Name = "vanechka")]
         public ActionResult<Address> GetAddress(long id)
         {
