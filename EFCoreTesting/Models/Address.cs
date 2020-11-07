@@ -15,7 +15,7 @@ namespace EFCoreTesting.Models
         [Required]
         public string City { get; set; }
 
-        [JsonIgnore]
+       [JsonIgnore]
         public IEnumerable<User> Users { get; set; }
     }
 }
