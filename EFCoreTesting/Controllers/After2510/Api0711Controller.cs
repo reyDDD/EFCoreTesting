@@ -21,6 +21,29 @@ namespace EFCoreTesting.Controllers.After2510
         }
 
 
+        [HttpDelete(Name = "killUp")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public IActionResult RemoveAddress(long id)
+        {
+            var addr = context.Addresses.Find(id);
+            if (addr == null)
+            {
+                return NotFound();
+            }
+            context.Entry(addr).State = EntityState.Deleted;
+            context.SaveChanges();
+
+            var add = context.Addresses.Find(id);
+            if (add == null)
+            {
+                return NoContent();
+            }
+            return BadRequest();
+
+        }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
