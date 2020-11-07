@@ -45,6 +45,27 @@ namespace EFCoreTesting.Controllers.After2510
 
         }
 
+        public class ModelDTO
+        {
+            public string City { get; set; }
+        }
+
+        [HttpGet("dto/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public ActionResult<ModelDTO> ReturnDto(int id)
+        {
+            var addr = context.Addresses.Find(id);
+            if (addr == null)
+            {
+                return NotFound();
+            }
+            ModelDTO model = new ModelDTO { City = addr.City };
+            return model;
+        }
+
+
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
