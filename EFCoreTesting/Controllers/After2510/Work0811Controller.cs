@@ -9,8 +9,9 @@ namespace EFCoreTesting.Controllers.After2510
  
     public class Work0811Controller : Controller
     {
-        //[HttpGet("{name}")]
+        [HttpGet("bb")]
         [HttpGet("[controller]/[action]/{name}")]
+        //[HttpGet("{name}")]
         public IActionResult Index(int name)
         {
             return View("dd" as object);

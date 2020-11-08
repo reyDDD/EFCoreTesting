@@ -11,6 +11,8 @@ namespace EFCoreTesting.Controllers.After2510
     [ApiController]
     public class Api0811Controller : ControllerBase
     {
+
+
         /// <summary>
         /// Возвращает текст в формате json
         /// </summary>
