@@ -22,5 +22,15 @@ namespace EFCoreTesting.Areas.DistributeCache.Controllers
 
             return View();
         }
+
+        public IActionResult Index2()
+        {
+            decimal positive = Convert.ToDecimal(2) / Convert.ToDecimal(5);
+            decimal negative = 7.6565m;
+            string result = positive.ToString("F" + 5);
+            string result2 = negative.ToString("F" + 5);
+            return View();
+        }
+
     }
 }

@@ -2,15 +2,25 @@
 <html>
 <head>
     <meta charset="utf-8" />
-   
+    <script src="js/crud0711.js"></script>
     <title></title>
 </head>
 <body>
+    <p>for adding new address to base</p>
+    <div>
+        <input type="text" id="cityAddr" placeholder="city Address" />
+        <input type="text" id="countryAddr" placeholder="country Address" />
+        <button onclick="addAddress()">Add new address</button>
+    </div>
+    <br/>
+
+
+
     <input type="number" id="numberAddr" placeholder="id Address" />
     <button onclick="getAddressTo()">Get address</button>
 
     <div id="insertgettingAddress"></div>
 
-    <script src="js/crud0711.js"></script>
+
 </body>
 </html>
