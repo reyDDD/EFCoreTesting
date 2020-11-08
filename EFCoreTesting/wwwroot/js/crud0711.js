@@ -1,10 +1,11 @@
 ﻿window.onload = function () {
     id = document.getElementById("numberAddr");
+    ids = document.getElementById("numberAddr");
     kuda = document.getElementById("insertgettingAddress");
     cityAddr = document.getElementById("cityAddr");
     countryAddr = document.getElementById("countryAddr");
 }
-var id, kuda, cityAddr, countryAddr;
+var id, kuda, cityAddr, countryAddr, ids;
 
 
 
@@ -35,5 +36,26 @@ async function addAddress() {
 
     var dat = await reques.json();
     var response = await reques.status;
-    kuda.innerHTML = "<em>response status is: " + response + ' ' + dat.city  + "</em>";
+    kuda.innerHTML = "<em>response status is: " + response + ' ' + dat.city + "</em>";
+}
+
+async function updateAddress() {
+    let url = "https://localhost:44356/api/Api0711/UpdateAddress";
+    var body = {
+        id: parseInt(ids.value),
+        city: cityAddr.value,
+        country: countryAddr.value
+    };
+
+    var request = await fetch(`${url}/${id.value}`, {
+        method: "PUT",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+
+    var response = await request.status;
+    kuda.innerHTML = "<em>response status is: " + response + "</em>";
 }
