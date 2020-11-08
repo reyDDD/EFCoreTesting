@@ -116,7 +116,7 @@ namespace EFCoreTesting
             //    options.Conventions.Add(new RouteTokenTransformerConvention(new PreobrazovatelParametrov())); //выполняется преобразование названия имен в пути на основании соглашений
             //});
 
-
+            services.AddControllers().AddXmlSerializerFormatters(); //подключил xml форматировщик
 
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
