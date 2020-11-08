@@ -11,6 +11,10 @@ namespace EFCoreTesting.Controllers.After2510
     [ApiController]
     public class Api0811Controller : ControllerBase
     {
+        /// <summary>
+        /// Возвращает текст в формате json
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("produce")]
         [Produces("application/json")]
         public IActionResult ReturnProduce()
@@ -25,6 +29,15 @@ namespace EFCoreTesting.Controllers.After2510
             return Ok("text produce app/json");
         }
 
+        /// <summary>
+        /// Возвращает содержимое в определенном формате в зависимости от запроса
+        /// </summary>
+        /// <remarks>
+        /// описание а блоке remarks
+        /// </remarks>
+        /// <param name="id">int типа параметр</param>
+        /// <returns>Возвращает текст text produce !!!!</returns>
+        ///<response code="200">Всегда возвращает 200</response>  
         [FormatFilter]
         [HttpGet("{id}.{format?}")]
         public IActionResult ReturnProduce3(int id)

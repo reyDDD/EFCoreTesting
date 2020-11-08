@@ -156,10 +156,11 @@ namespace EFCoreTesting
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseResponseCompression();
+           
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
-
+            
+            app.UseResponseCompression();
 
 
             //настройка русской локализации

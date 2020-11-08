@@ -20,13 +20,14 @@ namespace EFCoreTesting.Controllers
     [YaPlakalKogdaSmotrel]
     public class Work2010Controller : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Route("privet/{name}")]
-        [Route("[action]/{name}")]
+        //[Route("privet/{name}")]
+        //[Route("[action]/{name}")]
         [HttpGet("[controller]/[action]/{name}", Name ="izbrannoe")]
         public IActionResult IndexPoydet(string name)
         {
