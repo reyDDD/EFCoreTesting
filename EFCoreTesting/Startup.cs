@@ -190,6 +190,7 @@ namespace EFCoreTesting
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("working", "w/{controller}/{action}/{id?}", defaults: new { area = "Work" }, constraints: new { area = "Work" });
                 endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
                 endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
                     defaults: new { Area = "Two" },
