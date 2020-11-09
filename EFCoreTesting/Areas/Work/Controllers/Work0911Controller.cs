@@ -11,7 +11,12 @@ using Microsoft.Extensions.Options;
 
 namespace EFCoreTesting.Areas.Work.Controllers
 {
-
+    public class Uzzer2
+    {
+        public string User { get; set; }
+        public string Age { get; set; }
+        public string Unique { get; set; }
+    }
     public class Uzzer
     {
         public string Name { get; set; } = "TestSection3";
@@ -72,6 +77,12 @@ namespace EFCoreTesting.Areas.Work.Controllers
         {
             Uzzer user = option.Get("Section2");
             return View("Index", user.User + " " + user.Age);
+        }
+
+        public async Task<ActionResult> Read([FromServices] IOptions<Uzzer2> option)
+        {
+            Uzzer2 user = option.Value;
+            return View("Index", user.User + " " + user.Age + " " + user.Unique);
         }
     }
 }

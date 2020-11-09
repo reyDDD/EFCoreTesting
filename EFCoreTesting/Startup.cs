@@ -52,6 +52,7 @@ namespace EFCoreTesting
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
             services.Configure<ForTestCongigOptions>(Configuration);
+            services.Configure<Uzzer2>(Configuration);
             services.Configure<Uzzer>("Section2", Configuration.GetSection("TestSection2"));
             services.Configure<Uzzer>("Section3", Configuration.GetSection("TestSection3"));
             //одна из техник проверки параметров в файле конфигурации - выполняется в момент получения данных из файла конфига
@@ -173,6 +174,7 @@ namespace EFCoreTesting
             //services.AddSingleton<IDistributedCache, MemoryDistributedCache>();
             services.AddSingleton<IDistributedCache, SqlServerCache>();
             services.AddSingleton<IService3110, Service3110>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

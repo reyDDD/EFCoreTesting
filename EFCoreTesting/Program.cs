@@ -21,6 +21,7 @@ namespace EFCoreTesting
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("myTestParam.json", optional: false, reloadOnChange: true);
+                    config.AddJsonFile("two.json", optional: false, reloadOnChange: true) ; //подключаю еще один файл конфигурации, содержимое которого станет доступным из IConfiguration
                 })
 
                 .ConfigureWebHostDefaults(webBuilder =>
