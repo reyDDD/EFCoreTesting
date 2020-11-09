@@ -47,6 +47,21 @@ namespace EFCoreTesting.Areas.Work.Controllers
             return View("Index", result.User + " " + result.Age);
         }
 
+
+        public async Task<ActionResult> GetDataFromConfigaration3([FromServices] IOptions<Uzzer> option)
+        {
+            try
+            {
+                var user = option.Value;
+                return View("Index", user.User + " " + user.Age);
+            }
+            catch (Exception ex )
+            {
+                return View("Index", ex.Message);
+            }
+        }
+
+
         public async Task<ActionResult> GetDataFromOptions([FromServices] IOptionsSnapshot<Uzzer> option)
         {
             Uzzer user = option.Value;

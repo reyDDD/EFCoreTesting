@@ -52,9 +52,26 @@ namespace EFCoreTesting
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
             services.Configure<ForTestCongigOptions>(Configuration);
-            services.Configure<Uzzer>(Configuration.GetSection("TestSection2"));
             services.Configure<Uzzer>("Section2", Configuration.GetSection("TestSection2"));
             services.Configure<Uzzer>("Section3", Configuration.GetSection("TestSection3"));
+            //одна из техник проверки параметров в файле конфигурации - выполняется в момент получения данных из файла конфига
+            services.AddOptions<Uzzer>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations().Validate(opt =>
+            {
+                if (opt.User == "Uzvar3")
+                {
+                    return false;
+                }
+                return true;
+            }, "Значение Uzvar3 не подходит в файле конфига, нужно заменить");
+            //вторая техника - пост-проверки именованных параметров ниже
+            services.PostConfigure<Uzzer>("Section2", opt =>
+            {
+                if (opt.User == "Uzvar2")
+                {
+                    opt.User = "NeSvarilsya";
+                }
+            });
+
 
             services.AddMvc(opt =>
             {
