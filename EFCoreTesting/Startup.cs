@@ -26,6 +26,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.SqlServer;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
+using EFCoreTesting.Areas.Work.Controllers;
 
 namespace EFCoreTesting
 {
@@ -51,6 +52,9 @@ namespace EFCoreTesting
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
             services.Configure<ForTestCongigOptions>(Configuration);
+            services.Configure<Uzzer>(Configuration.GetSection("TestSection2"));
+            services.Configure<Uzzer>("Section2", Configuration.GetSection("TestSection2"));
+            services.Configure<Uzzer>("Section3", Configuration.GetSection("TestSection3"));
 
             services.AddMvc(opt =>
             {

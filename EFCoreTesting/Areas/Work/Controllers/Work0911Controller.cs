@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using EFCoreTesting.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace EFCoreTesting.Areas.Work.Controllers
 {
@@ -43,6 +45,18 @@ namespace EFCoreTesting.Areas.Work.Controllers
             Uzzer user = new Uzzer();
             Uzzer result = configuration.GetSection(user.Name).Get<Uzzer>();
             return View("Index", result.User + " " + result.Age);
+        }
+
+        public async Task<ActionResult> GetDataFromOptions([FromServices] IOptionsSnapshot<Uzzer> option)
+        {
+            Uzzer user = option.Value;
+            return View("Index", user.User + " " + user.Age);
+        }
+
+        public async Task<ActionResult> GetDataFromOptions2([FromServices] IOptionsSnapshot<Uzzer> option)
+        {
+            Uzzer user = option.Get("Section2");
+            return View("Index", user.User + " " + user.Age);
         }
     }
 }
