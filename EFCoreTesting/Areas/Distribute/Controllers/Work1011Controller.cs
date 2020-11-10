@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using EFCoreTesting.Infrastructure;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
 
 namespace EFCoreTesting.Areas.Distribute.Controllers
 {
@@ -13,6 +15,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
     public class Work1011Controller : Controller
     {
         private Model1011 model1011;
+
         public Work1011Controller(Model1011 model1011)
         {
             this.model1011 = model1011;
@@ -26,7 +29,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View();
         }
 
-       
+
         public IActionResult IndexWithNewContext([FromServices] Context1011 context1011)
         {
             string city = context1011.Addresses.FirstOrDefault().City;
@@ -38,7 +41,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         //[ResponseCache(VaryByQueryKeys = new string[] { "param", "dd", "bb" }, Duration = 30)] //если один из ключей явяляется параметром метода и его значение меняется, тогда программа должна возвращать новый результат, иначе - кешированный. По факту не работает!!!
         public IActionResult TestVaryByQueryKeys(string param)
         {
-            string data = DateTime.Now.TimeOfDay.ToString(); 
+            string data = DateTime.Now.TimeOfDay.ToString();
             return View("Index", data);
         }
 
@@ -78,7 +81,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
 
         public IActionResult TestSizeLimitMemoryCache([FromServices] MyCache1011 memoryCache)
         {
- 
+
             DateTime dates = memoryCache.MemoryCache.GetOrCreate<DateTime>("key", entry =>
             {
                 entry.SetSize(1);
@@ -95,5 +98,29 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View("Index", dates.TimeOfDay.ToString());
         }
 
+        public IActionResult TestWithCtsMemoryCache([FromServices] MyCache1011 memoryCaches, bool val)
+        {
+            if (val == true)
+            {
+                var token = new CancellationTokenSource(10000);
+                var options = new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(token.Token));
+                //var options = new MemoryCacheEntryOptions().AddExpirationToken(new CancellationChangeToken(memoryCaches.token.Token));
+                options.Size = 1;
+
+                memoryCaches.MemoryCache.Set("key007", DateTime.Now.TimeOfDay.ToString(), options);
+
+         
+
+                return View("Index", "add data");
+            }
+            var result = memoryCaches.MemoryCache.Get("key007")?.ToString();
+            return View("Index", result??"токен отработал, кеш очищен(либо и не был заполнен по этому ключу)");
+        }
+
+        public IActionResult CancelToken([FromServices] MyCache1011 memoryCaches)
+        {
+            memoryCaches.token.Cancel();
+            return Ok("токен отменен");
+        }
     }
 }
