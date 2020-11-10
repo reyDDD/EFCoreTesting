@@ -58,10 +58,24 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             DateTime dates = memoryCache.GetOrCreate<DateTime>("key", entry =>
             {
                 entry.SetSlidingExpiration(TimeSpan.FromSeconds(10));
+                entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(15));
+                entry.SetPriority(CacheItemPriority.Normal);
+                entry.RegisterPostEvictionCallback(AfterDeleteFromCache, memoryCache);
                 return DateTime.Now;
             });
+            if (memoryCache.TryGetValue("keyDelete", out string text))
+            {
+                return View("Index", dates.TimeOfDay.ToString() + " " + text);
+            }
             return View("Index", dates.TimeOfDay.ToString());
         }
+
+        private void AfterDeleteFromCache(object key, object value, EvictionReason reason, object state)
+        {
+            ((IMemoryCache)state).Set("keyDelete", "удалил минимум раз");
+        }
+
+ 
 
     }
 }
