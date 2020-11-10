@@ -53,5 +53,15 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View("Index", dates.TimeOfDay.ToString());
         }
 
+        public IActionResult TestGetOrCreateIMemoryCache([FromServices] IMemoryCache memoryCache)
+        {
+            DateTime dates = memoryCache.GetOrCreate<DateTime>("key", entry =>
+            {
+                entry.SetSlidingExpiration(TimeSpan.FromSeconds(10));
+                return DateTime.Now;
+            });
+            return View("Index", dates.TimeOfDay.ToString());
+        }
+
     }
 }
