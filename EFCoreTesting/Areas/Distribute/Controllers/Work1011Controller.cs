@@ -23,5 +23,11 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             model1011.AddAddressWithUser(user);
             return View();
         }
+
+        public IActionResult IndexWithNewContext([FromServices] Context1011 context1011)
+        {
+            string city = context1011.Addresses.FirstOrDefault().City;
+            return View("Index", city);
+        }
     }
 }
