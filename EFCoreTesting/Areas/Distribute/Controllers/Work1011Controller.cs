@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFCoreTesting.Infrastructure;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -72,10 +73,27 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
 
         private void AfterDeleteFromCache(object key, object value, EvictionReason reason, object state)
         {
-            ((IMemoryCache)state).Set("keyDelete", "удалил минимум раз");
+            ((IMemoryCache)state).Set("keyDelete", "удалил минимум раз", new MemoryCacheEntryOptions { Size = 1 });
         }
 
+        public IActionResult TestSizeLimitMemoryCache([FromServices] MyCache1011 memoryCache)
+        {
  
+            DateTime dates = memoryCache.MemoryCache.GetOrCreate<DateTime>("key", entry =>
+            {
+                entry.SetSize(1);
+                entry.SetSlidingExpiration(TimeSpan.FromSeconds(10));
+                entry.SetAbsoluteExpiration(TimeSpan.FromSeconds(15));
+                entry.SetPriority(CacheItemPriority.Normal);
+                entry.RegisterPostEvictionCallback(AfterDeleteFromCache, memoryCache);
+                return DateTime.Now;
+            });
+            if (memoryCache.MemoryCache.TryGetValue("keyDelete", out string text))
+            {
+                return View("Index", dates.TimeOfDay.ToString() + " " + text);
+            }
+            return View("Index", dates.TimeOfDay.ToString());
+        }
 
     }
 }

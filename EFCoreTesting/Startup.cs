@@ -177,6 +177,7 @@ namespace EFCoreTesting
             services.AddSingleton<IDistributedCache, SqlServerCache>();
             services.AddSingleton<IService3110, Service3110>();
             services.AddScoped<Model1011>();
+            services.AddSingleton<MyCache1011>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
