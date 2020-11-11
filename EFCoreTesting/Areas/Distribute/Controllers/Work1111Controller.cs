@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace EFCoreTesting.Areas.Distribute.Controllers
 {
@@ -42,6 +44,24 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                 transaction.Commit();
             }
             return Ok(context.Users.Find(user.Id).FirstName);
+        }
+
+
+        public IActionResult WorkWithCashe([FromServices] IDistributedCache cache)
+        {
+            string dataFromCache = default;
+            var res = cache.Get("key1111");
+            if (res != null)
+            {
+                dataFromCache = Encoding.UTF8.GetString(res);
+            }
+            else
+            {
+                var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(10));
+                cache.Set("key1111", Encoding.UTF8.GetBytes(DateTime.Now.TimeOfDay.ToString()), option);
+                dataFromCache = Encoding.UTF8.GetString(cache.Get("key1111"));
+            }
+            return Ok(dataFromCache);
         }
 
         protected override void Dispose(bool disposing)
