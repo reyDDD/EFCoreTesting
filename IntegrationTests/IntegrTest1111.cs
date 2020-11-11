@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using HtmlAgilityPack;
+
 
 namespace IntegrationTests
 {
@@ -30,5 +32,33 @@ namespace IntegrationTests
             response.EnsureSuccessStatusCode();
             Assert.Equal("text/html", response.Content.Headers.ContentType.MediaType.ToString());
         }
+
+
+        [Theory]
+        [InlineData("https://localhost:44356/Cache/Work1111/Index")]
+        public async Task TestContent(string url)
+        {
+            //Arrange
+            HtmlDocument htmlDocument = new HtmlWeb().Load(url);
+            List<string> val = new List<string>();
+
+            //Action
+            var nodes = htmlDocument.DocumentNode.SelectNodes("//form");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.Attributes["action"]?.Value != null)
+                    {
+                        val.Add(node.Attributes["action"]?.Value);
+                    }
+                }
+            }
+ 
+
+            //Assert
+            Assert.Equal("/cache/Work1111/Add", val[0]);
+        }
+
     }
 }
