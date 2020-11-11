@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using HtmlAgilityPack;
-
+using Microsoft.Extensions.DependencyInjection;
+using EFCoreTesting.Areas.Distribute.Controllers;
+using Microsoft.Extensions.Logging;
 
 namespace IntegrationTests
 {
@@ -54,11 +56,40 @@ namespace IntegrationTests
                     }
                 }
             }
- 
-
             //Assert
             Assert.Equal("/cache/Work1111/Add", val[0]);
         }
+
+
+        [Theory]
+        [InlineData("https://localhost:44356/Cache/Work1111/Index")]
+        public async Task TestWithWebHostBuilder(string url)
+        {
+            //Arrange
+            var client = factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureServices(services =>
+                {
+                    var serviceProvider = services.BuildServiceProvider();
+                    using (var scope = serviceProvider.CreateScope())
+                    {
+                        var scopedService = scope.ServiceProvider;
+                        var logger = scopedService.GetRequiredService<ILogger<Work1111Controller>>();
+                        logger.LogWarning("yes today");
+                    }
+                });
+            });
+
+            var workKlient = client.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+
+            //Action
+            var page = await workKlient.GetAsync(url);
+
+            var result = await page.Content.ReadAsStringAsync();
+            //Assert
+            Assert.Contains("/cache/Work1111/Add", result);
+        }
+
 
     }
 }
