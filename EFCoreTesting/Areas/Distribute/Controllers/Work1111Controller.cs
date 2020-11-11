@@ -27,7 +27,9 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
 
             //var user3 = context.Users.SingleOrDefault(x=>x.LastName == "Oboltusec");
 
-            var userList = context.Users.Where(x=>x.LastName.Contains("ина")).ToList();
+            //var userList = context.Users.Where(x=>x.LastName.Contains("ина")).ToList();
+
+            var userList2 = context.Users.Where(x => x.LastName.StartsWith("M")).ToList();
 
             return View();
         }
