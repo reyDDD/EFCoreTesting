@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Services
 {
-    public class Work1810Service
+
+    public interface IWork1810Service
+    {
+        Address ReturAddressFirst();
+    }
+    public class Work1810Service : IWork1810Service
     {
         private Context connect;
         public Work1810Service(Context connect)
