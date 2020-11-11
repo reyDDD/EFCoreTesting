@@ -22,7 +22,8 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         [ResponseCache(Duration = 30)]
         public IActionResult Index()
         {
-
+            var user = context.Users.FirstOrDefault(x => x.IsMale == true);
+            var user2 = context.Users.Where(x => x.IsMale == true).FirstOrDefault();
             return View();
         }
 
