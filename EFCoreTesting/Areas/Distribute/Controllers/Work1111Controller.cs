@@ -15,6 +15,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         {
             this.context = context;
         }
+
         public IActionResult Index()
         {
 
@@ -26,8 +27,11 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         {
             using (var transaction = context.Database.BeginTransaction())
             {
-                context.Addresses.Add(user.Address);
-                context.SaveChanges();
+                if (user.Address != null)
+                {
+                    context.Addresses.Add(user.Address);
+                    context.SaveChanges();
+                }
                 context.Users.Add(user);
                 context.SaveChanges();
                 transaction.Commit();
