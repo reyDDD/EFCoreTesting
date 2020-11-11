@@ -19,6 +19,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             this.context = context;
         }
 
+        [ResponseCache(Duration = 30)]
         public IActionResult Index()
         {
 
