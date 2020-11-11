@@ -18,12 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\myScripts.js" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\GenericSiteRobson.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\siteRobson.min.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\myScripts.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,10 +44,6 @@
   <ItemGroup>
     <Folder Include="Views\Work1010\" />
     <Folder Include="Views\Work1410\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\myScripts.js" />
   </ItemGroup>
 
   <ItemGroup>

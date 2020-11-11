@@ -1,6 +1,6 @@
 [
   {
-    "outputFileName": "wwwroot/css/siteRobson.css",
+    "outputFileName": "wwwroot/css/GenericSiteRobson.css",
     "inputFiles": [
       "wwwroot/css/site.css",
       "wwwroot/css/robson.css"
@@ -12,8 +12,9 @@
     "sourceMap": false
   },
   {
-    "outputFileName": "wwwroot/js/myScripts.js",
-    "inputFiles": [ "wwwroot/js/*.js" ],
+    "outputFileName": "wwwroot/GenericMyScripts.js",
+    //"inputFiles": [ "wwwroot/js/*.js" ], //вариант работает со всеми файлами в каталоге
+    "inputFiles": [ "wwwroot/js/crudApi.js" ],
     "minify": {
       "enabled": true,
       "renameLocals": true

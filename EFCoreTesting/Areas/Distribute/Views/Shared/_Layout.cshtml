@@ -3,6 +3,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="~/css/GenericSiteRobson.css" />
+    </environment>
+    <environment include="Staging">
+        <link rel="stylesheet" type="text/css" href="~/css/GenericSiteRobson.min.css" />
+    </environment>
     <title>@ViewBag.Title</title>
 </head>
 <body>

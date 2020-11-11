@@ -1,4 +1,4 @@
-﻿const uri = 'https://localhost:44356/api/ApiWork1910';
+const uri = 'https://localhost:44356/api/ApiWork1910';
 
 function addCity() {
 
