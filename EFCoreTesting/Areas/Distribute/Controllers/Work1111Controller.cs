@@ -11,6 +11,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
     public class Work1111Controller : Controller
     {
         private Context context;
+       
         public Work1111Controller(Context context)
         {
             this.context = context;

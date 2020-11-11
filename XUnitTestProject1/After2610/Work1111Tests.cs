@@ -15,11 +15,13 @@ namespace XUnitTestProject1.After2610
     {
         private Context context;
         private IConfiguration config;
+        private Context contextInMemory;
 
         public Work1111Tests()
         {
             config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             context = new Context(new DbContextOptionsBuilder<Context>().UseSqlServer(config.GetSection("ConnectionStrings:DefaultConnection").Value).Options);
+            contextInMemory = new Context((new DbContextOptionsBuilder<Context>().UseInMemoryDatabase("myBase")).Options);
         }
 
         [Fact]

@@ -14,9 +14,9 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
     [Area("Distribute")]
     public class Work1011Controller : Controller
     {
-        private Model1011 model1011;
+        private IModel1011 model1011;
 
-        public Work1011Controller(Model1011 model1011)
+        public Work1011Controller(IModel1011 model1011)
         {
             this.model1011 = model1011;
         }

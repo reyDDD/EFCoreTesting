@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Models
 {
-    public class Model1011
+
+    public interface IModel1011
+    {
+        void AddAddressWithUser(User user);
+    }
+    public class Model1011 : IModel1011
     {
         private Context context;
 

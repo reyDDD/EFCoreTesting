@@ -178,6 +178,7 @@ namespace EFCoreTesting
             services.AddSingleton<IService3110, Service3110>();
             services.AddScoped<Model1011>();
             services.AddSingleton<MyCache1011>();
+            services.AddScoped<IModel1011, Model1011>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
