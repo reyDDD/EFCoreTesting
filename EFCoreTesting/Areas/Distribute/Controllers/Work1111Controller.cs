@@ -25,6 +25,10 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         [HttpPost]
         public IActionResult Add(User user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             using (var transaction = context.Database.BeginTransaction())
             {
                 if (user.Address != null)

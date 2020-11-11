@@ -1,6 +1,7 @@
 ﻿using EFCoreTesting.Areas.Distribute.Controllers;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -35,11 +36,34 @@ namespace XUnitTestProject1.After2610
             
         }
 
+        [Fact]
+        public void TestMethodAddForBadRequest()
+        {
+            var user = new User() { FirstName = "Ivan", LastName = "Oboltus", Age = 23, BirthDay = new DateTime(year: 2010, month: 12, day: 16), IsMale = true, AddressId = 3 };
+            Work1111Controller controller = new Work1111Controller(context);
+            
+            controller.ModelState.AddModelError("key", "исскуственно вызвананя ошибка достоверности модели");
+            var actionResult = controller.Add(user);
+            var model = Assert.IsType<BadRequestObjectResult>(actionResult);
+            Assert.IsType<SerializableError>(model.Value);
+
+            var res = controller.ModelState.Values;
+            foreach (var modelState in controller.ModelState.Values)
+            {
+                foreach (ModelError error in modelState.Errors)
+                {
+                    Assert.Equal("исскуственно вызвананя ошибка достоверности модели", error.ErrorMessage);
+                }
+            }
+            
+        }
+
+
+
         public void Dispose()
         {
-
+            config = null!;
             context.Dispose();
-      
         }
 
       
