@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using EFCoreTesting.Areas.Work.Controllers;
 using EFCoreTesting.Infrastructure.Mediatr;
+using EFCoreTesting.Models.WithParameterForDI;
 
 namespace EFCoreTesting
 {
@@ -181,68 +182,72 @@ namespace EFCoreTesting
             services.AddSingleton<MyCache1011>();
             services.AddScoped<IModel1011, Model1011>();
 
-            services.AddScoped<IMediator<IEventForMediator>, ConcreteMediator>();
-            services.AddScoped<IEventForMediator, EventForMediatorConcrete>();
+            services.AddTransient<IMediator<EventForMediatorConcrete>, ConcreteMediator>();
 
+
+            services.AddScoped<IDIyes, DIyes>(x =>
+            {
+                return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6});
+            });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-           
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
-            
-            app.UseResponseCompression();
-
-
-            //настройка русской локализации
-            var defaultCulture = new CultureInfo("ru-RU");
-            var localizationOptions = new RequestLocalizationOptions()
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
-                DefaultRequestCulture = new RequestCulture(defaultCulture),
-                SupportedCultures = new List<CultureInfo> { defaultCulture },
-                SupportedUICultures = new List<CultureInfo> { defaultCulture }
-            };
-            app.UseRequestLocalization(localizationOptions);
+
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
+
+                app.UseResponseCompression();
 
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            app.UseResponseCaching();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseStatusCodePages();
+                //настройка русской локализации
+                var defaultCulture = new CultureInfo("ru-RU");
+                var localizationOptions = new RequestLocalizationOptions()
+                {
+                    DefaultRequestCulture = new RequestCulture(defaultCulture),
+                    SupportedCultures = new List<CultureInfo> { defaultCulture },
+                    SupportedUICultures = new List<CultureInfo> { defaultCulture }
+                };
+                app.UseRequestLocalization(localizationOptions);
+
+
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+                app.UseResponseCaching();
+                app.UseDefaultFiles();
+                app.UseStaticFiles();
+                app.UseStatusCodePages();
 
 
 
 
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute("working", "w/{controller}/{action}/{id?}", defaults: new { area = "Work" }, constraints: new { area = "Work" });
-                endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
-                endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
-                    defaults: new { Area = "Two" },
-                    constraints: new { Area = "Two" });
-                endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllerRoute("working", "w/{controller}/{action}/{id?}", defaults: new { area = "Work" }, constraints: new { area = "Work" });
+                    endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
+                    endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
+                        defaults: new { Area = "Two" },
+                        constraints: new { Area = "Two" });
+                    endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
 
                 //endpoints.MapControllers();
                 endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
-                endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
-                endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-                endpoints.MapBlazorHub();
-                endpoints.MapFallbackToController("Blazor", "Home");
-                endpoints.MapFallbackToPage("/route/{param}", "/_Host");
+                    endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
+                    endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToController("Blazor", "Home");
+                    endpoints.MapFallbackToPage("/route/{param}", "/_Host");
                 // endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
-                endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
-                endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
-            });
+                    endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
+                    endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
+                });
+            }
         }
     }
-}

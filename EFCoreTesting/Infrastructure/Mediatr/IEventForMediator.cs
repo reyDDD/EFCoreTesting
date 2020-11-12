@@ -7,7 +7,6 @@ namespace EFCoreTesting.Infrastructure.Mediatr
 {
     public interface IEventForMediator
     {
-        IMediator<IEventForMediator> Mediator { get; set; }
         string Name { get; set; }
         string Family { get; set; }
         string Country { get; set; }

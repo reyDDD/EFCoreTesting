@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Infrastructure.Mediatr
 {
-    public class ConcreteMediator : IMediator<IEventForMediator>
+    public class ConcreteMediator : IMediator<EventForMediatorConcrete>
     {
         public string Send(IEventForMediator eventForMediator)
         {

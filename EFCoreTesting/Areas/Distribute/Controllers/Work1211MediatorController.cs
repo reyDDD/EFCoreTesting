@@ -10,8 +10,8 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
     [Area("Distribute")]
     public class Work1211MediatorController : Controller
     {
-        private IMediator<IEventForMediator> mmediator;
-        public Work1211MediatorController(IMediator<IEventForMediator> mmediator)
+        private IMediator<EventForMediatorConcrete> mmediator;
+        public Work1211MediatorController(IMediator<EventForMediatorConcrete> mmediator)
         {
             this.mmediator = mmediator;
         }

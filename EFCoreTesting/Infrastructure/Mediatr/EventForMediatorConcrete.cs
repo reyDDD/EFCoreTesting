@@ -5,17 +5,27 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Infrastructure.Mediatr
 {
-    public class EventForMediatorConcrete : EventForMediatorAbstract
+    public class EventForMediatorConcrete : IEventForMediator
     {
-        public EventForMediatorConcrete(IMediator<IEventForMediator> mediator): base(mediator)
+        public IMediator<EventForMediatorConcrete> Mediator { get; set; }
+        public string Name { get; set; }
+        public string Family { get; set; }
+        public string Country { get; set; }
+        public string Address { get; set; }
+
+
+        public EventForMediatorConcrete(IMediator<EventForMediatorConcrete> mediator)
         {
+            Mediator = mediator;
         }
-        public override string Notify(string text)
+
+
+        public string Notify(string text)
         {
             return text + " вау йеху";
         }
 
-        public override string Send()
+        public string Send()
         {
             return Mediator.Send(this);
         }
