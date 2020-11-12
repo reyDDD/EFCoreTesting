@@ -27,6 +27,7 @@ using Microsoft.Extensions.Caching.SqlServer;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using EFCoreTesting.Areas.Work.Controllers;
+using EFCoreTesting.Infrastructure.Mediatr;
 
 namespace EFCoreTesting
 {
@@ -179,6 +180,10 @@ namespace EFCoreTesting
             services.AddScoped<Model1011>();
             services.AddSingleton<MyCache1011>();
             services.AddScoped<IModel1011, Model1011>();
+
+            services.AddScoped<IMediator<IEventForMediator>, ConcreteMediator>();
+            services.AddScoped<IEventForMediator, EventForMediatorConcrete>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
