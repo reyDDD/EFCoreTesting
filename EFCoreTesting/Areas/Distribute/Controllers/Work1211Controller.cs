@@ -18,7 +18,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         }
         public IActionResult Index(long id, string name)
         {
-            if (id <=0 || string.IsNullOrEmpty(name))
+            if (id <= 0 || string.IsNullOrEmpty(name))
             {
                 return BadRequest("Или айди не задан или он меньше равен нулю или имя для замены не указано");
             }
@@ -27,10 +27,35 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             {
                 return NotFound("не найден пользователь в базе с ИД " + id);
             }
-            
+
             userec.LastName = name;
             context.SaveChanges();
-            userec = context.Users.AsNoTracking().FirstOrDefault(x=> x.Id ==userec.Id);
+            userec = context.Users.AsNoTracking().FirstOrDefault(x => x.Id == userec.Id);
+            return View(userec);
+        }
+
+        public class DTOUser
+        {
+            public string First { get; set; }
+            public string Last { get; set; }
+        }
+        public IActionResult IndexDTO(long id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Или айди не задан или он меньше равен нулю");
+            }
+            var userec = context.Users.Where(i => i.Id == id).Select(u=> new DTOUser
+            {
+                First = u.FirstName,
+                Last = u.LastName
+            }).FirstOrDefault();
+
+            if (userec == null)
+            {
+                return NotFound("не найден пользователь в базе с ИД " + id);
+            }
+
             return View(userec);
         }
     }

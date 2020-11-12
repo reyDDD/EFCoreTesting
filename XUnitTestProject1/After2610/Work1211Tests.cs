@@ -8,6 +8,7 @@ using Xunit;
 using EFCoreTesting.Areas.Distribute.Controllers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using static EFCoreTesting.Areas.Distribute.Controllers.Work1211Controller;
 
 namespace XUnitTestProject1.After2610
 {
@@ -48,6 +49,29 @@ namespace XUnitTestProject1.After2610
             Assert.Equal(model.LastName, newName);
 
            work1211.Index(userecInBase.Id, baseName); //возвращаю в исходное состояние
+        }
+
+
+        [Fact]
+        public async Task TestGetDTO()
+        {
+            //Arrange
+            Work1211Controller work1211 = new Work1211Controller(context);
+
+            var userecInBase = await context.Users.FirstOrDefaultAsync();
+
+            if (userecInBase == null)
+            {
+                throw new Exception("В базе не содержится ни одной записи");
+            }
+
+            //Action
+            var actionResult = work1211.IndexDTO(userecInBase.Id);
+
+            //Assert
+            var viewResult = Assert.IsType<ViewResult>(actionResult);
+            var model = Assert.IsType<DTOUser>(viewResult.ViewData.Model);
+            Assert.Equal(model.Last, userecInBase.LastName);
         }
     }
 }
