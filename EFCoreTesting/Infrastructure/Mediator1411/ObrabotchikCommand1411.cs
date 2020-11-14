@@ -10,7 +10,7 @@ namespace EFCoreTesting.Infrastructure.Mediator1411
     public class ObrabotchikCommand1411 : IObrabotchikCommand<Uzver, string>
     {
         public IMediatorr<Uzver, string> Posrednik { get; }
-        public ObrabotchikCommand1411(Posrednik1411 posrednik)
+        public ObrabotchikCommand1411(IMediatorr<Uzver, string> posrednik)
         {
             this.Posrednik = posrednik;
         }
