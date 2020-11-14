@@ -33,6 +33,15 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View("Index", res);
         }
 
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        public IActionResult Index2()
+        {
+            string res = DateTime.Now.TimeOfDay.ToString();
+
+            return View("Index", res);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             logger = null;
