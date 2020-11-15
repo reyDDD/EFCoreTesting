@@ -34,7 +34,7 @@ namespace XUnitTestProject1.After2610
             {
                 ConnOptionsForModel1511.AddNewUserToInMemoryDataBase(context);
                 var model = new Model1511(context);
-                var res = model.GetSingleUser(1);
+                var res = model.GetSingleUser(22);
                 Assert.True(res != null);
             }
         }
@@ -61,6 +61,18 @@ namespace XUnitTestProject1.After2610
                 var model = new Model1511(context);
                 var result = model.GetSingleUser(500);
                 Assert.Null(result);
+            }
+        }
+
+        [Fact]
+        public void ListUser_SearchTerm()
+        {
+            using (var context = new Context(options))
+            {
+                ConnOptionsForModel1511.AddNewUserToInMemoryDataBase(context);
+                var model = new Model1511(context);
+                var result = model.GetUserSearchLastNameText("1511");
+                Assert.True(result.Count == 2);
             }
         }
     }

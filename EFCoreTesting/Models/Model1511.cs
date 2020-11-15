@@ -28,5 +28,10 @@ namespace EFCoreTesting.Models
         {
            return context.Users.SingleOrDefault(u => u.Age >= age);
         }
+
+        public IList<User> GetUserSearchLastNameText(string line)
+        {
+            return context.Users.Where(u=>u.LastName.Contains(line)).ToList();
+        }
     }
 }
