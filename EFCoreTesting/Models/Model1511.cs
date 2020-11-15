@@ -23,5 +23,10 @@ namespace EFCoreTesting.Models
             User user1 = context.Users.Where(u => u.Age >= age).FirstOrDefault();
             return user1;
         }
+
+        public User GetSingleUser(int id)
+        {
+           return context.Users.SingleOrDefault(u => u.Id == id);
+        }
     }
 }
