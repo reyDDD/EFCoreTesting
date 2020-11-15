@@ -75,5 +75,18 @@ namespace XUnitTestProject1.After2610
                 Assert.True(result.Count == 2);
             }
         }
+
+        [Fact]
+        public void ListUser_StartsWithTerm()
+        {
+            using (var context = new Context(options))
+            {
+                ConnOptionsForModel1511.AddNewUserToInMemoryDataBase(context);
+                var model = new Model1511(context);
+                var result = model.GetUserStartsWithLastNameText("LastName");
+                Assert.True(result.Count == 2);
+                Assert.True(result[0].LastName == "LastName1511");
+            }
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace EFCoreTesting.Models
         {
             return context.Users.Where(u=>u.LastName.Contains(line)).ToList();
         }
+
+        public IList<User> GetUserStartsWithLastNameText(string line)
+        {
+            return context.Users.Where(u => u.LastName.StartsWith(line)).ToList();
+        }
     }
 }
