@@ -29,6 +29,13 @@ using System.IO.Compression;
 using EFCoreTesting.Areas.Work.Controllers;
 using EFCoreTesting.Infrastructure.Mediatr;
 using EFCoreTesting.Models.WithParameterForDI;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.HttpsPolicy;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
+using EFCoreTesting.Models.Account;
 
 namespace EFCoreTesting
 {
@@ -76,6 +83,17 @@ namespace EFCoreTesting
                     opt.User = "NeSvarilsya";
                 }
             });
+
+            services.AddDbContext<IdentyyDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("AspWithIdentityContextConnection")));
+
+            services.AddIdentity<MyIdentityUser, IdentityRole>()
+        // services.AddDefaultIdentity<IdentityUser>()
+        .AddEntityFrameworkStores<IdentyyDbContext>()
+        .AddDefaultTokenProviders();
+
+
+
 
 
             services.AddMvc(opt =>
@@ -187,67 +205,69 @@ namespace EFCoreTesting
 
             services.AddScoped<IDIyes, DIyes>(x =>
             {
-                return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6});
+                return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6 });
             });
         }
 
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
+
+            app.UseResponseCompression();
+
+
+            //настройка русской локализации
+            var defaultCulture = new CultureInfo("ru-RU");
+            var localizationOptions = new RequestLocalizationOptions()
             {
-
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTestApi"));
-
-                app.UseResponseCompression();
-
-
-                //настройка русской локализации
-                var defaultCulture = new CultureInfo("ru-RU");
-                var localizationOptions = new RequestLocalizationOptions()
-                {
-                    DefaultRequestCulture = new RequestCulture(defaultCulture),
-                    SupportedCultures = new List<CultureInfo> { defaultCulture },
-                    SupportedUICultures = new List<CultureInfo> { defaultCulture }
-                };
-                app.UseRequestLocalization(localizationOptions);
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            };
+            app.UseRequestLocalization(localizationOptions);
 
 
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-                app.UseResponseCaching();
-                app.UseDefaultFiles();
-                app.UseStaticFiles();
-                app.UseStatusCodePages();
-
-
-
-
-
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute("working", "w/{controller}/{action}/{id?}", defaults: new { area = "Work" }, constraints: new { area = "Work" });
-                    endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
-                    endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
-                        defaults: new { Area = "Two" },
-                        constraints: new { Area = "Two" });
-                    endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
-
-                //endpoints.MapControllers();
-                endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
-                    endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
-                    endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
-                    endpoints.MapDefaultControllerRoute();
-                    endpoints.MapRazorPages();
-                    endpoints.MapBlazorHub();
-                    endpoints.MapFallbackToController("Blazor", "Home");
-                    endpoints.MapFallbackToPage("/route/{param}", "/_Host");
-                // endpoints.MapFallbackToPage("/_Host");
-                endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
-                    endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
-                    endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
-                });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
             }
+            app.UseResponseCaching();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseStatusCodePages();
+
+
+
+
+
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("working", "w/{controller}/{action}/{id?}", defaults: new { area = "Work" }, constraints: new { area = "Work" });
+                endpoints.MapAreaControllerRoute("firstArea", "Arey", "arr/{controller}/{action}/{id?}");
+                endpoints.MapControllerRoute("twoArea", "twoArr/{controller}/{action}/{id?}",
+                    defaults: new { Area = "Two" },
+                    constraints: new { Area = "Two" });
+                endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
+
+                    //endpoints.MapControllers();
+                    endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
+                endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
+                endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToController("Blazor", "Home");
+                endpoints.MapFallbackToPage("/route/{param}", "/_Host");
+                    // endpoints.MapFallbackToPage("/_Host");
+                    endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
+                endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
+                endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
+            });
         }
     }
+}

@@ -24,7 +24,16 @@
     <base href="~/" />
 </head>
 <body>
-    @*@await Component.InvokeAsync(nameof(Cart))*@ 
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    @*@await Component.InvokeAsync(nameof(Cart))*@
 
     <div class="btn-success btn-block">Это содержимое макета MVC</div>
     <div>

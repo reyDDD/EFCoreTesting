@@ -88,5 +88,33 @@ namespace XUnitTestProject1.After2610
                 Assert.True(result[0].LastName == "LastName1511");
             }
         }
+
+        [Fact]
+        public void My()
+        {
+            var count = Convert.ToInt32(Console.ReadLine());
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            for (int i = 0; i < count; i++)
+            {
+                string namePhone = Console.ReadLine();
+                var res = namePhone.Split(' ');
+                dict.Add(res[0], res[1]);
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                var ish = Console.ReadLine();
+                string res;
+                if (dict.TryGetValue(ish, out res))
+                {
+                    Console.WriteLine($"{res}={dict[res]}");
+                }
+                else
+                {
+                    Console.WriteLine($"Not found");
+                }
+            }
+
+        }
     }
 }
