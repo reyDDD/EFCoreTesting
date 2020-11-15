@@ -38,5 +38,30 @@ namespace XUnitTestProject1.After2610
                 Assert.True(res != null);
             }
         }
+
+        [Fact]
+        public void NotSingleUser_ReturnException()
+        {
+            using (var context = new Context(options))
+            {
+                ConnOptionsForModel1511.AddNewUserToInMemoryDataBase(context);
+                var model = new Model1511(context);
+                
+                Exception ex = Assert.Throws<InvalidOperationException>(() => model.GetSingleUser(5));
+                    Assert.Equal("Sequence contains more than one element", ex.Message); 
+            }
+        }
+
+        [Fact]
+        public void SingleUser_ReturnMoreThenOne()
+        {
+            using (var context = new Context(options))
+            {
+                ConnOptionsForModel1511.AddNewUserToInMemoryDataBase(context);
+                var model = new Model1511(context);
+                var result = model.GetSingleUser(500);
+                Assert.Null(result);
+            }
+        }
     }
 }

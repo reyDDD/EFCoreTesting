@@ -24,9 +24,9 @@ namespace EFCoreTesting.Models
             return user1;
         }
 
-        public User GetSingleUser(int id)
+        public User GetSingleUser(int age)
         {
-           return context.Users.SingleOrDefault(u => u.Id == id);
+           return context.Users.SingleOrDefault(u => u.Age >= age);
         }
     }
 }

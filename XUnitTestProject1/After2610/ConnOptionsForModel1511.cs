@@ -26,6 +26,8 @@ namespace XUnitTestProject1.After2610
         {
             User user = new User() { FirstName = "Name1511", LastName = "LastName1511", Age = 23, BirthDay = new DateTime(year: 2010, month: 12, day: 16), IsMale = true, AddressId = 3 };
             context.Entry(user).State = EntityState.Added;
+            User user2 = new User() { FirstName = "Name1511-2", LastName = "LastName1511-2", Age = 23, BirthDay = new DateTime(year: 2010, month: 12, day: 16), IsMale = true, AddressId = 3 };
+            context.Entry(user2).State = EntityState.Added;
             context.SaveChanges();
         }
     }
