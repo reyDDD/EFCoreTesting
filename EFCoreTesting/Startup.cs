@@ -87,12 +87,21 @@ namespace EFCoreTesting
             services.AddDbContext<IdentyyDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AspWithIdentityContextConnection")));
 
-            services.AddIdentity<MyIdentityUser, IdentityRole>()
-        // services.AddDefaultIdentity<IdentityUser>()
-        .AddEntityFrameworkStores<IdentyyDbContext>()
-        .AddDefaultTokenProviders();
+            services.AddIdentity<MyIdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+            // services.AddDefaultIdentity<IdentityUser>()
+            .AddEntityFrameworkStores<IdentyyDbContext>()
+            .AddDefaultTokenProviders();
 
 
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
 
 
 
@@ -254,8 +263,8 @@ namespace EFCoreTesting
                     constraints: new { Area = "Two" });
                 endpoints.MapAreaControllerRoute("distri", "Distribute", "cache/{controller}/{action}/{id?}");
 
-                    //endpoints.MapControllers();
-                    endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute("Default", pattern: "vpered/valim", defaults: new { controller = "NotNull", action = "Index24" });
                 endpoints.MapControllerRoute("Default", pattern: "vpered/{*article}", defaults: new { controller = "Null", action = "Index" });
                 endpoints.MapControllerRoute("Default", "{controller=one2many}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
@@ -263,8 +272,8 @@ namespace EFCoreTesting
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToController("Blazor", "Home");
                 endpoints.MapFallbackToPage("/route/{param}", "/_Host");
-                    // endpoints.MapFallbackToPage("/_Host");
-                    endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
+                // endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapFallbackToPage("/work05a10/{param?}", "/_Host");
                 endpoints.MapFallbackToPage("/work1310/{param?}", "/_Host");
                 endpoints.MapFallbackToPage("/page2810/{paramas?}", "/_Host");
             });

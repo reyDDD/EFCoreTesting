@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EFCoreTesting.Models.Account.LoginModel
+
 @{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h4>Создать пользователя</h4>
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<form asp-action="Register2" asp-controller="Account" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+</form>
