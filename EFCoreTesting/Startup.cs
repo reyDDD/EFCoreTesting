@@ -63,8 +63,22 @@ namespace EFCoreTesting
             //services.Configure<Uzver>(Configuration.GetSection("TestSection2")); //считал параметры из конфигурационного файла
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
+            //две записи ниже равнозначны, но первую привязку данных невозможно проверить на валидность
+             //services.Configure<Work1611cController.MySectionData>(Configuration.GetSection("FirstSection"));
+            services.AddOptions<Work1611cController.MySectionData>()
+                .Bind(Configuration.GetSection("FirstSection"))
+                //.ValidateDataAnnotations()
+                .Validate(work =>
+                {
+                    if (work.Age.Contains("Popovich"))
+                    {
+                        return false;
+                    }
+                    return true;
+                });
+            //конец двух равнозначных записей
 
-            services.Configure<Work1611cController.MySectionData>(Configuration.GetSection("FirstSection"));
+
             services.Configure<ForTestCongigOptions>(Configuration);
             services.Configure<Uzzer2>(Configuration);
             services.Configure<Uzzer>("Section2", Configuration.GetSection("TestSection2"));

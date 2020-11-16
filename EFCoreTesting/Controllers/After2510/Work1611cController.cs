@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models;
@@ -32,12 +33,22 @@ namespace EFCoreTesting.Controllers.After2510
 
         public IActionResult FromSectionConfigure([FromServices] IOptions<MySectionData> options)
         {
- 
-            return View("Index", $"{options.Value.User} {options.Value.Age}");
+            MySectionData ret = new MySectionData();
+            try
+            {
+                ret = options.Value;
+            }
+            catch (Exception ex)
+            {
+                ret.Age = "Unknown";
+                ret.User = $"{ex.Message}";
+            }
+            return View("Index", $"{ret?.User} {ret?.Age}");
         }
 
         public class MySectionData
         {
+            [StringLength(12, MinimumLength = 10)]
             public string User { get; set; }
             public string Age { get; set; }
         }
