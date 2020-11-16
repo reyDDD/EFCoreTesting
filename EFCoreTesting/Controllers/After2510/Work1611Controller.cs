@@ -9,6 +9,7 @@ namespace EFCoreTesting.Controllers.After2510
     [Route("[controller]/[action]", Name = "[controller]_[action]")]
     public class Work1611Controller : Controller
     {
+        [HttpGet]
         [HttpGet("{age}")]
         public IActionResult Index(int age)
         {
