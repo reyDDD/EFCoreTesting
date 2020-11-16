@@ -44,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Origin\Controllers\" />
     <Folder Include="Areas\Origin\Data\" />
     <Folder Include="Areas\Origin\Models\" />
     <Folder Include="Areas\Origin\Views\" />
