@@ -211,6 +211,7 @@ namespace EFCoreTesting
             services.AddScoped<Model1011>();
             services.AddSingleton<MyCache1011>();
             services.AddScoped<IModel1011, Model1011>();
+            services.AddScoped<Service1611>();
 
             services.AddTransient<IMediator<EventForMediatorConcrete>, ConcreteMediator>();
 
