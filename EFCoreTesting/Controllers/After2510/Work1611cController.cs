@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace EFCoreTesting.Controllers.After2510
 {
@@ -25,6 +26,12 @@ namespace EFCoreTesting.Controllers.After2510
         {
             MySectionData mySection = configuration.GetSection("TestSection2").Get<MySectionData>();
             return View("Index", $"{mySection.User} {mySection.Age}");
+        }
+
+        public IActionResult FromSectionConfigure([FromServices] IOptions<MySectionData> options)
+        {
+ 
+            return View("Index", $"{options.Value.User} {options.Value.Age}");
         }
 
         public class MySectionData

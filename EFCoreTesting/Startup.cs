@@ -36,6 +36,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using EFCoreTesting.Models.Account;
+using EFCoreTesting.Controllers.After2510;
 
 namespace EFCoreTesting
 {
@@ -62,6 +63,8 @@ namespace EFCoreTesting
             //services.Configure<Uzver>(Configuration.GetSection("TestSection2")); //считал параметры из конфигурационного файла
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
+
+            services.Configure<Work1611cController.MySectionData>(Configuration.GetSection("FirstSection"));
             services.Configure<ForTestCongigOptions>(Configuration);
             services.Configure<Uzzer2>(Configuration);
             services.Configure<Uzzer>("Section2", Configuration.GetSection("TestSection2"));
