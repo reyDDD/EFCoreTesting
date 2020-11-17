@@ -6,6 +6,7 @@ using Castle.Core.Logging;
 using EFCoreTesting.Infrastructure.DIWithParam;
 using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -26,11 +27,13 @@ namespace EFCoreTesting.Controllers.After2510
             this.medi = medi;
             this.logger = logger;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             Moda model = context.Addresses.Where(i => i.City != null).Select(m => new Moda { City = m.City, Country = m.Country }).FirstOrDefault();
 
-            return Ok($"{model.City} {model.Country}");
+            return View($"{model.City} {model.Country}" as object);
         }
 
         public class Moda

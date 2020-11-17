@@ -12,5 +12,10 @@ namespace EFCoreTesting.Controllers
         {
             return View("_Host2");
         }
+
+        public IActionResult Index2()
+        {
+            return View();
+        }
     }
 }

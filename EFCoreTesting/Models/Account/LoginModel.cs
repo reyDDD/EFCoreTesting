@@ -15,5 +15,7 @@ namespace EFCoreTesting.Models.Account
         [Required]
         [UIHint("password")]
         public string Password { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }

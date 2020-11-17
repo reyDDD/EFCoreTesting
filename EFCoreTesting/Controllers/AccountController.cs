@@ -77,9 +77,67 @@ namespace EFCoreTesting.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            ViewBag.returnUrl = returnUrl;
+            return View("Login");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login2(LoginModel model, string returnUrl = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            if (ModelState.IsValid)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, 
+                // set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email,
+                                   model.Password, model.RememberMe, lockoutOnFailure: true);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+                if (result.RequiresTwoFactor)
+                {
+                    return RedirectToPage("./LoginWith2fa", new
+                    {
+                        ReturnUrl = returnUrl,
+                        RememberMe = model.RememberMe
+                    });
+                }
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User account locked out.");
+                    return RedirectToPage("./Lockout");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View("Login");
+                }
+            }
+
+            return View("Login");
+        }
+
+        public async Task<IActionResult> Logout(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            if (returnUrl != null)
+            {
+                if (returnUrl.Contains("Home"))
+                {
+                    return LocalRedirect("/Home/Index2");
+                }
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                return LocalRedirect("/Home/Index2");
+            }
         }
     }
 }
