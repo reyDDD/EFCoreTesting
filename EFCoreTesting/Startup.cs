@@ -37,6 +37,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using EFCoreTesting.Models.Account;
 using EFCoreTesting.Controllers.After2510;
+using EFCoreTesting.Infrastructure.Mediator1711;
 
 namespace EFCoreTesting
 {
@@ -228,7 +229,8 @@ namespace EFCoreTesting
             services.AddScoped<Service1611>();
 
             services.AddTransient<IMediator<EventForMediatorConcrete>, ConcreteMediator>();
-
+            services.AddScoped<IObbrabotchik<StartClass, EndClass>, Obrabotchik1711>();
+            services.AddScoped<IMedi<StartClass>, RealMediator1711>();
 
             services.AddScoped<IDIyes, DIyes>(x =>
             {
