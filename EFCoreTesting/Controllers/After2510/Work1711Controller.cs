@@ -53,5 +53,10 @@ namespace EFCoreTesting.Controllers.After2510
         {
             return Ok($"{param.Age}");
         }
+
+        public IActionResult Text()
+        {
+            return View("Index");
+        }
     }
 }
