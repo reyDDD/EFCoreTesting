@@ -7,6 +7,7 @@ using EFCoreTesting.Infrastructure.DIWithParam;
 using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace EFCoreTesting.Controllers.After2510
@@ -72,6 +73,12 @@ namespace EFCoreTesting.Controllers.After2510
 
 
             return View("Index");
+        }
+
+        public IActionResult MyData([FromServices] IConfiguration config)
+        {
+
+            return Ok(config.GetValue<string>("onene"));
         }
     }
 }

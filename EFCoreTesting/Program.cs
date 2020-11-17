@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using EFCoreTesting.GetDataAsConfig;
+using EFCoreTesting.Infrastructure.MyDataProvidee1711;
 
 namespace EFCoreTesting
 {
@@ -25,6 +26,7 @@ namespace EFCoreTesting
                     config.AddJsonFile("myTestParam.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("two.json", optional: false, reloadOnChange: true) ; //подключаю еще один файл конфигурации, содержимое которого станет доступным из IConfiguration
                     config.AddMyFile1311("GetDataAsConfig\\dataFromConfig.txt", reloadOnChange: true);
+                    config.AddMyFile1711("Infrastructure\\MyDataProvidee1711\\data1711.txt", reloadOnChange: true);
                 })
 
                 .ConfigureWebHostDefaults(webBuilder =>
