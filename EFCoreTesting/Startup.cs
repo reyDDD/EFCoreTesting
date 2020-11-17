@@ -38,6 +38,7 @@ using Microsoft.AspNetCore.DataProtection;
 using EFCoreTesting.Models.Account;
 using EFCoreTesting.Controllers.After2510;
 using EFCoreTesting.Infrastructure.Mediator1711;
+using EFCoreTesting.Infrastructure.DIWithParam;
 
 namespace EFCoreTesting
 {
@@ -236,6 +237,7 @@ namespace EFCoreTesting
             {
                 return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6 });
             });
+            services.AddScoped<ClassForDI1711>(provider => ActivatorUtilities.CreateInstance<ClassForDI1711>(provider, parameters: 44 ));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

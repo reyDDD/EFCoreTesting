@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFCoreTesting.Infrastructure.DIWithParam;
 using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,11 @@ namespace EFCoreTesting.Controllers.After2510
             var megdu = result.Name;
 
             return Ok($"{result.Age} {result.Name}");
+        }
+
+        public IActionResult DIWithConstructor([FromServices] ClassForDI1711 param)
+        {
+            return Ok($"{param.Age}");
         }
     }
 }
