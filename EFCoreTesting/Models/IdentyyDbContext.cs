@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Models.Account;
+using IdentityServer4.EntityFramework.Entities;
+using IdentityServer4.EntityFramework.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,7 @@ namespace EFCoreTesting.Models
         {
         }
 
-       //DbSet<MyIdentityUser> IdentityUsers { get; set; }
+
+        //DbSet<MyIdentityUser> IdentityUsers { get; set; }
     }
 }

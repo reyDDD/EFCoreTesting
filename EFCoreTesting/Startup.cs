@@ -39,6 +39,7 @@ using EFCoreTesting.Models.Account;
 using EFCoreTesting.Controllers.After2510;
 using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Infrastructure.DIWithParam;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EFCoreTesting
 {
@@ -112,11 +113,15 @@ namespace EFCoreTesting
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+
+                options.SignIn.RequireConfirmedAccount = false;
             })
-            // services.AddDefaultIdentity<IdentityUser>()
+            // services.AddDefaultIdentity<IdentityUser>() //эта и строка ниже равнозначны, но та что ниже работает в верси€х коре старше 2.1
             .AddEntityFrameworkStores<IdentyyDbContext>()
             .AddDefaultTokenProviders();
 
+            //рапсширение ниже дл€ јѕи доступно после установки пакета Microsoft.AspNetCore.ApiAuthorization.IdentityServer
+            // services.AddIdentityServer().AddApiAuthorization<MyIdentityUser, IdentyyDbContext>(); //не смог настроить, так как требует, чтобы класс реализовал интерфейс IPersistedGrantDbContext, а € не знаю, что с ним делать
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -274,8 +279,11 @@ namespace EFCoreTesting
 
 
             app.UseRouting();
+           // app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
+            
+
             app.UseEndpoints(endpoints =>
             {
 
