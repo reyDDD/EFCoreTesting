@@ -25,5 +25,14 @@ namespace XUnitTestProject1.Models.Thi
 
             Assert.Null(res);
         }
+
+        [Fact]
+        public void ReturnNameOf()
+        {
+            WorkWithThis work = new WorkWithThis();
+            string res = work.NameOfWork("конхфетка");
+
+            Assert.Equal($"Переменная с именем paramName содержит значение: конхфетка", res);
+        }
     }
 }

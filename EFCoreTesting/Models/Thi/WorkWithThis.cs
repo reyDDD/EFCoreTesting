@@ -20,5 +20,10 @@ namespace EFCoreTesting.Models.Thi
             var res = bases.GetStringFromBase().SetNullFrombase()?.AddFromChild("от ребенка для родителя").Template;
             return res;
         }
+
+        public string NameOfWork(string paramName)
+        {
+            return $"Переменная с именем {nameof(paramName)} содержит значение: {paramName}";
+        }
     }
 }
