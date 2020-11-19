@@ -16,5 +16,14 @@ namespace XUnitTestProject1.Models.Thi
 
             Assert.Equal("от родителя для родителя от ребенка для родителя", res);
         }
+
+        [Fact]
+        public void ReturnNull()
+        {
+            WorkWithThis work = new WorkWithThis();
+            string res = work.Work2();
+
+            Assert.Null(res);
+        }
     }
 }

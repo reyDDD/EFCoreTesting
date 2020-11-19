@@ -15,6 +15,16 @@ namespace EFCoreTesting.Models.Thi
             return this;
         }
 
+        public ThisBase SetNullFrombase(string text = null)
+        {
+            if (text == null)
+            {
+                return null;
+            }
+            Template = text;
+            return this;
+        }
+
         public ThisBase GetStringFromBase()
         {
             return this;

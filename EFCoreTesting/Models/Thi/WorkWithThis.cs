@@ -13,5 +13,12 @@ namespace EFCoreTesting.Models.Thi
             var res = bases.GetStringFromBase().SetStringFrombase("от родителя для родителя ").AddFromChild("от ребенка для родителя").Template;
             return res;
         }
+
+        public string Work2()
+        {
+            ThisBase bases = new ThisBase();
+            var res = bases.GetStringFromBase().SetNullFrombase()?.AddFromChild("от ребенка для родителя").Template;
+            return res;
+        }
     }
 }
