@@ -34,5 +34,18 @@ namespace XUnitTestProject1.Models.Thi
 
             Assert.Equal($"Переменная с именем paramName содержит значение: конхфетка", res);
         }
+
+        [Fact]
+        public void LocalFunctionWork()
+        {
+            WorkWithThis work = new WorkWithThis();
+            IEnumerable<int> res = work.MylocalFunctionsTest(5);
+            List<int> neLeniviy = new List<int>();
+            foreach (var item in res)
+            {
+                neLeniviy.Add(item);
+            }    
+            Assert.True(neLeniviy.Count == 5);
+        }
     }
 }
