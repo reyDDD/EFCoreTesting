@@ -1,5 +1,8 @@
-﻿using System;
+﻿using EFCoreTesting.Areas.Two.Controllers;
+using EFCoreTesting.Areas.Work.Controllers;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +10,7 @@ namespace EFCoreTesting.Models.Thi
 {
     public class WorkWithThis
     {
+        public readonly string MyProperty = "ff";
         public string Work()
         {
             ThisBase bases = new ThisBase();
@@ -49,6 +53,7 @@ namespace EFCoreTesting.Models.Thi
 
         public IEnumerable<int> MylocalFunctionsTest(int number)
         {
+
             if (number <= 0) throw new ArgumentException();
             else
             {
@@ -62,5 +67,49 @@ namespace EFCoreTesting.Models.Thi
                 }
             }
         }
+
+        public object WorkWithSwitch()
+        {
+            List<object> vs = new List<object>();
+            vs.Add(new User { AddressId = 3, Age = 44, FirstName = "dsd", LastName = "df", IsMale = true, BirthDay = DateTime.Now });
+            vs.Add(null);
+            vs.Add(3);
+            foreach (var item in vs)
+            {
+                switch (item)
+                {
+                    case int n when n > 0:
+                        Debug.WriteLine("dsd");
+                        break;
+                    case null:
+                        Debug.WriteLine("nulll");
+                        break;
+                    case User ussr:
+                        Debug.WriteLine(ussr.FirstName);
+                        break;
+                    case int n when n == 0:
+                        return new Uzver();
+                }
+            }
+            return null;
+        }
+
+        public User YetSwich(object user) => user switch
+            {
+                User => new User { Address = ((User)user).Address },
+                string => new User { Address = ((User)user).Address },
+                int => new User { Address = ((User)user).Address },
+                _ => throw new NotImplementedException()
+            };
+
+        public Uzzer ShablonSwich(User user) {
+
+            return user switch
+            {
+                { LastName: "Иванов" } => new Uzzer { Name = "Namasa" },
+                _ => throw new NotImplementedException()
+            };
+        }
+
     }
-}
+ }

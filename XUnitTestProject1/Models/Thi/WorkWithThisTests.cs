@@ -12,7 +12,7 @@ namespace XUnitTestProject1.Models.Thi
         public void ReturnConcatline()
         {
             WorkWithThis work = new WorkWithThis();
-           string res =  work.Work();
+            string res = work.Work();
 
             Assert.Equal("от родителя для родителя от ребенка для родителя", res);
         }
@@ -44,8 +44,22 @@ namespace XUnitTestProject1.Models.Thi
             foreach (var item in res)
             {
                 neLeniviy.Add(item);
-            }    
+            }
             Assert.True(neLeniviy.Count == 5);
+        }
+
+        [Fact]
+        public void CwitchC()
+        {
+            WorkWithThis work = new WorkWithThis();
+            work.WorkWithSwitch();
+        }
+
+        [Fact]
+        public void Swith8()
+        {
+            WorkWithThis work = new WorkWithThis();
+            Assert.Throws<NotImplementedException>(() => work.YetSwich("no-no"));
         }
     }
 }

@@ -8,6 +8,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
  <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+ <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
