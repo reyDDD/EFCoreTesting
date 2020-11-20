@@ -4,8 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using global::System.ComponentModel;
+#if NETSTANDARD2_0 || NETSTANDARD2_1 || NETCOREAPP2_0 || NETCOREAPP2_1 || NETCOREAPP2_2 || NETCOREAPP3_0 || NETCOREAPP3_1 || NET45 || NET451 || NET452 || NET6 || NET461 || NET462 || NET47 || NET471 || NET472 || NET48
+
+using System.ComponentModel;
+
+// ReSharper disable once CheckNamespace
+namespace System.Runtime.CompilerServices
+{
+    /// <summary>
+    /// Reserved to be used by the compiler for tracking metadata.
+    /// This class should not be used by developers in source code.
+    /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    internal static class IsExternalInit
+    {
+    }
+}
+
+#endif
+
 namespace EFCoreTesting.Infrastructure.TypeWrite
 {
+
+
     public record Test2011
     {
         public string MyProperty { get; set; }
@@ -28,14 +50,14 @@ namespace EFCoreTesting.Infrastructure.TypeWrite
 
     public sealed record InTest2011Seald : Test2011
     {
-        public string MyProperty4 { get; }
+        public string MyProperty4 { get; init; }
         public InTest2011Seald(string one, string two, string three) : base(one, two) => MyProperty4 = three;
 
  
     }
 
-    //ниже позиционная запись - чето она не работает
-    //public record PositionWrite(string Ones, string Twos, string Three) : Test2011(Ones, Twos);
+    //ниже позиционная запись
+    public record PositionWrite(string Ones, string Twos, string Three) : Test2011(Ones, Twos);
 
     public class WorkWithRecord
     {
