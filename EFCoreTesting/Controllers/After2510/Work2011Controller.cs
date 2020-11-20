@@ -75,5 +75,11 @@ namespace EFCoreTesting.Controllers.After2510
             Span<int> mass = new int[] { 3, 5, 7 };
             return Ok(mass[cc]); //диапазон значений, открыт с конца, также может быть открыт с начала
         }
+
+        public IActionResult AskDouble(string text)
+        {
+            return Ok(text ??= "vot tak"); //присвоить значение, если переменная равна null
+        }
+
     }
 }
