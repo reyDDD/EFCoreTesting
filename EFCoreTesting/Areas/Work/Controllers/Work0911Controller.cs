@@ -22,6 +22,9 @@ namespace EFCoreTesting.Areas.Work.Controllers
         public string Name { get; set; } = "TestSection3";
         public string User { get; set; }
         public string Age { get; set; }
+
+        public void Deconstruct(out string name, out string user, out string age) =>
+        (name, user, age) = (Name, User, Age);
     }
     [Area("Work")]
     public class Work0911Controller : Controller

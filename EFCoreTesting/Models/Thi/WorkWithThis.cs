@@ -106,10 +106,28 @@ namespace EFCoreTesting.Models.Thi
 
             return user switch
             {
-                { LastName: "Иванов" } => new Uzzer { Name = "Namasa" },
+                { LastName: "Иванов" } => new Uzzer { Name = "Namasa" }, //не работает для простых типов типа стринг, актуально только для сложных типов
                 _ => throw new NotImplementedException()
             };
         }
 
+        public Uzzer ShablonSwich(string user) //работает с кортежами с любым количество элементов
+        {
+
+            return (user) switch
+            {
+                ("Иванов") => new Uzzer { Name = user },
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        public Uzzer ShablonPositionniy(Uzzer usera)
+        {
+            return usera switch
+            {
+                var (name, user, agesec) when name == "Ivanov" && user == "Petrovach" => new Uzzer { Name = user },
+                _ => throw new NotImplementedException()
+            };
+        }
     }
  }
