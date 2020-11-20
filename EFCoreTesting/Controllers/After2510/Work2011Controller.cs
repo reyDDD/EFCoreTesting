@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreTesting.Services;
+using EFCoreTesting.Infrastructure.TypeWrite;
 
 namespace EFCoreTesting.Controllers.After2510
 {
@@ -79,6 +80,12 @@ namespace EFCoreTesting.Controllers.After2510
         public IActionResult AskDouble(string text)
         {
             return Ok(text ??= "vot tak"); //присвоить значение, если переменная равна null
+        }
+
+        public IActionResult Record()
+        {
+            WorkWithRecord work = new WorkWithRecord();
+            return Ok(work.Worker()); //присвоить значение, если переменная равна null
         }
 
     }
