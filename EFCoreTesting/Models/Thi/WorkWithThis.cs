@@ -57,10 +57,10 @@ namespace EFCoreTesting.Models.Thi
             if (number <= 0) throw new ArgumentException();
             else
             {
-                return Worka();
-                IEnumerable<int> Worka()
+                return Worka(number);
+                static IEnumerable<int> Worka(int testNumber) //статик позволяет пеерпроверить, что замыкание не образуется и переменные уничтожаются по факту отработки локальной функции
                 {
-                    for (int i = 0; i < number; i++)
+                    for (int i = 0; i < testNumber; i++)
                     {
                         yield return i;
                     }
