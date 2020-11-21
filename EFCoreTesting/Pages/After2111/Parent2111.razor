@@ -1,7 +1,7 @@
 ﻿@page "/parent2111"
 
 <h3>Parent2111</h3>
-<Child2111 ClickEvent="Obrabotchik">
+<Child2111 ClickEvent="Obrabotchik" @attributes="Dict">
     <p>текст из родительского компонента: @Res</p>
 </Child2111>
 
@@ -12,4 +12,11 @@
     {
         Res = "спасибо за клик, но не стоило, ей богу";
     }
+
+    public IEnumerable<KeyValuePair<string, object>> Dict { get; set; } = new Dictionary<string, object>
+        {
+            {"dd", "hac" },
+            {"mm", "zak" }
+        };
+
 }
