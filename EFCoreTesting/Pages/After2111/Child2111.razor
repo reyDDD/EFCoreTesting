@@ -1,0 +1,12 @@
+﻿<h3>Child2111</h3>
+
+<div>
+    <p>Внутри дочернего компонента: начало</p>
+    <div class="child">@ChildContent</div>
+    <p>Внутри дочернего компонента: конец</p>
+</div>
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
