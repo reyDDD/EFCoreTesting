@@ -53,7 +53,11 @@ namespace EFCoreTesting.Models
             var contexta = new Context(provider.GetRequiredService<DbContextOptions<Context>>());
             contexta.Users.First();
         }
-
+        public bool ContainsAny()
+        {
+            var result = context.Users.Any();
+            return result;
+        }
 
     }
 
