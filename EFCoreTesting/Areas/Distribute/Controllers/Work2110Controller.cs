@@ -50,6 +50,10 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return Ok(my2.MyProperty);
         }
 
+         public static void V()
+        {
+
+        }
         int Work(User user)
         {
             if (user.Age is 0) user.Age = 99;

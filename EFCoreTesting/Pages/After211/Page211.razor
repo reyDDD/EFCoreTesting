@@ -1,0 +1,17 @@
+﻿@page "/page211"
+@inject Vozvrat2909 repo
+@*@inject Context context*@
+ <br />
+<h3>Page211</h3>
+<p>@Data</p>
+<button @onclick="Work">Жми</button>
+@code {
+
+    public string Data { get; set; }
+
+    private async Task Work()
+    {
+        var res = await repo.GetAddress();
+        Data = res.ToList().FirstOrDefault().City;
+    }
+}
