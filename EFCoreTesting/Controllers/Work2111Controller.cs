@@ -15,5 +15,13 @@ namespace EFCoreTesting.Controllers
             
             return View(model);
         }
+
+        public IActionResult Index2(string ofiget)
+        {
+            var s = ofiget;
+            Model2111 model = new Model2111() { Data = DateTime.Now };
+
+            return View("Index", model);
+        }
     }
 }
