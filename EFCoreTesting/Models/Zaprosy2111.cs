@@ -24,5 +24,14 @@ namespace EFCoreTesting.Models
             }
             return adr;
         }
+
+        public void UpdateData(int idUser, string city, string name)
+        {
+            User? user = context.Users.Include(a=>a.Address).Where(id => id.Id == idUser ).First();
+            if (user is null) new EntryPointNotFoundException();
+            user.FirstName = name;
+            user.Address.City = city;
+            context.SaveChanges();
+        }
     }
 }
