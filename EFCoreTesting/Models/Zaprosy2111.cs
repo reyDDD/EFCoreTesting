@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -43,5 +44,13 @@ namespace EFCoreTesting.Models
             var res = encoder.Encode(text);
             return res;
         }
+
+
+    }
+
+    public class Model2111
+    {
+        [DataType(DataType.Date)]
+        public DateTime Data { get; set; }
     }
 }
