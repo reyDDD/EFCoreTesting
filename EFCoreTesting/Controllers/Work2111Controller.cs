@@ -24,5 +24,11 @@ namespace EFCoreTesting.Controllers
 
             return View("Index", model);
         }
+
+        public IActionResult Index2([Bind("Country, City")] Address adr)
+        {
+            return View("Index");
+        }
+
     }
 }
