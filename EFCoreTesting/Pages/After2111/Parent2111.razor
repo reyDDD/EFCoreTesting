@@ -1,9 +1,15 @@
 ﻿@page "/parent2111"
 
 <h3>Parent2111</h3>
-<Child2111>
-    <p>текст из родительского компонента</p>
+<Child2111 ClickEvent="Obrabotchik">
+    <p>текст из родительского компонента: @Res</p>
 </Child2111>
+
 @code {
 
+    public string Res { get; set; }
+    void Obrabotchik ()
+    {
+        Res = "спасибо за клик, но не стоило, ей богу";
+    }
 }
