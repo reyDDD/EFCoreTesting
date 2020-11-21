@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
@@ -52,5 +54,9 @@ namespace EFCoreTesting.Models
     {
         [DataType(DataType.Date)]
         public DateTime Data { get; set; }
+        public Model2111()
+        {
+            string config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("mySection").Value;
+        }
     }
 }
