@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EFCoreTesting.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,42 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             }
             result ??= "и ничего не присвоено - ни один вариант проверки не прошел";
             return Ok(result);
+        }
+
+ 
+        public IActionResult Index3()
+        {
+            User user = new() { Age = 65}; //упрощенный способ создания экземпляра класса
+            var result = Work(new()); //упрощенный способ передачи экземпляра класса в качестве параметра метода, когда метод знает, экземпляр какого типа создавать
+            return Ok(result);
+        }
+        public IActionResult Index4()
+        {
+            My my = new(); //отрабатывает конструктор по умолчанию
+            My my2 = new(77); //отрабатывает пользоательский конструктор
+            return Ok(my2.MyProperty);
+        }
+
+        int Work(User user)
+        {
+            if (user.Age is 0) user.Age = 99;
+            return user.Age;
+        }
+        int Myy(My my)
+        {
+            return my.MyProperty;
+        }
+        public class My
+        {
+            public int MyProperty { get; set; }
+            public My()
+            {
+                MyProperty = 1;
+            }
+            public My(int zn)
+            {
+                MyProperty = zn;
+            }
         }
     }
 }
