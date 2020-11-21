@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,6 +46,12 @@ namespace EFCoreTesting.Models
             HtmlEncoder encoder = HtmlEncoder.Create(UnicodeRanges.All);
             var res = encoder.Encode(text);
             return res;
+        }
+
+        public void CreateContextWithServiceProvider(IServiceProvider provider)
+        {
+            var contexta = new Context(provider.GetRequiredService<DbContextOptions<Context>>());
+            contexta.Users.First();
         }
 
 
