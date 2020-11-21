@@ -4,7 +4,7 @@
     <p @attributes="KeyValuePairs">Внутри дочернего компонента: начало</p>
     <div class="child">@ChildContent</div>
     <button @onclick="ClickEvent">Волшебная кнопка</button>
-    <p>Внутри дочернего компонента: конец</p>
+    <p>Внутри дочернего компонента: конец (@Magic)</p>
 </div>
 
 @code {
@@ -17,4 +17,11 @@
 
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> KeyValuePairs { get; set; }
+
+    private string Magic { get; set; }
+
+    public void Magiya()
+    {
+        Magic = "произошла магия - управление методом в родительском компоненте находится";
+    }
 }

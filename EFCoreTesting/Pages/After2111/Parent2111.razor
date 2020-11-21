@@ -1,11 +1,13 @@
 ﻿@page "/parent2111"
 
 <h3>Parent2111</h3>
-<Child2111 ClickEvent="Obrabotchik" @attributes="Dict">
-    <p>текст из родительского компонента: @Res</p>
+<Child2111 ClickEvent="Obrabotchik" @attributes="Dict" @ref="childec">
+    <p @onclick="@(() => childec.Magiya())">текст из родительского компонента: @Res</p>
 </Child2111>
 
 @code {
+
+    private Child2111 childec;
 
     public string Res { get; set; }
     void Obrabotchik ()
