@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 
 namespace EFCoreTesting.Models
@@ -35,5 +37,11 @@ namespace EFCoreTesting.Models
         }
 
  
+        public string CodingText(string text)
+        {
+            HtmlEncoder encoder = HtmlEncoder.Create(UnicodeRanges.All);
+            var res = encoder.Encode(text);
+            return res;
+        }
     }
 }
