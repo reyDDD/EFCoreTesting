@@ -33,5 +33,7 @@ namespace EFCoreTesting.Models
             user.Address.City = city;
             context.SaveChanges();
         }
+
+ 
     }
 }
