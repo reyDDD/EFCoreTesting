@@ -16,6 +16,7 @@ namespace EFCoreTesting.Controllers
             return View(model);
         }
 
+        [ValidateAntiForgeryToken]
         public IActionResult Index2(string ofiget)
         {
             var s = ofiget;
