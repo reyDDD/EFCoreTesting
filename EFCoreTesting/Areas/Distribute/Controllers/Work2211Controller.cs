@@ -34,5 +34,14 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
         {
             return RedirectToAction("Secret", new { id = 1});
         }
+
+        public IActionResult Search(string name, string lastName, [FromServices] Context context)
+        {
+            var f = context.Users.Where(i => i.FirstName.Contains(name));
+            var s = f?.Where(c => c.LastName.Contains(lastName)).ToList();
+            string? model = $"{s?.FirstOrDefault()?.FirstName} {s?.FirstOrDefault()?.LastName}";
+            return View("Index", model);
+        }
+
     }
 }
