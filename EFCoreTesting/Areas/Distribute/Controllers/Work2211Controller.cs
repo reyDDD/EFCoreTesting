@@ -43,5 +43,21 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             return View("Index", model);
         }
 
+
+        public IActionResult Convart(string numba)
+        {
+            if (numba is null or "")
+            {
+                return View("ForStart");
+            }
+            if (ModelState.IsValid)
+            {
+                Model2211 model2211 = new Model2211 { ForChange = numba };
+                var c = model2211.Origin.GetType() ;
+  
+            }
+
+            return View("Index");
+        }
     }
 }

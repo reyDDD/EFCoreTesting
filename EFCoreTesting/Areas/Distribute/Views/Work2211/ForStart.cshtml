@@ -1,0 +1,13 @@
+﻿
+<form asp-action="Convart" asp-controller="Work2211" asp-area="Distribute" method="get">
+    <input type="text" id="ww" onblur="Work()" name="numba" />
+    <button type="submit">отправить</button>
+</form>
+<script>
+    var c = document.getElementById("ww");
+
+    function Work() {
+        var res = c.value.replace('.', ',');
+        c.value = res;
+    }
+</script>
