@@ -66,6 +66,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             context.Users.Where(x => x.Id == 22).FirstOrDefault();
             context.Users.FirstOrDefault(x => x.Id == 22);
             context.Users.Single(x => x.Id == 22);
+            context.Users.Where(x => x.FirstName.Contains("ff"));
             return RedirectToAction("Secret", new { id = 1 });
         }
 
