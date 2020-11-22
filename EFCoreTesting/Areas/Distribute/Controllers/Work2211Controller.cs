@@ -51,7 +51,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                 return View("ForStart");
             }
             if (ModelState.IsValid)
-            {
+            { 
                 Model2211 model2211 = new Model2211 { ForChange = numba };
                 var c = model2211.Origin.GetType() ;
   
@@ -59,5 +59,16 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
 
             return View("Index");
         }
+
+
+        public IActionResult TwoSearch([FromServices]Context context)
+        {
+            context.Users.Where(x => x.Id == 22).FirstOrDefault();
+            context.Users.FirstOrDefault(x => x.Id == 22);
+
+            return RedirectToAction("Secret", new { id = 1 });
+        }
+
+
     }
 }
