@@ -18,7 +18,7 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
             {
                 return new StatusCodeResult((int)HttpStatusCode.Found);
             }
-            else if(id is > 0)
+            else if(id is > 4)
             {
                 User userr = context.Users.Single(x => x.Id == id);
                 if (await TryUpdateModelAsync<User>(userr, "", x => x.IsMale, x=>x.FirstName))
@@ -26,7 +26,13 @@ namespace EFCoreTesting.Areas.Distribute.Controllers
                     return new StatusCodeResult((int)HttpStatusCode.OK);
                 }
             }
-            return View();
+            return View("Index");
+        }
+
+
+        public IActionResult Redir()
+        {
+            return RedirectToAction("Secret", new { id = 1});
         }
     }
 }
