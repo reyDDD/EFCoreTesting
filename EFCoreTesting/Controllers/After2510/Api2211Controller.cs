@@ -1,4 +1,5 @@
 ﻿using EFCoreTesting.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,8 @@ namespace EFCoreTesting.Controllers.After2510
             return CreatedAtAction("Index", new { userId = user.Id }, user);
         }
 
+       // [EnableCors]
+        [EnableCors("firsPolicyBlock")]
         [Produces("application/json")]
         [HttpGet("{userId}")]
         public IActionResult Index(long userId, [FromServices] Context context)

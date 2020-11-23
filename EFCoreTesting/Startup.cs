@@ -40,6 +40,7 @@ using EFCoreTesting.Controllers.After2510;
 using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Infrastructure.DIWithParam;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 namespace EFCoreTesting
 {
@@ -243,6 +244,33 @@ namespace EFCoreTesting
                 return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6 });
             });
             services.AddScoped<ClassForDI1711>(provider => ActivatorUtilities.CreateInstance<ClassForDI1711>(provider, parameters: 44 ));
+
+            services.AddCors(option =>
+            {
+                //option.AddDefaultPolicy(builder =>
+                //{
+                //    builder.WithOrigins("https://localhost:44399", "https://alocalhost:44356");
+                //});
+                option.AddPolicy(name: "firsPolicy", 
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44399", "https://alocalhost:44356")
+                        //.WithExposedHeaders("x-custom-header")
+                        .SetPreflightMaxAge(TimeSpan.FromSeconds(25))
+                        .WithMethods("PUT", "DELETE"); 
+                        //builder.WithHeaders(HeaderNames.CacheControl);
+                    });
+                option.AddPolicy(name: "firsPolicyBlock",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                        .WithHeaders(HeaderNames.ContentType, "x-custom-header6")
+                        //.WithExposedHeaders("x-custom-header6")
+                        //.SetPreflightMaxAge(TimeSpan.FromSeconds(25))
+                        .WithMethods("PUT", "DELETE");
+                        //builder.WithHeaders(HeaderNames.CacheControl);
+                    });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -269,7 +297,8 @@ namespace EFCoreTesting
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseResponseCaching();
+
+            //app.UseResponseCaching(); был в этом месте, пока не перенес ниже
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseStatusCodePages();
@@ -279,7 +308,12 @@ namespace EFCoreTesting
 
 
             app.UseRouting();
-           // app.UseIdentityServer();
+
+            app.UseCors();
+
+            app.UseResponseCaching();
+
+            // app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
             
