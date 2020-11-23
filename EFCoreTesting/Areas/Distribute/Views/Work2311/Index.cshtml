@@ -1,0 +1,11 @@
+﻿
+@{
+    DateTime date = DateTime.Now;
+}
+<distributed-cache name="originCode2311" expires-after="@TimeSpan.FromSeconds(25)" vary-by-user="true">
+    <p>немного кешированных данных в распределенном кеше - @date.TimeOfDay</p>
+</distributed-cache>
+
+<cache expires-after="@TimeSpan.FromSeconds(45)" vary-by-user="true">
+    <p>немного кешированных данных из кеша в памяти - @date.TimeOfDay</p>
+</cache>
