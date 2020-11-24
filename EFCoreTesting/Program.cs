@@ -22,9 +22,10 @@ namespace EFCoreTesting
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
+                    config.AddJsonFile("forTest2411.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("my1611.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("myTestParam.json", optional: false, reloadOnChange: true);
-                    config.AddJsonFile("two.json", optional: false, reloadOnChange: true) ; //подключаю еще один файл конфигурации, содержимое которого станет доступным из IConfiguration
+                    config.AddJsonFile("two.json", optional: false, reloadOnChange: true); //подключаю еще один файл конфигурации, содержимое которого станет доступным из IConfiguration
                     config.AddMyFile1311("GetDataAsConfig\\dataFromConfig.txt", reloadOnChange: true);
                     config.AddMyFile1711("Infrastructure\\MyDataProvidee1711\\data1711.txt", reloadOnChange: true);
                 })
