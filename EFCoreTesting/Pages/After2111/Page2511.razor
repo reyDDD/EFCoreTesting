@@ -1,0 +1,33 @@
+﻿@page "/page2511"
+@inject Service2511 Service
+@implements IDisposable
+
+<h3>Page2511</h3>
+<p>результат: @Result</p>
+<p @onclick="@(() => Service.Pusk(3,6))">ну так а сюда кликать</p>
+@code {
+
+    public string Result { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Service.MyFuncDelegate += Davay;
+    }
+    public async Task Davay(int x, int y)
+    {
+        await InvokeAsync(() =>
+        {
+
+            Result = "otworkal";
+            StateHasChanged();
+        });
+
+    }
+
+
+
+    public void Dispose()
+    {
+        Service.MyFuncDelegate -= Davay;
+    }
+}

@@ -344,3 +344,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/EFCoreTesting/Pages/After2111/DolbaniyTest/NotifierService.cs
+/EFCoreTesting/Pages/After2111/DolbaniyTest/Test2511-2.razor
+/EFCoreTesting/Pages/After2111/DolbaniyTest/Test2511.razor
