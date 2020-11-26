@@ -68,7 +68,7 @@ namespace EFCoreTesting
             services.AddOptions<Uzver>().Bind(Configuration.GetSection("TestSection3")).ValidateDataAnnotations(); //считал параметры из конфигурационного файла + выполнил проверку модели
 
             //две записи ниже равнозначны, но первую привязку данных невозможно проверить на валидность
-             //services.Configure<Work1611cController.MySectionData>(Configuration.GetSection("FirstSection"));
+            //services.Configure<Work1611cController.MySectionData>(Configuration.GetSection("FirstSection"));
             services.AddOptions<Work1611cController.MySectionData>()
                 .Bind(Configuration.GetSection("FirstSection"))
                 //.ValidateDataAnnotations()
@@ -210,13 +210,13 @@ namespace EFCoreTesting
                 //{
                 //    builder.WithOrigins("https://localhost:44399", "https://alocalhost:44356");
                 //});
-                option.AddPolicy(name: "firsPolicy", 
+                option.AddPolicy(name: "firsPolicy",
                     builder =>
                     {
                         builder.WithOrigins("https://localhost:44399", "https://alocalhost:44356")
                         //.WithExposedHeaders("x-custom-header")
                         .SetPreflightMaxAge(TimeSpan.FromSeconds(25))
-                        .WithMethods("PUT", "DELETE"); 
+                        .WithMethods("PUT", "DELETE");
                         //builder.WithHeaders(HeaderNames.CacheControl);
                     });
                 option.AddPolicy(name: "firsPolicyBlock",
@@ -230,6 +230,12 @@ namespace EFCoreTesting
                         //builder.WithHeaders(HeaderNames.CacheControl);
                     });
             });
+
+            services.AddMvc()
+                .AddRazorOptions(options =>
+                {
+                    options.ViewLocationFormats.Add("/{0}.cshtml");
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
