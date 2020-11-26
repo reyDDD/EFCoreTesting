@@ -1,0 +1,14 @@
+﻿<h3>Page2611_2</h3>
+
+<p>значение изначальное при нициализации: @perenaznachil</p>
+@code {
+    private string perenaznachil;
+
+    [Parameter]
+    public string MyProperty { get; set; }
+
+    protected override void OnInitialized()
+    {
+        perenaznachil = MyProperty + " добавка";
+    }
+}

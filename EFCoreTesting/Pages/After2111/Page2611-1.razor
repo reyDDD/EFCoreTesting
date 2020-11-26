@@ -1,0 +1,17 @@
+﻿@page "/page2611-1"
+
+<h3>Page2611_1</h3>
+<Page2611_2 MyProperty="@Old"/>
+<br />
+<p> @Old</p>
+<br />
+<p @onclick="Izmenil">изменил значение</p>
+@code {
+    public string Old { get; set; } = "first";
+
+    public void Izmenil()
+    {
+        Old = "vernul v null";
+        StateHasChanged();
+    }
+}
