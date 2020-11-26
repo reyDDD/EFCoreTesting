@@ -5,10 +5,11 @@
 <br />
 <p> @Old</p>
 <br />
-<p @onclick="Izmenil">изменил значение</p>
+<p @onclick="Izmenil">изменил значение и это - @((MarkupString)text)</p>
 @code {
     public string Old { get; set; } = "first";
 
+    public string text = "<i>выделенный текст</i>";
     public void Izmenil()
     {
         Old = "vernul v null";
