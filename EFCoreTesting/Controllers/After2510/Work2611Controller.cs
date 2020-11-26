@@ -12,5 +12,10 @@ namespace EFCoreTesting.Controllers.After2510
         {
             return View("Index", "faska");
         }
+
+        public IActionResult ReturnComponent()
+        {
+            return ViewComponent("Probn", new { Name = "Из компонента вызов в виде возвращаемого значения метода" });
+        }
     }
 }
