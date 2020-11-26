@@ -4,7 +4,6 @@ using EFCoreTesting.Infrastructure.Mediatr;
 using EFCoreTesting.Models;
 using EFCoreTesting.Models.WithParameterForDI;
 using EFCoreTesting.Pages.After2111;
-using EFCoreTesting.Pages.After2111.DolbaniyTest;
 using EFCoreTesting.Services;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.SqlServer;
@@ -20,7 +19,6 @@ namespace EFCoreTesting.Infrastructure
     {
         public static void AddMyServiceInStartup(this IServiceCollection services)
         {
-            services.AddScoped<NotifierService>();
             services.AddSingleton<Service2511>();
             services.AddScoped<InjectService>();
             services.AddScoped<InjectService2>();

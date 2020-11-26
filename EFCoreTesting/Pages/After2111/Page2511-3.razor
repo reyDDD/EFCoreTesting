@@ -1,0 +1,22 @@
+﻿@page "/page2511-3"
+@using EFCoreTesting.Areas.Two.Controllers;
+<h3>Page2511_3</h3>
+
+@foreach (Uzver item in lista)
+{
+    <Page2511_4 ValueProp="@item.User" @key="@item.Age" />
+}
+<Page2511_4 ValueProp="@Test" @key="@Test" />
+<p @onclick="@(() => Test = "new")"> клик для обновления</p>
+@code {
+
+    public string Test { get; set; } = "old";
+
+    List<Uzver> lista = new List<Uzver>()
+{
+        new Uzver () {Age = "3", User = "yes"},
+    new Uzver () {Age = "1", User = "also yes" },
+    new Uzver () {Age = "0", User = "not also yes" }
+};
+
+}
