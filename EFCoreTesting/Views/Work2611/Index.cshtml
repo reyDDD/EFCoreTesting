@@ -1,4 +1,6 @@
 ﻿@model string
 
-@await Component.InvokeAsync("Component2611", Model)
 
+@await Component.InvokeAsync("Component2611", new { Name = Model })
+
+<vc:probn Name="privet"></vc:probn>
