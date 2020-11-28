@@ -54,7 +54,6 @@
     <Folder Include="Areas\Origin\Data\" />
     <Folder Include="Areas\Origin\Models\" />
     <Folder Include="Areas\Origin\Views\" />
-    <Folder Include="Controllers\After2811\" />
     <Folder Include="Views\Work1010\" />
     <Folder Include="Views\Work1410\" />
   </ItemGroup>

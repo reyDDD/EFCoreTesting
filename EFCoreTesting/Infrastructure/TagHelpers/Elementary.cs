@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFCoreTesting.Infrastructure.TagHelpers
 {
-    [HtmlTargetElement("p")]
+    [HtmlTargetElement("p", Attributes = "fornamedatut")]
     public class Elementary : TagHelper
     {
         public string Name { get; set; }

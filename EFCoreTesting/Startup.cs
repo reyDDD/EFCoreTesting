@@ -83,6 +83,7 @@ namespace EFCoreTesting
             //конец двух равнозначных записей
 
 
+            services.Configure<Model2811>(Configuration.GetSection("Engl"));
             services.Configure<ForTestConfig2411>(Configuration.GetSection("Sectaon"));
             services.Configure<ForTestCongigOptions>(Configuration);
             services.Configure<Uzzer2>(Configuration);

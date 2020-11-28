@@ -22,6 +22,7 @@ namespace EFCoreTesting
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
+                    config.AddJsonFile("forTest2811.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("forTest2411.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("my1611.json", optional: false, reloadOnChange: true);
                     config.AddJsonFile("myTestParam.json", optional: false, reloadOnChange: true);
