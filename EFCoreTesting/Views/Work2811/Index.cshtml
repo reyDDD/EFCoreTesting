@@ -4,3 +4,8 @@
 @await Component.InvokeAsync("Com2811") 
 <br />
 <factt maye-buty>Содержимое тегхелпера</factt>
+<cache expires-sliding="@TimeSpan.FromSeconds(15)">
+    @DateTime.Now.TimeOfDay
+</cache>
+<br />
+<distributed-cache name="MyCache" expires-after="@TimeSpan.FromSeconds(25)" vary-by-user="true">@DateTime.Now.TimeOfDay</distributed-cache>
