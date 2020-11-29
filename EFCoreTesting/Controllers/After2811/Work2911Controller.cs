@@ -113,6 +113,12 @@ namespace EFCoreTesting.Controllers.After2811
             return View("Index", noll??"вместо нолика");
         }
 
+        public IActionResult Work10()
+        {
+            using var deleteH = new System.IO.StreamWriter("WriteLines2.txt"); //работает только с типами, которые реализуют интерфейс IDisposable
+
+            return View("Index", "kk");
+        }
 
         public IActionResult Work1()
         {
