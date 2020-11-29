@@ -96,6 +96,17 @@ namespace EFCoreTesting.Controllers.After2811
             return View("Index", person.ToString());
         }
 
+        public IActionResult Work9()
+        {
+            string[] mass = new string[] { "one", "two", "three" };
+            List<string> list = new List<string>();
+            //list.AddRange(mass[..]); // включает все элементы диапазона, то же самое, что и пример ниже
+            //list.AddRange(mass[0..^0]); //диапазон с началом и концом ( ..^0 указывает на значение до конца диапазона и не включает его
+            list.AddRange(mass[..2]);//включает элементы с нулевого по первый включительно, второй не входит
+            return View("Index", list.Count.ToString());
+            //return View("Index", mass[^1]);
+        }
+
         public IActionResult Work8()
         {
             string? noll = null;
