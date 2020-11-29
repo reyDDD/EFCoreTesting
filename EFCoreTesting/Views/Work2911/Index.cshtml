@@ -1,3 +1,8 @@
 ﻿@model string
-
+@{ 
+    Address address = new Address { Id = 33, City = "Красноград", Country = "Македония",
+        Users = new List<User> { new EFCoreTesting.Models.User { Id = 5} }
+    };
+}
 <p>Model: @Model</p>
+<vc:add-user address="address"></vc:add-user>
