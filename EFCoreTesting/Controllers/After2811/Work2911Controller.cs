@@ -19,6 +19,13 @@ namespace EFCoreTesting.Controllers.After2811
             return View("Index", $"{tpe}");
         }
 
+        public IActionResult Work2()
+        {
+            Model2911 model = new Model2911() { InitProperty = "стартонул" };
+            Model2911 model2 = new Model2911();
+            return View("Index", model2.InitProperty);
+        }
+
         public IActionResult Index()
         {
             User user = new() { FirstName = "FirstName" };
