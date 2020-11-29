@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>request
+    <p onclick="request()">выполнить запрос к ресурсу на внешнем домене</p>
+    <div id="insert"></div>
+    <script>
+        var url = "https://localhost:44399/cors/index";
+        var methodName = "GET";
+        var headersValue = { 'Content-Type': 'x-custom-header' };
+        var resultDiv = document.getElementById("insert");
+
+        function request() {
+            fetch(url,
+                {
+                    method: methodName,
+                    headers: headersValue
+                })
+                .then(response => {
+                    if (response.ok) {
+                        response.text().then(text => {
+                            resultDiv.innerText = text;
+                        })
+                    }
+                    else {
+                        resultDiv.innerText = response.status;
+                    }
+                })
+                .catch(() => resultDiv.innerText = "Все пропало, что там в консоли?");
+        }
+    </script>
+</body>
+</html>
