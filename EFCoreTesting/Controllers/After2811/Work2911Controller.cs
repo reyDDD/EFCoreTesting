@@ -60,8 +60,38 @@ namespace EFCoreTesting.Controllers.After2811
 
     public record Person3(string FirstName, string LastName); // упрощенный вариант записи
 
+    public enum Num
+    {
+        Reb,
+        Blue,
+        Green
+    }
     public class Work2911Controller : Controller
     {
+        public IActionResult Work12()
+        {
+            Address address = new Address { City = "Ctas", Country = "Countras", Id = 32 };
+            string result = address switch
+            {
+                { City: "Ctas" } => "есть таой город",
+                _ => "конкретный пролет"
+            };
+            return View("Index", result);
+        }
+
+        public IActionResult Work11()
+        {
+            Num num = Num.Blue;
+          var x =  num switch
+            {
+                Num.Blue => "голубой",
+                Num.Reb => "красный",
+                Num.Green => "зелень"
+            };
+
+            return View("Index", x);
+        }
+
 
         public IActionResult Work3()
         {
