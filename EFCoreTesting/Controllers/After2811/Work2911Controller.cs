@@ -96,6 +96,13 @@ namespace EFCoreTesting.Controllers.After2811
             return View("Index", person.ToString());
         }
 
+        public IActionResult Work8()
+        {
+            string? noll = null;
+            return View("Index", noll??"вместо нолика");
+        }
+
+
         public IActionResult Work1()
         {
             User user = new User();
