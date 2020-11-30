@@ -21,6 +21,10 @@ namespace EFCoreTesting.Controllers.After2811
             string nazvaPeremennoy = "nevazno";
             return View("Stroca", nameof(nazvaPeremennoy));
         }
-
+        public IActionResult Index3()
+        {
+            string nazvaPeremennoy = null;
+            return View("Stroca", nazvaPeremennoy??"na");
+        }
     }
 }
