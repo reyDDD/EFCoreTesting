@@ -24,7 +24,16 @@ namespace EFCoreTesting.Controllers.After2811
         public IActionResult Index3()
         {
             string nazvaPeremennoy = null;
-            return View("Stroca", nazvaPeremennoy??"na");
+            return View("Stroca", this.RetNull2()?.Replace("i", " ") ?? "na");
+        }
+
+        
+    }
+    public static class Vn
+    {
+        public static string? RetNull2(this Work3011Controller controller)
+        {
+            return null;
         }
     }
 }
