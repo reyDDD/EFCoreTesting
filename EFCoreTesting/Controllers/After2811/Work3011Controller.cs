@@ -12,16 +12,15 @@ namespace EFCoreTesting.Controllers.After2811
         public IActionResult Index()
         {
             Model3011 model = new Model3011();
-            try
-            {
-                IEnumerable<string> res = model.GetList();
-                return View(res);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-            }
-            return View();
+            IEnumerable<string> res = model.GetList();
+            return View(res);
         }
+
+        public IActionResult Index2()
+        {
+            string nazvaPeremennoy = "nevazno";
+            return View("Stroca", nameof(nazvaPeremennoy));
+        }
+
     }
 }
