@@ -1,0 +1,12 @@
+﻿@model string
+
+<p>страничка авторизации</p>
+
+<form asp-action="Index5" asp-controller="Work3011" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewBag.Return" />
+    <input type="text" name="address.City" />
+    <input type="text" name="address.Country" />
+    <input type="submit" value="отправить" />
+</form>
+
+<p>@Model</p>

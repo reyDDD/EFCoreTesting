@@ -1,4 +1,5 @@
-﻿using EFCoreTesting.Models.After3011;
+﻿using EFCoreTesting.Models;
+using EFCoreTesting.Models.After3011;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,18 @@ namespace EFCoreTesting.Controllers.After2811
             string nazvaPeremennoy = null;
             return View("Stroca", this.RetNull2()?.Replace("i", " ") ?? "na");
         }
+        public IActionResult Index4(string returnUrl)
+        {
+            ViewBag.Return = returnUrl;
+            return View("Auth");
+        }
+        [HttpPost]
+        public IActionResult Index5(string returnUrl, Address address)
+        {
+            ViewBag.Return = returnUrl;
+            return View("Auth", "работа выполнена, кеп");
+        }
 
-        
     }
     public static class Vn
     {
