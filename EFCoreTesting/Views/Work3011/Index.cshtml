@@ -1,0 +1,10 @@
+﻿@model IEnumerable<string>
+
+@if (ViewBag.Error != null)
+{
+<p>ViewBag.Error</p>
+}
+@foreach (var item in @Model)
+{
+    <p>@item</p>
+}
