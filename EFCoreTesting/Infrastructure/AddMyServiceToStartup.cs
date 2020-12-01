@@ -3,6 +3,7 @@ using EFCoreTesting.Infrastructure.Mediator1711;
 using EFCoreTesting.Infrastructure.Mediatr;
 using EFCoreTesting.Models;
 using EFCoreTesting.Models.WithParameterForDI;
+using EFCoreTesting.Models.WithParamForDI;
 using EFCoreTesting.Pages.After2111;
 using EFCoreTesting.Services;
 using Microsoft.Extensions.Caching.Distributed;
@@ -63,6 +64,11 @@ namespace EFCoreTesting.Infrastructure
                 return ActivatorUtilities.CreateInstance<DIyes>(x, parameters: new ForT() { MyProperty = 6 });
             });
             services.AddScoped<ClassForDI1711>(provider => ActivatorUtilities.CreateInstance<ClassForDI1711>(provider, parameters: 44));
+
+            services.AddScoped<IOru, Oru>(services =>
+            {
+                return ActivatorUtilities.CreateInstance<Oru>(services, parameters:  new object[] { 1, "text" });
+            });
         }
     }
 }

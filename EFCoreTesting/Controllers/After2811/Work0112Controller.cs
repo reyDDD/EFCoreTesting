@@ -1,4 +1,5 @@
 ﻿using EFCoreTesting.Models.Chain0112;
+using EFCoreTesting.Models.WithParamForDI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -35,5 +36,12 @@ namespace EFCoreTesting.Controllers.After2811
             string res = configuration.GetValue<string>("vanek");
             return View("Index", res);
         }
+
+        public IActionResult Index5([FromServices] IOru oru)
+        {
+            string res = oru.MyProperty + oru.MyProperty2;
+            return View("Index", res);
+        }
+
     }
 }
