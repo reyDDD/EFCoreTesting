@@ -1,5 +1,6 @@
 ﻿using EFCoreTesting.Models.Chain0112;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,12 @@ namespace EFCoreTesting.Controllers.After2811
         {
  
             return View("Index", "data");
+        }
+
+        public IActionResult Index4([FromServices] IConfiguration configuration)
+        {
+            string res = configuration.GetValue<string>("vanek");
+            return View("Index", res);
         }
     }
 }
