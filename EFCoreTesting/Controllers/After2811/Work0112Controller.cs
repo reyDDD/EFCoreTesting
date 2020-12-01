@@ -52,5 +52,13 @@ namespace EFCoreTesting.Controllers.After2811
             return View("Index", res.Age + " " + res.User);
         }
 
+        public IActionResult Index7([FromServices] Context context)
+        {
+            var user = context.Users.Where(x => x.Id == 22).FirstOrDefault();
+            user.LastName = "Далеко не прстачок";
+            var res = context.Users.Where(x => x.Id == 22).FirstOrDefault();
+            return View("Index", res.FirstName + " " + res.LastName);
+        }
+
     }
 }
