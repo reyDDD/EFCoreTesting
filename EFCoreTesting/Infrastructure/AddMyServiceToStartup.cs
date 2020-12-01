@@ -5,6 +5,7 @@ using EFCoreTesting.Models;
 using EFCoreTesting.Models.WithParameterForDI;
 using EFCoreTesting.Models.WithParamForDI;
 using EFCoreTesting.Pages.After2111;
+using EFCoreTesting.Pages.Mediator;
 using EFCoreTesting.Services;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.SqlServer;
@@ -58,6 +59,7 @@ namespace EFCoreTesting.Infrastructure
             services.AddTransient<IMediator<EventForMediatorConcrete>, ConcreteMediator>();
             services.AddScoped<IObbrabotchik<StartClass, EndClass>, Obrabotchik1711>();
             services.AddScoped<IMedi<StartClass>, RealMediator1711>();
+            services.AddScoped<IMedi, Medi>();
 
             services.AddScoped<IDIyes, DIyes>(x =>
             {

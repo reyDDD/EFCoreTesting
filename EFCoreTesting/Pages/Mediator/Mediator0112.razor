@@ -1,0 +1,23 @@
+﻿@page "/mediator0112"
+@inject IMedi Mediatttr
+
+<h3 @onclick="Method">Mediator0112 - по клику запускается система</h3>
+
+<p>@Col2.MyProperty</p>
+@code
+{
+    private Colleque Col1 { get; set; }
+    private Colleque Col2 { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Col1 = new Colleque(Mediatttr);
+        Col2 = new Colleque(Mediatttr);
+        Mediatttr.Colleque1 = Col1;
+        Mediatttr.Colleque2 = Col2;
+    }
+    private void Method()
+    {
+        Col1.Send("сообщеньице");
+    }
+}
