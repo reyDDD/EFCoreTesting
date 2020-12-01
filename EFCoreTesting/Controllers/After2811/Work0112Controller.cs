@@ -56,7 +56,14 @@ namespace EFCoreTesting.Controllers.After2811
         {
             var user = context.Users.Where(x => x.Id == 22).FirstOrDefault();
             user.LastName = "Далеко не прстачок";
+            context.SaveChanges();
             var res = context.Users.Where(x => x.Id == 22).FirstOrDefault();
+            return View("Index", res.FirstName + " " + res.LastName);
+        }
+
+        public IActionResult Index8([FromServices] Context context)
+        {
+            var res = context.Users.Where(x => x.LastName.StartsWith("Далеко")).FirstOrDefault();
             return View("Index", res.FirstName + " " + res.LastName);
         }
 
