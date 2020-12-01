@@ -1,2 +1,10 @@
 ﻿@model string
 <p>Model: @Model</p>
+
+@for (int i = 0; i < 3; i++)
+{
+    <text>i = @i</text>
+}
+@{
+    @:текст в строку
+}
